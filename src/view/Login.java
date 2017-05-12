@@ -1,12 +1,15 @@
+package view;
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import model.dao.UsuarioDAO;
 
 public class Login extends JFrame {
     
@@ -15,7 +18,7 @@ public class Login extends JFrame {
     private JPasswordField pfSenha;
     private JButton btEntrar, btNovoUsua, btSair;
     
-    Login(String titulo){
+    public Login(String titulo){
         super(titulo);
         setLayout(new FlowLayout());
 
@@ -59,8 +62,14 @@ public class Login extends JFrame {
         public void actionPerformed(ActionEvent evento) {
             
             if(evento.getSource() == btEntrar || evento.getSource() == pfSenha){
-                ConexaoMySQL conexao = new ConexaoMySQL();
-                conexao.conectar();
+                UsuarioDAO usuarioDAO = new UsuarioDAO();
+                
+                if(usuarioDAO.ler(tfUsuario.getText(), pfSenha.getText())){
+                    JOptionPane.showMessageDialog(null, "ENTROU");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuário e/ou senha incorreta(s)!");
+                }
+                
             } else if (evento.getSource() == btNovoUsua){
                 NovoUsuario objNovoUsuario = new NovoUsuario();               
                 objNovoUsuario.setSize(268, 115);
