@@ -62,14 +62,28 @@ public class Login extends JFrame {
         public void actionPerformed(ActionEvent evento) {
             
             if(evento.getSource() == btEntrar || evento.getSource() == pfSenha){
-                UsuarioDAO usuarioDAO = new UsuarioDAO();
-                
-                if(usuarioDAO.ler(tfUsuario.getText(), pfSenha.getText())){
-                    JOptionPane.showMessageDialog(null, "ENTROU");
+                if (tfUsuario.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Usuário obrigatório");                   
+                } else if (pfSenha.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Senha obrigatória");
                 } else {
-                    JOptionPane.showMessageDialog(null, "Usuário e/ou senha incorreta(s)!");
-                }
-                
+                    UsuarioDAO usuarioDAO = new UsuarioDAO();                
+                    if(usuarioDAO.ler(tfUsuario.getText(), pfSenha.getText())){
+                        ViewComanda objComanda = new ViewComanda();
+                        objComanda.setLocationRelativeTo(null);
+                        objComanda.setResizable(false);
+                        objComanda.setVisible(true);
+                        objComanda.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        
+                        ViewVisitante objVisitante = new ViewVisitante();
+                        objVisitante.setLocationRelativeTo(null);
+                        objVisitante.setResizable(false);
+                        objVisitante.setVisible(true);
+                        objVisitante.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Usuário e/ou senha incorreta(s)!");
+                    }
+                }                                                
             } else if (evento.getSource() == btNovoUsua){
                 NovoUsuario objNovoUsuario = new NovoUsuario();               
                 objNovoUsuario.setSize(268, 115);
