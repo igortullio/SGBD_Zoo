@@ -3,15 +3,15 @@ package model.bean;
 
 public class Visitante {
     
-    private int cpf;
+    private double cpf;
     private String nome;
-    private int telefone;
+    private double telefone;
 
-    public int getCpf() {
+    public double getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(double cpf) {
         this.cpf = cpf;
     }
 
@@ -23,11 +23,11 @@ public class Visitante {
         this.nome = nome;
     }
 
-    public int getTelefone() {
+    public double getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(double telefone) {
         this.telefone = telefone;
     }        
     

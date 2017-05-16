@@ -13,7 +13,7 @@ public class ConexaoMySQL {
     public static Connection conexao = null;
     private static final String USUARIO = "root";
     private static final String SENHA = "";
-    private static final String URL = "jdbc:mysql://127.0.0.1/zoo";
+    private static final String URL = "jdbc:mysql://127.0.0.1/zoo?autoReconnect=true&useSSL=false";
     private static final String DRIVER = "com.mysql.jdbc.Driver";
    
 

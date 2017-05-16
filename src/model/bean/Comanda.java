@@ -5,7 +5,7 @@ package model.bean;
 public class Comanda {
     
     private int codigo;
-    private int cpf_visitante;
+    private double cpf_visitante;
     private String dataEntrada;
     private double valor;
 
@@ -17,11 +17,11 @@ public class Comanda {
         this.codigo = codigo;
     }
 
-    public int getCpf_visitante() {
+    public double getCpf_visitante() {
         return cpf_visitante;
     }
 
-    public void setCpf_visitante(int cpf_visitante) {
+    public void setCpf_visitante(double cpf_visitante) {
         this.cpf_visitante = cpf_visitante;
     }
 

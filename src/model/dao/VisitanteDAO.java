@@ -19,9 +19,9 @@ public class VisitanteDAO {
         try {
             stmt = conexao.prepareStatement("INSERT INTO visitante (Cpf_Visitante, Nome_Visitante, Telefone_Visitante) VALUES (?, ?, ?)");
             
-            stmt.setInt(1, visitante.getCpf());
+            stmt.setDouble(1, visitante.getCpf());
             stmt.setString(2, visitante.getNome());
-            stmt.setInt(3, visitante.getTelefone());
+            stmt.setDouble(3, visitante.getTelefone());
             
             stmt.executeUpdate();
             
@@ -46,7 +46,7 @@ public class VisitanteDAO {
         try {
             stmt = conexao.prepareStatement("SELECT Cpf_Visitante FROM visitante WHERE Cpf_Visitante = ?");
             
-            stmt.setInt(1, visitante.getCpf());                       
+            stmt.setDouble(1, visitante.getCpf());                       
             
             rs = stmt.executeQuery();
             

@@ -8,41 +8,58 @@ package view;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-import model.bean.ItemServico;
-import model.dao.ItemServicoDAO;
+import model.bean.Comanda;
+import model.bean.Visitante;
+import model.dao.ComandaDAO;
+import model.dao.VisitanteDAO;
 
 /**
  *
- * @author Igor Túllio
+ * @author igorgoncalves
  */
 public class ViewComanda extends javax.swing.JFrame {
 
     /**
-     * Creates new form Comanda
+     * Creates new form ViewComanda
      */
     public ViewComanda() {
-        super("ZOO");
+        super("ZOO - Abertura de Comanda");
         initComponents();
-        DefaultTableModel modelo = (DefaultTableModel) jtItemServico.getModel();
-        jtItemServico.setRowSorter(new TableRowSorter(modelo));
+        DefaultTableModel modelo = (DefaultTableModel) jtComanda.getModel();
+        jtComanda.setRowSorter(new TableRowSorter(modelo));
         
         leTabela();
     }
     
     public void leTabela(){
-        DefaultTableModel modelo = (DefaultTableModel) jtItemServico.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) jtComanda.getModel();
         modelo.setNumRows(0);
-        ItemServicoDAO itemDAO = new ItemServicoDAO();
+        ComandaDAO comandaDAO = new ComandaDAO();
         
-        for (ItemServico p: itemDAO.ler()) {
+        for (Visitante v: comandaDAO.ler()) {
             modelo.addRow(new Object[]{
-               p.getCodigo(),
-               p.getDescricao(),
-               p.getValor()
+               v.getCpf(),
+               v.getNome(),
+               v.getTelefone()
             });                        
         }
         
     }
+    
+    public void leTabelaPorNome(String nomeVisitante){
+        DefaultTableModel modelo = (DefaultTableModel) jtComanda.getModel();
+        modelo.setNumRows(0);
+        ComandaDAO comandaDAO = new ComandaDAO();
+        
+        for (Visitante v: comandaDAO.lerPorNome(nomeVisitante)) {
+            modelo.addRow(new Object[]{
+               v.getCpf(),
+               v.getNome(),
+               v.getTelefone()
+            });                        
+        }
+        
+    }   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,20 +70,56 @@ public class ViewComanda extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtItemServico = new javax.swing.JTable();
-        tfDescricao = new javax.swing.JTextField();
-        tfValor = new javax.swing.JTextField();
-        lbDescricao = new javax.swing.JLabel();
-        lbValor = new javax.swing.JLabel();
-        btSalvar = new javax.swing.JButton();
-        btExcluir = new javax.swing.JButton();
-        btAlterar = new javax.swing.JButton();
         lbTitulo = new javax.swing.JLabel();
+        btPesquisarCPF = new javax.swing.JButton();
+        tfBuscaCpf = new javax.swing.JTextField();
+        lbCpf = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        tfBuscaNome = new javax.swing.JTextField();
+        btPesquisarNome = new javax.swing.JButton();
+        btAbrirComanda = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtComanda = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jtItemServico.setModel(new javax.swing.table.DefaultTableModel(
+        lbTitulo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbTitulo.setText("Comanda");
+
+        btPesquisarCPF.setText("Pesquisar");
+        btPesquisarCPF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPesquisarCPFActionPerformed(evt);
+            }
+        });
+
+        lbCpf.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbCpf.setText("CPF:");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Nome:");
+
+        tfBuscaNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfBuscaNomeActionPerformed(evt);
+            }
+        });
+
+        btPesquisarNome.setText("Pesquisar");
+        btPesquisarNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPesquisarNomeActionPerformed(evt);
+            }
+        });
+
+        btAbrirComanda.setText("Abrir Comanda");
+        btAbrirComanda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAbrirComandaActionPerformed(evt);
+            }
+        });
+
+        jtComanda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -74,58 +127,20 @@ public class ViewComanda extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Código", "Descrição", "Valor"
+                "CPF", "Nome", "Telefone"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jtItemServico.addMouseListener(new java.awt.event.MouseAdapter() {
+        ));
+        jtComanda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtItemServicoMouseClicked(evt);
+                jtComandaMouseClicked(evt);
             }
         });
-        jtItemServico.addKeyListener(new java.awt.event.KeyAdapter() {
+        jtComanda.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtItemServicoKeyReleased(evt);
+                jtComandaKeyReleased(evt);
             }
         });
-        jScrollPane1.setViewportView(jtItemServico);
-
-        lbDescricao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbDescricao.setText("Descrição");
-
-        lbValor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbValor.setText("Valor");
-
-        btSalvar.setText("Salvar");
-        btSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSalvarActionPerformed(evt);
-            }
-        });
-
-        btExcluir.setText("Excluir");
-        btExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btExcluirActionPerformed(evt);
-            }
-        });
-
-        btAlterar.setText("Alterar");
-        btAlterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAlterarActionPerformed(evt);
-            }
-        });
-
-        lbTitulo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lbTitulo.setText("Cadastro de Itens e Serviços");
+        jScrollPane1.setViewportView(jtComanda);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,134 +149,118 @@ public class ViewComanda extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbTitulo)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbDescricao))
+                                    .addComponent(jLabel1)
+                                    .addComponent(lbCpf))
                                 .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfBuscaNome)
+                                    .addComponent(tfBuscaCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbValor)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(tfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(34, 34, 34)
-                                        .addComponent(btSalvar)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btExcluir)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btAlterar))))
-                            .addComponent(lbTitulo))
-                        .addGap(0, 30, Short.MAX_VALUE)))
+                                    .addComponent(btPesquisarCPF)
+                                    .addComponent(btPesquisarNome))))
+                        .addGap(0, 2, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(107, 107, 107)
+                .addComponent(btAbrirComanda, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(lbTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbDescricao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbCpf)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btSalvar)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbValor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btExcluir)
-                            .addComponent(btAlterar))))
+                            .addComponent(jLabel1)
+                            .addComponent(btPesquisarNome)
+                            .addComponent(tfBuscaNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tfBuscaCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btPesquisarCPF)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btAbrirComanda, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
-        
-        ItemServico item = new ItemServico();
-        ItemServicoDAO itemDAO = new ItemServicoDAO();
-        
-        item.setDescricao(tfDescricao.getText());
-        item.setValor(Double.parseDouble(tfValor.getText()));
-        
-        itemDAO.salvar(item);
-        
-        tfDescricao.setText("");
-        tfValor.setText("");
-        
-        leTabela();        
-        
-    }//GEN-LAST:event_btSalvarActionPerformed
-
-    private void jtItemServicoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtItemServicoKeyReleased
+    private void tfBuscaNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBuscaNomeActionPerformed
         // TODO add your handling code here:
-        
-        if (jtItemServico.getSelectedRow() != -1) {
-            tfDescricao.setText(jtItemServico.getValueAt(jtItemServico.getSelectedRow(), 1).toString());
-            tfValor.setText(jtItemServico.getValueAt(jtItemServico.getSelectedRow(), 2).toString());
-        }
-        
-    }//GEN-LAST:event_jtItemServicoKeyReleased
+    }//GEN-LAST:event_tfBuscaNomeActionPerformed
 
-    private void jtItemServicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtItemServicoMouseClicked
+    private void btPesquisarNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarNomeActionPerformed
         // TODO add your handling code here:
-        
-        if (jtItemServico.getSelectedRow() != -1) {
-            tfDescricao.setText(jtItemServico.getValueAt(jtItemServico.getSelectedRow(), 1).toString());
-            tfValor.setText(jtItemServico.getValueAt(jtItemServico.getSelectedRow(), 2).toString());
-        }
-        
-    }//GEN-LAST:event_jtItemServicoMouseClicked
 
-    private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
+        leTabelaPorNome(tfBuscaNome.getText());
+        tfBuscaCpf.setText("");
+        
+    }//GEN-LAST:event_btPesquisarNomeActionPerformed
+
+    private void btPesquisarCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarCPFActionPerformed
         // TODO add your handling code here:
+
+        ComandaDAO comandaDAO = new ComandaDAO();
         
-        if (jtItemServico.getSelectedRow() != -1) {
-            ItemServico item = new ItemServico();
-            ItemServicoDAO itemDAO = new ItemServicoDAO();
-
-            item.setDescricao(tfDescricao.getText());
-            item.setValor(Double.parseDouble(tfValor.getText()));
-            item.setCodigo((int)jtItemServico.getValueAt(jtItemServico.getSelectedRow(), 0));
-            itemDAO.alterar(item);
-
-            tfDescricao.setText("");
-            tfValor.setText("");
-
-            leTabela();        
+        String retorno = comandaDAO.verificaCPF(Double.parseDouble(tfBuscaCpf.getText()));
+        if (retorno != null) {
+            JOptionPane.showMessageDialog(null, "Visitante existente!");
+            tfBuscaNome.setText(retorno);
         } else {
-            JOptionPane.showMessageDialog(null, "Selecione um produto");
+            JOptionPane.showMessageDialog(null, "Visitante não encontrado!");
         }
         
-    }//GEN-LAST:event_btAlterarActionPerformed
+    }//GEN-LAST:event_btPesquisarCPFActionPerformed
 
-    private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
+    private void jtComandaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtComandaMouseClicked
         // TODO add your handling code here:
         
-        if (jtItemServico.getSelectedRow() != -1) {
-            ItemServico item = new ItemServico();
-            ItemServicoDAO itemDAO = new ItemServicoDAO();
-
-            item.setCodigo((int)jtItemServico.getValueAt(jtItemServico.getSelectedRow(), 0));
-            itemDAO.excluir(item);
-
-            tfDescricao.setText("");
-            tfValor.setText("");
-
-            leTabela();        
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione um produto");
+        if (jtComanda.getSelectedRow() != -1) {
+            tfBuscaCpf.setText(jtComanda.getValueAt(jtComanda.getSelectedRow(), 0).toString());
+            tfBuscaNome.setText(jtComanda.getValueAt(jtComanda.getSelectedRow(), 1).toString());
         }
         
-    }//GEN-LAST:event_btExcluirActionPerformed
+    }//GEN-LAST:event_jtComandaMouseClicked
+
+    private void jtComandaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtComandaKeyReleased
+        // TODO add your handling code here:
+        
+        if (jtComanda.getSelectedRow() != -1) {
+            tfBuscaCpf.setText(jtComanda.getValueAt(jtComanda.getSelectedRow(), 0).toString());
+            tfBuscaNome.setText(jtComanda.getValueAt(jtComanda.getSelectedRow(), 1).toString());
+        }
+        
+    }//GEN-LAST:event_jtComandaKeyReleased
+
+    private void btAbrirComandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAbrirComandaActionPerformed
+        // TODO add your handling code here:
+        
+        if (!tfBuscaCpf.getText().equals("")) {                    
+            Comanda comanda = new Comanda();
+            ComandaDAO comandaDAO = new ComandaDAO();
+
+            comanda.setCpf_visitante(Double.parseDouble(tfBuscaCpf.getText()));
+
+            comandaDAO.abre(comanda);
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um CPF.");
+        }
+        
+    }//GEN-LAST:event_btAbrirComandaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -289,7 +288,6 @@ public class ViewComanda extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ViewComanda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -300,15 +298,15 @@ public class ViewComanda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btAlterar;
-    private javax.swing.JButton btExcluir;
-    private javax.swing.JButton btSalvar;
+    private javax.swing.JButton btAbrirComanda;
+    private javax.swing.JButton btPesquisarCPF;
+    private javax.swing.JButton btPesquisarNome;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtItemServico;
-    private javax.swing.JLabel lbDescricao;
+    private javax.swing.JTable jtComanda;
+    private javax.swing.JLabel lbCpf;
     private javax.swing.JLabel lbTitulo;
-    private javax.swing.JLabel lbValor;
-    private javax.swing.JTextField tfDescricao;
-    private javax.swing.JTextField tfValor;
+    private javax.swing.JTextField tfBuscaCpf;
+    private javax.swing.JTextField tfBuscaNome;
     // End of variables declaration//GEN-END:variables
 }
