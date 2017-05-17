@@ -1,77 +1,324 @@
 
 package view;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import model.bean.Comanda;
+import model.bean.ItemServico;
+import model.bean.Visitante;
+import model.dao.ComandaDAO;
+import model.dao.ItemServicoDAO;
+import model.dao.VisitanteDAO;
+
 public class ViewGlobal extends javax.swing.JFrame {
 
     public ViewGlobal() {
         initComponents();
+        
+        DefaultTableModel modeloItemServico = (DefaultTableModel) jtItemServico.getModel();
+        jtItemServico.setRowSorter(new TableRowSorter(modeloItemServico));
+        
+        DefaultTableModel modeloComanda = (DefaultTableModel) jtComanda.getModel();
+        jtComanda.setRowSorter(new TableRowSorter(modeloComanda));
+        
+        leTabelaComanda();
+        leTabelaItemServico();
     }
+    
+    public void leTabelaItemServico(){
+        DefaultTableModel modelo = (DefaultTableModel) jtItemServico.getModel();
+        modelo.setNumRows(0);
+        ItemServicoDAO itemDAO = new ItemServicoDAO();
+        
+        for (ItemServico p: itemDAO.ler()) {
+            modelo.addRow(new Object[]{
+               p.getCodigo(),
+               p.getDescricao(),
+               p.getValor()
+            });                        
+        }        
+    }
+    
+    public void leTabelaComanda(){
+        DefaultTableModel modelo = (DefaultTableModel) jtComanda.getModel();
+        modelo.setNumRows(0);
+        ComandaDAO comandaDAO = new ComandaDAO();
+        
+        for (Visitante v: comandaDAO.ler()) {
+            modelo.addRow(new Object[]{
+               v.getCpf(),
+               v.getNome(),
+               v.getTelefone()
+            });                        
+        }
+        
+    }
+    
+    public void leTabelaComandaPorNome(String nomeVisitante){
+        DefaultTableModel modelo = (DefaultTableModel) jtComanda.getModel();
+        modelo.setNumRows(0);
+        ComandaDAO comandaDAO = new ComandaDAO();
+        
+        for (Visitante v: comandaDAO.lerPorNome(nomeVisitante)) {
+            modelo.addRow(new Object[]{
+               v.getCpf(),
+               v.getNome(),
+               v.getTelefone()
+            });                        
+        }        
+    }   
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jpItemServico = new javax.swing.JPanel();
-        tfDescricao = new javax.swing.JTextField();
-        tfValor = new javax.swing.JTextField();
-        lbDescricao = new javax.swing.JLabel();
-        lbValor = new javax.swing.JLabel();
-        btSalvar = new javax.swing.JButton();
-        btExcluir = new javax.swing.JButton();
-        btAlterar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtItemServico = new javax.swing.JTable();
+        jpComanda_ItemServico = new javax.swing.JPanel();
+        lbComanda_ItemServico_CodComanda = new javax.swing.JLabel();
+        lbComanda_ItemServico_CodItemServico = new javax.swing.JLabel();
+        lbComanda_ItemServico_Quantidade = new javax.swing.JLabel();
+        lbComanda_ItemServico_Valor = new javax.swing.JLabel();
+        tfComanda_ItemServico_CodComanda = new javax.swing.JTextField();
+        tfComanda_ItemServico_CodItemServico = new javax.swing.JTextField();
+        tfComanda_ItemServico_Quantidade = new javax.swing.JTextField();
+        tfComanda_ItemServico_Valor = new javax.swing.JTextField();
+        btComanda_ItemServico_Adicionar = new javax.swing.JButton();
+        btComanda_ItemServico_Cancelar = new javax.swing.JButton();
         jpComanda = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtComanda = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        btPesquisar1 = new javax.swing.JButton();
-        tfCpf1 = new javax.swing.JTextField();
-        lbCpf1 = new javax.swing.JLabel();
-        tfCpf2 = new javax.swing.JTextField();
-        btPesquisar2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        lbComanda_Nome = new javax.swing.JLabel();
+        btComanda_PesquisaCPF = new javax.swing.JButton();
+        tfComanda_Cpf = new javax.swing.JTextField();
+        lbComanda_Cpf = new javax.swing.JLabel();
+        tfComanda_Nome = new javax.swing.JTextField();
+        btComanda_PesquisarNome = new javax.swing.JButton();
+        btComanda_Abrir = new javax.swing.JButton();
+        jpItemServico = new javax.swing.JPanel();
+        tfItemServico_Descricao = new javax.swing.JTextField();
+        tfItemServico_Valor = new javax.swing.JTextField();
+        lbItemServico_Descricao = new javax.swing.JLabel();
+        lbItemServico_Valor = new javax.swing.JLabel();
+        btItemServico_Salvar = new javax.swing.JButton();
+        btItemServico_Excluir = new javax.swing.JButton();
+        btItemServico_Alterar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtItemServico = new javax.swing.JTable();
         jpVisitante = new javax.swing.JPanel();
-        tfCpf = new javax.swing.JTextField();
-        tfNome = new javax.swing.JTextField();
-        lbCpf = new javax.swing.JLabel();
-        lbNome = new javax.swing.JLabel();
-        btSalvar1 = new javax.swing.JButton();
-        tfTelefone = new javax.swing.JTextField();
-        lbTelefone = new javax.swing.JLabel();
-        btCancelar = new javax.swing.JButton();
-        btPesquisar = new javax.swing.JButton();
+        tfVisitante_Cpf = new javax.swing.JTextField();
+        tfVisitante_Nome = new javax.swing.JTextField();
+        lbVisitante_Cpf = new javax.swing.JLabel();
+        lbVisitante_Nome = new javax.swing.JLabel();
+        btVisitante_Salvar = new javax.swing.JButton();
+        tfVisitante_Telefone = new javax.swing.JTextField();
+        lbVisitante_Telefone = new javax.swing.JLabel();
+        btVisitante_Cancelar = new javax.swing.JButton();
+        btVisitante_PesquisarCPF = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setIconImages(null);
+        setLocation(new java.awt.Point(0, 0));
+        setLocationByPlatform(true);
+        setResizable(false);
 
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
 
-        lbDescricao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbDescricao.setText("Descrição:");
+        lbComanda_ItemServico_CodComanda.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbComanda_ItemServico_CodComanda.setText("Código da Comanda:");
 
-        lbValor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbValor.setText("Valor:");
+        lbComanda_ItemServico_CodItemServico.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbComanda_ItemServico_CodItemServico.setText("Código do Item/Serviço:");
 
-        btSalvar.setText("Salvar");
-        btSalvar.addActionListener(new java.awt.event.ActionListener() {
+        lbComanda_ItemServico_Quantidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbComanda_ItemServico_Quantidade.setText("Quantidade:");
+
+        lbComanda_ItemServico_Valor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbComanda_ItemServico_Valor.setText("Valor:");
+
+        tfComanda_ItemServico_Valor.setEditable(false);
+
+        btComanda_ItemServico_Adicionar.setText("Adicionar");
+
+        btComanda_ItemServico_Cancelar.setText("Cancelar");
+
+        javax.swing.GroupLayout jpComanda_ItemServicoLayout = new javax.swing.GroupLayout(jpComanda_ItemServico);
+        jpComanda_ItemServico.setLayout(jpComanda_ItemServicoLayout);
+        jpComanda_ItemServicoLayout.setHorizontalGroup(
+            jpComanda_ItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpComanda_ItemServicoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpComanda_ItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbComanda_ItemServico_CodItemServico)
+                    .addComponent(lbComanda_ItemServico_Valor, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbComanda_ItemServico_Quantidade, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbComanda_ItemServico_CodComanda, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(25, 25, 25)
+                .addGroup(jpComanda_ItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfComanda_ItemServico_Valor)
+                    .addComponent(tfComanda_ItemServico_Quantidade)
+                    .addComponent(tfComanda_ItemServico_CodItemServico)
+                    .addComponent(tfComanda_ItemServico_CodComanda))
+                .addContainerGap())
+            .addGroup(jpComanda_ItemServicoLayout.createSequentialGroup()
+                .addGap(113, 113, 113)
+                .addComponent(btComanda_ItemServico_Adicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btComanda_ItemServico_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(114, Short.MAX_VALUE))
+        );
+        jpComanda_ItemServicoLayout.setVerticalGroup(
+            jpComanda_ItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpComanda_ItemServicoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpComanda_ItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbComanda_ItemServico_CodComanda)
+                    .addComponent(tfComanda_ItemServico_CodComanda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jpComanda_ItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbComanda_ItemServico_CodItemServico)
+                    .addComponent(tfComanda_ItemServico_CodItemServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jpComanda_ItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbComanda_ItemServico_Quantidade)
+                    .addComponent(tfComanda_ItemServico_Quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jpComanda_ItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbComanda_ItemServico_Valor)
+                    .addComponent(tfComanda_ItemServico_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGroup(jpComanda_ItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btComanda_ItemServico_Adicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btComanda_ItemServico_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22))
+        );
+
+        jTabbedPane1.addTab("Adicionar Itens", jpComanda_ItemServico);
+
+        jtComanda.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "CPF", "Nome", "Telefone"
+            }
+        ));
+        jtComanda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtComandaMouseClicked(evt);
+            }
+        });
+        jtComanda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtComandaKeyReleased(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jtComanda);
+
+        lbComanda_Nome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbComanda_Nome.setText("Nome:");
+
+        btComanda_PesquisaCPF.setText("Pesquisar");
+        btComanda_PesquisaCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSalvarActionPerformed(evt);
+                btComanda_PesquisaCPFActionPerformed(evt);
             }
         });
 
-        btExcluir.setText("Excluir");
-        btExcluir.addActionListener(new java.awt.event.ActionListener() {
+        lbComanda_Cpf.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbComanda_Cpf.setText("CPF:");
+
+        btComanda_PesquisarNome.setText("Pesquisar");
+        btComanda_PesquisarNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btExcluirActionPerformed(evt);
+                btComanda_PesquisarNomeActionPerformed(evt);
             }
         });
 
-        btAlterar.setText("Alterar");
-        btAlterar.addActionListener(new java.awt.event.ActionListener() {
+        btComanda_Abrir.setText("Abrir Comanda");
+        btComanda_Abrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAlterarActionPerformed(evt);
+                btComanda_AbrirActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jpComandaLayout = new javax.swing.GroupLayout(jpComanda);
+        jpComanda.setLayout(jpComandaLayout);
+        jpComandaLayout.setHorizontalGroup(
+            jpComandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpComandaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpComandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpComandaLayout.createSequentialGroup()
+                        .addComponent(lbComanda_Nome)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfComanda_Nome, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btComanda_PesquisarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpComandaLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(lbComanda_Cpf)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfComanda_Cpf, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btComanda_PesquisaCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(jpComandaLayout.createSequentialGroup()
+                .addGap(164, 164, 164)
+                .addComponent(btComanda_Abrir)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jpComandaLayout.setVerticalGroup(
+            jpComandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpComandaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpComandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbComanda_Cpf)
+                    .addComponent(tfComanda_Cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btComanda_PesquisaCPF))
+                .addGap(18, 18, 18)
+                .addGroup(jpComandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbComanda_Nome)
+                    .addComponent(tfComanda_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btComanda_PesquisarNome))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btComanda_Abrir)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Abrir Comanda", jpComanda);
+
+        lbItemServico_Descricao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbItemServico_Descricao.setText("Descrição:");
+
+        lbItemServico_Valor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbItemServico_Valor.setText("Valor:");
+
+        btItemServico_Salvar.setText("Salvar");
+        btItemServico_Salvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btItemServico_SalvarActionPerformed(evt);
+            }
+        });
+
+        btItemServico_Excluir.setText("Excluir");
+        btItemServico_Excluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btItemServico_ExcluirActionPerformed(evt);
+            }
+        });
+
+        btItemServico_Alterar.setText("Alterar");
+        btItemServico_Alterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btItemServico_AlterarActionPerformed(evt);
             }
         });
 
@@ -119,18 +366,18 @@ public class ViewGlobal extends javax.swing.JFrame {
                         .addGroup(jpItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpItemServicoLayout.createSequentialGroup()
                                 .addGap(2, 2, 2)
-                                .addComponent(btSalvar))
+                                .addComponent(btItemServico_Salvar))
                             .addGroup(jpItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btAlterar, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btExcluir, javax.swing.GroupLayout.Alignment.TRAILING))))
+                                .addComponent(btItemServico_Alterar, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btItemServico_Excluir, javax.swing.GroupLayout.Alignment.TRAILING))))
                     .addGroup(jpItemServicoLayout.createSequentialGroup()
                         .addGroup(jpItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbDescricao))
+                            .addComponent(tfItemServico_Descricao, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbItemServico_Descricao))
                         .addGap(18, 18, 18)
                         .addGroup(jpItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbValor)
-                            .addComponent(tfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbItemServico_Valor)
+                            .addComponent(tfItemServico_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -140,151 +387,53 @@ public class ViewGlobal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jpItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpItemServicoLayout.createSequentialGroup()
-                        .addComponent(lbDescricao)
+                        .addComponent(lbItemServico_Descricao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jpItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfItemServico_Descricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfItemServico_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jpItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jpItemServicoLayout.createSequentialGroup()
-                                .addComponent(btSalvar)
+                                .addComponent(btItemServico_Salvar)
                                 .addGap(18, 18, 18)
-                                .addComponent(btAlterar)
+                                .addComponent(btItemServico_Alterar)
                                 .addGap(18, 18, 18)
-                                .addComponent(btExcluir))))
-                    .addComponent(lbValor))
-                .addContainerGap(35, Short.MAX_VALUE))
+                                .addComponent(btItemServico_Excluir))))
+                    .addComponent(lbItemServico_Valor))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cadastro de Itens/Serviços", jpItemServico);
 
-        jtComanda.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "CPF", "Nome", "Telefone"
-            }
-        ));
-        jtComanda.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtComandaMouseClicked(evt);
-            }
-        });
-        jtComanda.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtComandaKeyReleased(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jtComanda);
+        lbVisitante_Cpf.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbVisitante_Cpf.setText("CPF:");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Nome:");
+        lbVisitante_Nome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbVisitante_Nome.setText("Nome:");
 
-        btPesquisar1.setText("Pesquisar");
-        btPesquisar1.addActionListener(new java.awt.event.ActionListener() {
+        btVisitante_Salvar.setText("Salvar");
+        btVisitante_Salvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btPesquisar1ActionPerformed(evt);
+                btVisitante_SalvarActionPerformed(evt);
             }
         });
 
-        lbCpf1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbCpf1.setText("CPF:");
+        lbVisitante_Telefone.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbVisitante_Telefone.setText("Telefone:");
 
-        btPesquisar2.setText("Pesquisar");
-        btPesquisar2.addActionListener(new java.awt.event.ActionListener() {
+        btVisitante_Cancelar.setText("Cancelar");
+        btVisitante_Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btPesquisar2ActionPerformed(evt);
+                btVisitante_CancelarActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Abrir Comanda");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btVisitante_PesquisarCPF.setText("Pesquisar");
+        btVisitante_PesquisarCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jpComandaLayout = new javax.swing.GroupLayout(jpComanda);
-        jpComanda.setLayout(jpComandaLayout);
-        jpComandaLayout.setHorizontalGroup(
-            jpComandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpComandaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpComandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpComandaLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfCpf2, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btPesquisar2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpComandaLayout.createSequentialGroup()
-                        .addComponent(lbCpf1)
-                        .addGap(30, 30, 30)
-                        .addComponent(tfCpf1, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btPesquisar1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(jpComandaLayout.createSequentialGroup()
-                .addGap(164, 164, 164)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jpComandaLayout.setVerticalGroup(
-            jpComandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpComandaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpComandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbCpf1)
-                    .addComponent(tfCpf1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btPesquisar1))
-                .addGap(18, 18, 18)
-                .addGroup(jpComandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(tfCpf2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btPesquisar2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Abrir Comanda", jpComanda);
-
-        lbCpf.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbCpf.setText("CPF:");
-
-        lbNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbNome.setText("Nome:");
-
-        btSalvar1.setText("Salvar");
-        btSalvar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSalvar1ActionPerformed(evt);
-            }
-        });
-
-        lbTelefone.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbTelefone.setText("Telefone:");
-
-        btCancelar.setText("Cancelar");
-        btCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCancelarActionPerformed(evt);
-            }
-        });
-
-        btPesquisar.setText("Pesquisar");
-        btPesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btPesquisarActionPerformed(evt);
+                btVisitante_PesquisarCPFActionPerformed(evt);
             }
         });
 
@@ -292,49 +441,49 @@ public class ViewGlobal extends javax.swing.JFrame {
         jpVisitante.setLayout(jpVisitanteLayout);
         jpVisitanteLayout.setHorizontalGroup(
             jpVisitanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpVisitanteLayout.createSequentialGroup()
+                .addContainerGap(115, Short.MAX_VALUE)
+                .addComponent(btVisitante_Salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btVisitante_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(102, 102, 102))
             .addGroup(jpVisitanteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpVisitanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbNome)
-                    .addComponent(lbTelefone)
-                    .addComponent(lbCpf))
+                    .addComponent(lbVisitante_Telefone)
+                    .addComponent(lbVisitante_Nome, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbVisitante_Cpf, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(jpVisitanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpVisitanteLayout.createSequentialGroup()
-                        .addComponent(tfCpf)
+                        .addComponent(tfVisitante_Cpf)
                         .addGap(18, 18, 18)
-                        .addComponent(btPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(tfNome)
-                    .addComponent(tfTelefone))
+                        .addComponent(btVisitante_PesquisarCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfVisitante_Nome)
+                    .addComponent(tfVisitante_Telefone))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpVisitanteLayout.createSequentialGroup()
-                .addContainerGap(115, Short.MAX_VALUE)
-                .addComponent(btSalvar1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(102, 102, 102))
         );
         jpVisitanteLayout.setVerticalGroup(
             jpVisitanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpVisitanteLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(jpVisitanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbCpf)
-                    .addComponent(tfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btPesquisar))
+                    .addComponent(lbVisitante_Cpf)
+                    .addComponent(tfVisitante_Cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btVisitante_PesquisarCPF))
                 .addGap(18, 18, 18)
                 .addGroup(jpVisitanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbNome))
+                    .addComponent(tfVisitante_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbVisitante_Nome))
                 .addGap(18, 18, 18)
                 .addGroup(jpVisitanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbTelefone))
+                    .addComponent(tfVisitante_Telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbVisitante_Telefone))
                 .addGap(34, 34, 34)
                 .addGroup(jpVisitanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btSalvar1)
-                    .addComponent(btCancelar))
-                .addContainerGap(53, Short.MAX_VALUE))
+                    .addComponent(btVisitante_Salvar)
+                    .addComponent(btVisitante_Cancelar))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cadastro de Visitantes", jpVisitante);
@@ -353,24 +502,24 @@ public class ViewGlobal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
+    private void btItemServico_SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btItemServico_SalvarActionPerformed
 
         ItemServico item = new ItemServico();
         ItemServicoDAO itemDAO = new ItemServicoDAO();
 
-        item.setDescricao(tfDescricao.getText());
-        item.setValor(Double.parseDouble(tfValor.getText()));
+        item.setDescricao(tfItemServico_Descricao.getText());
+        item.setValor(Double.parseDouble(tfItemServico_Valor.getText()));
 
         itemDAO.salvar(item);
 
-        tfDescricao.setText("");
-        tfValor.setText("");
+        tfItemServico_Descricao.setText("");
+        tfItemServico_Valor.setText("");
 
-        leTabela();
+        leTabelaItemServico();
 
-    }//GEN-LAST:event_btSalvarActionPerformed
+    }//GEN-LAST:event_btItemServico_SalvarActionPerformed
 
-    private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
+    private void btItemServico_ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btItemServico_ExcluirActionPerformed
         // TODO add your handling code here:
 
         if (jtItemServico.getSelectedRow() != -1) {
@@ -380,44 +529,44 @@ public class ViewGlobal extends javax.swing.JFrame {
             item.setCodigo((int)jtItemServico.getValueAt(jtItemServico.getSelectedRow(), 0));
             itemDAO.excluir(item);
 
-            tfDescricao.setText("");
-            tfValor.setText("");
+            tfItemServico_Descricao.setText("");
+            tfItemServico_Valor.setText("");
 
-            leTabela();
+            leTabelaItemServico();
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um produto");
         }
 
-    }//GEN-LAST:event_btExcluirActionPerformed
+    }//GEN-LAST:event_btItemServico_ExcluirActionPerformed
 
-    private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
+    private void btItemServico_AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btItemServico_AlterarActionPerformed
         // TODO add your handling code here:
 
         if (jtItemServico.getSelectedRow() != -1) {
             ItemServico item = new ItemServico();
             ItemServicoDAO itemDAO = new ItemServicoDAO();
 
-            item.setDescricao(tfDescricao.getText());
-            item.setValor(Double.parseDouble(tfValor.getText()));
+            item.setDescricao(tfItemServico_Descricao.getText());
+            item.setValor(Double.parseDouble(tfItemServico_Valor.getText()));
             item.setCodigo((int)jtItemServico.getValueAt(jtItemServico.getSelectedRow(), 0));
             itemDAO.alterar(item);
 
-            tfDescricao.setText("");
-            tfValor.setText("");
+            tfItemServico_Descricao.setText("");
+            tfItemServico_Valor.setText("");
 
-            leTabela();
+            leTabelaItemServico();
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um produto");
         }
 
-    }//GEN-LAST:event_btAlterarActionPerformed
+    }//GEN-LAST:event_btItemServico_AlterarActionPerformed
 
     private void jtItemServicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtItemServicoMouseClicked
         // TODO add your handling code here:
 
         if (jtItemServico.getSelectedRow() != -1) {
-            tfDescricao.setText(jtItemServico.getValueAt(jtItemServico.getSelectedRow(), 1).toString());
-            tfValor.setText(jtItemServico.getValueAt(jtItemServico.getSelectedRow(), 2).toString());
+            tfItemServico_Descricao.setText(jtItemServico.getValueAt(jtItemServico.getSelectedRow(), 1).toString());
+            tfItemServico_Valor.setText(jtItemServico.getValueAt(jtItemServico.getSelectedRow(), 2).toString());
         }
 
     }//GEN-LAST:event_jtItemServicoMouseClicked
@@ -426,57 +575,57 @@ public class ViewGlobal extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         if (jtItemServico.getSelectedRow() != -1) {
-            tfDescricao.setText(jtItemServico.getValueAt(jtItemServico.getSelectedRow(), 1).toString());
-            tfValor.setText(jtItemServico.getValueAt(jtItemServico.getSelectedRow(), 2).toString());
+            tfItemServico_Descricao.setText(jtItemServico.getValueAt(jtItemServico.getSelectedRow(), 1).toString());
+            tfItemServico_Valor.setText(jtItemServico.getValueAt(jtItemServico.getSelectedRow(), 2).toString());
         }
 
     }//GEN-LAST:event_jtItemServicoKeyReleased
 
-    private void btSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvar1ActionPerformed
+    private void btVisitante_SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisitante_SalvarActionPerformed
 
         Visitante visitante = new Visitante();
         VisitanteDAO visitanteDAO = new VisitanteDAO();
 
-        visitante.setCpf(Integer.parseInt(tfCpf.getText()));
-        visitante.setNome(tfNome.getText());
-        visitante.setTelefone(Integer.parseInt(tfTelefone.getText()));
+        visitante.setCpf(Integer.parseInt(tfVisitante_Cpf.getText()));
+        visitante.setNome(tfVisitante_Nome.getText());
+        visitante.setTelefone(Integer.parseInt(tfVisitante_Telefone.getText()));
 
         visitanteDAO.salvar(visitante);
 
-        tfCpf.setText("");
-        tfNome.setText("");
-        tfTelefone.setText("");
-    }//GEN-LAST:event_btSalvar1ActionPerformed
+        tfVisitante_Cpf.setText("");
+        tfVisitante_Nome.setText("");
+        tfVisitante_Telefone.setText("");
+    }//GEN-LAST:event_btVisitante_SalvarActionPerformed
 
-    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
+    private void btVisitante_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisitante_CancelarActionPerformed
         // TODO add your handling code here:
 
-        tfCpf.setText("");
-        tfNome.setText("");
-        tfTelefone.setText("");
-    }//GEN-LAST:event_btCancelarActionPerformed
+        tfVisitante_Cpf.setText("");
+        tfVisitante_Nome.setText("");
+        tfVisitante_Telefone.setText("");
+    }//GEN-LAST:event_btVisitante_CancelarActionPerformed
 
-    private void btPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarActionPerformed
+    private void btVisitante_PesquisarCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisitante_PesquisarCPFActionPerformed
         // TODO add your handling code here:
 
         Visitante visitante = new Visitante();
         VisitanteDAO visitanteDAO = new VisitanteDAO();
 
-        visitante.setCpf(Integer.parseInt(tfCpf.getText()));
+        visitante.setCpf(Integer.parseInt(tfVisitante_Cpf.getText()));
 
         if (visitanteDAO.pesquisar(visitante)){
             JOptionPane.showMessageDialog(null, "CPF existente!");
         } else {
-            JOptionPane.showMessageDialog(null, "Não existe resgistro com esse CPF.");
+            JOptionPane.showMessageDialog(null, "Não existe registro com esse CPF.");
         }
-    }//GEN-LAST:event_btPesquisarActionPerformed
+    }//GEN-LAST:event_btVisitante_PesquisarCPFActionPerformed
 
     private void jtComandaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtComandaMouseClicked
         // TODO add your handling code here:
 
         if (jtComanda.getSelectedRow() != -1) {
-            tfBuscaCpf.setText(jtComanda.getValueAt(jtComanda.getSelectedRow(), 0).toString());
-            tfBuscaNome.setText(jtComanda.getValueAt(jtComanda.getSelectedRow(), 1).toString());
+            tfComanda_Cpf.setText(jtComanda.getValueAt(jtComanda.getSelectedRow(), 0).toString());
+            tfComanda_Nome.setText(jtComanda.getValueAt(jtComanda.getSelectedRow(), 1).toString());
         }
 
     }//GEN-LAST:event_jtComandaMouseClicked
@@ -485,23 +634,46 @@ public class ViewGlobal extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         if (jtComanda.getSelectedRow() != -1) {
-            tfBuscaCpf.setText(jtComanda.getValueAt(jtComanda.getSelectedRow(), 0).toString());
-            tfBuscaNome.setText(jtComanda.getValueAt(jtComanda.getSelectedRow(), 1).toString());
+            tfComanda_Cpf.setText(jtComanda.getValueAt(jtComanda.getSelectedRow(), 0).toString());
+            tfComanda_Nome.setText(jtComanda.getValueAt(jtComanda.getSelectedRow(), 1).toString());
         }
 
     }//GEN-LAST:event_jtComandaKeyReleased
 
-    private void btPesquisar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisar1ActionPerformed
+    private void btComanda_PesquisaCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btComanda_PesquisaCPFActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btPesquisar1ActionPerformed
+        ComandaDAO comandaDAO = new ComandaDAO();
+        
+        String retorno = comandaDAO.verificaCPF(Double.parseDouble(tfComanda_Cpf.getText()));
+        if (retorno != null) {
+            JOptionPane.showMessageDialog(null, "Visitante existente!");
+            tfComanda_Nome.setText(retorno);
+        } else {
+            JOptionPane.showMessageDialog(null, "Visitante não encontrado!");
+        }
+    }//GEN-LAST:event_btComanda_PesquisaCPFActionPerformed
 
-    private void btPesquisar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisar2ActionPerformed
+    private void btComanda_PesquisarNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btComanda_PesquisarNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btPesquisar2ActionPerformed
+        leTabelaComandaPorNome(tfComanda_Nome.getText());
+        tfComanda_Cpf.setText("");
+        
+    }//GEN-LAST:event_btComanda_PesquisarNomeActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btComanda_AbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btComanda_AbrirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if (!tfComanda_Nome.getText().equals("")) {                    
+            Comanda comanda = new Comanda();
+            ComandaDAO comandaDAO = new ComandaDAO();
+
+            comanda.setCpf_visitante(Double.parseDouble(tfComanda_Cpf.getText()));
+
+            comandaDAO.abre(comanda);
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um CPF.");
+        }
+        
+    }//GEN-LAST:event_btComanda_AbrirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -539,36 +711,47 @@ public class ViewGlobal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btAlterar;
-    private javax.swing.JButton btCancelar;
-    private javax.swing.JButton btExcluir;
-    private javax.swing.JButton btPesquisar;
-    private javax.swing.JButton btPesquisar1;
-    private javax.swing.JButton btPesquisar2;
-    private javax.swing.JButton btSalvar;
-    private javax.swing.JButton btSalvar1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btComanda_Abrir;
+    private javax.swing.JButton btComanda_ItemServico_Adicionar;
+    private javax.swing.JButton btComanda_ItemServico_Cancelar;
+    private javax.swing.JButton btComanda_PesquisaCPF;
+    private javax.swing.JButton btComanda_PesquisarNome;
+    private javax.swing.JButton btItemServico_Alterar;
+    private javax.swing.JButton btItemServico_Excluir;
+    private javax.swing.JButton btItemServico_Salvar;
+    private javax.swing.JButton btVisitante_Cancelar;
+    private javax.swing.JButton btVisitante_PesquisarCPF;
+    private javax.swing.JButton btVisitante_Salvar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel jpComanda;
+    private javax.swing.JPanel jpComanda_ItemServico;
     private javax.swing.JPanel jpItemServico;
     private javax.swing.JPanel jpVisitante;
     private javax.swing.JTable jtComanda;
     private javax.swing.JTable jtItemServico;
-    private javax.swing.JLabel lbCpf;
-    private javax.swing.JLabel lbCpf1;
-    private javax.swing.JLabel lbDescricao;
-    private javax.swing.JLabel lbNome;
-    private javax.swing.JLabel lbTelefone;
-    private javax.swing.JLabel lbValor;
-    private javax.swing.JTextField tfCpf;
-    private javax.swing.JTextField tfCpf1;
-    private javax.swing.JTextField tfCpf2;
-    private javax.swing.JTextField tfDescricao;
-    private javax.swing.JTextField tfNome;
-    private javax.swing.JTextField tfTelefone;
-    private javax.swing.JTextField tfValor;
+    private javax.swing.JLabel lbComanda_Cpf;
+    private javax.swing.JLabel lbComanda_ItemServico_CodComanda;
+    private javax.swing.JLabel lbComanda_ItemServico_CodItemServico;
+    private javax.swing.JLabel lbComanda_ItemServico_Quantidade;
+    private javax.swing.JLabel lbComanda_ItemServico_Valor;
+    private javax.swing.JLabel lbComanda_Nome;
+    private javax.swing.JLabel lbItemServico_Descricao;
+    private javax.swing.JLabel lbItemServico_Valor;
+    private javax.swing.JLabel lbVisitante_Cpf;
+    private javax.swing.JLabel lbVisitante_Nome;
+    private javax.swing.JLabel lbVisitante_Telefone;
+    private javax.swing.JTextField tfComanda_Cpf;
+    private javax.swing.JTextField tfComanda_ItemServico_CodComanda;
+    private javax.swing.JTextField tfComanda_ItemServico_CodItemServico;
+    private javax.swing.JTextField tfComanda_ItemServico_Quantidade;
+    private javax.swing.JTextField tfComanda_ItemServico_Valor;
+    private javax.swing.JTextField tfComanda_Nome;
+    private javax.swing.JTextField tfItemServico_Descricao;
+    private javax.swing.JTextField tfItemServico_Valor;
+    private javax.swing.JTextField tfVisitante_Cpf;
+    private javax.swing.JTextField tfVisitante_Nome;
+    private javax.swing.JTextField tfVisitante_Telefone;
     // End of variables declaration//GEN-END:variables
 }

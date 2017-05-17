@@ -69,24 +69,7 @@ public class Login extends JFrame {
                 } else {
                     UsuarioDAO usuarioDAO = new UsuarioDAO();                
                     if(usuarioDAO.ler(tfUsuario.getText(), pfSenha.getText())){
-                        ViewItemServico objItemServico = new ViewItemServico();
-                        objItemServico.setLocationRelativeTo(null);
-                        objItemServico.setResizable(false);
-                        objItemServico.setVisible(true);
-                        objItemServico.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                        
-                        ViewVisitante objVisitante = new ViewVisitante();
-                        objVisitante.setLocationRelativeTo(null);
-                        objVisitante.setResizable(false);
-                        objVisitante.setVisible(true);
-                        objVisitante.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                        
-                        ViewComanda objComanda = new ViewComanda();
-                        objComanda.setLocationRelativeTo(null);
-                        objComanda.setResizable(false);
-                        objComanda.setVisible(true);
-                        objComanda.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                        
+                        new ViewGlobal().setVisible(true);                        
                     } else {
                         JOptionPane.showMessageDialog(null, "Usuário e/ou senha incorreta(s)!");
                     }
