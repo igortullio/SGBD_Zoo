@@ -3,7 +3,6 @@ package view;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.security.Principal;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -71,7 +70,7 @@ public class Login extends JFrame {
                         UsuarioDAO usuarioDAO = new UsuarioDAO();
                         if (usuarioDAO.ler(tfUsuario.getText(), pfSenha.getText())) {
 
-                            // resposta == 0 para Comanda, 1 para Ficha Médica, 2 para Maybe e -1 or 3 para Escape/Cancelar.
+                            // resposta == 0 para Comanda, 1 para Ficha Médica, -1 ou 2 para Escape/Cancelar.
                             String[] opcoes = new String[]{"Comanda", "Ficha Médica", "Cancelar"}; // vetor com 4 posições
                             int resposta
                                     = JOptionPane.showOptionDialog(

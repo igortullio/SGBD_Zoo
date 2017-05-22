@@ -66,28 +66,21 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="spFichaMedica" alignment="1" pref="999" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jlAltura" min="-2" max="-2" attributes="0"/>
                                           <Component id="jlPeso" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jlEstadoSaude" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jlEntrada" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="tfEstadoSaude" alignment="1" max="32767" attributes="0"/>
-                                                  <Component id="tfPeso" max="32767" attributes="0"/>
-                                                  <Component id="tfAltura" alignment="1" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <EmptySpace pref="33" max="32767" attributes="0"/>
-                                              <Component id="tfEntrada" min="-2" pref="50" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="tfPeso" max="32767" attributes="0"/>
+                                          <Component id="tfAltura" max="32767" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="cbEstadoSaude" pref="92" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -95,23 +88,33 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jlNascimento" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jlCodAnimal" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jlEntrada" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="tfCodAnimal" pref="50" max="32767" attributes="0"/>
-                                          <Component id="tfNascimento" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="tfEntrada" min="-2" pref="95" max="-2" attributes="0"/>
+                                          <Component id="tfCodAnimal" min="-2" pref="50" max="-2" attributes="0"/>
+                                          <Component id="tfNascimento" min="-2" pref="95" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jbInserir" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jbAtualizar" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Pesquisar" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jbExcluir" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jbExcluir" max="32767" attributes="0"/>
+                                  <Component id="jbInserir" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="jlCodFicha" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="tfCodFicha" min="-2" pref="40" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jbPesquisar" max="32767" attributes="0"/>
+                                  <Component id="jbAtualizar" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="spFichaMedica" alignment="1" pref="999" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -123,40 +126,53 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="spFichaMedica" min="-2" pref="200" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jlCodAnimal" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfCodAnimal" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jbInserir" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jlCodAnimal" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfCodAnimal" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jlNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jlEntrada" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfEntrada" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jlEstadoSaude" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cbEstadoSaude" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jlPeso" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfPeso" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jbInserir" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jlCodFicha" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfCodFicha" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jbPesquisar" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jbAtualizar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jbExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jlNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jbAtualizar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jlEntrada" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfEntrada" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Pesquisar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jlEstadoSaude" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfEstadoSaude" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jbExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jlPeso" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfPeso" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jlAltura" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfAltura" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfAltura" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="13" max="32767" attributes="0"/>
+                      <EmptySpace pref="55" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -254,7 +270,16 @@
                 <Property name="text" type="java.lang.String" value="Estado de Sa&#xfa;de"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tfEstadoSaude">
+            <Component class="javax.swing.JComboBox" name="cbEstadoSaude">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="3">
+                    <StringItem index="0" value="Normal"/>
+                    <StringItem index="1" value="Aten&#xe7;&#xe3;o"/>
+                    <StringItem index="2" value="Grave"/>
+                  </StringArray>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jlPeso">
               <Properties>
@@ -273,6 +298,7 @@
             <Component class="javax.swing.JButton" name="jbInserir">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Inserir"/>
+                <Property name="toolTipText" type="java.lang.String" value="Digite dos dados nescess&#xe1;rios e clique para inserir no banco"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbInserirActionPerformed"/>
@@ -283,15 +309,30 @@
                 <Property name="text" type="java.lang.String" value="Atualizar"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="Pesquisar">
+            <Component class="javax.swing.JButton" name="jbPesquisar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pesquisar"/>
+                <Property name="toolTipText" type="java.lang.String" value="Pesquisa a ficha pelo c&#xf3;digo digitado"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbPesquisarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbExcluir">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Excluir"/>
+                <Property name="toolTipText" type="java.lang.String" value="Selecione uma ficha na tabela e clique para excluir"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbExcluirActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlCodFicha">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="C&#xf3;digo da Ficha"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfCodFicha">
             </Component>
           </SubComponents>
         </Container>
@@ -312,7 +353,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="396" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="422" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -334,7 +375,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="396" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="422" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -356,7 +397,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="396" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="422" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -378,7 +419,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="396" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="422" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>

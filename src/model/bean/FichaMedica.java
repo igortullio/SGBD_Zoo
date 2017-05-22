@@ -16,6 +16,9 @@ public class FichaMedica {
     float Peso_FichaMedica;
     float Altura_FichaMedica;
 
+    public FichaMedica() {
+    }
+    
     /**
      * Constutor da Ficha Médica
      * 

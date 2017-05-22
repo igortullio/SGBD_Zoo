@@ -3,7 +3,6 @@ package view;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-import model.bean.FichaMedica;
 import model.dao.FichaMedicaDAO;
 import model.bean.FichaMedica;
 
@@ -15,7 +14,7 @@ import model.bean.FichaMedica;
 public class ViewFichaMedica extends javax.swing.JFrame {
 
     /**
-     * Creates new form NewJFrame
+     * Construtor da classe. Creates new form NewJFrame
      */
     public ViewFichaMedica() {
         initComponents();
@@ -29,7 +28,7 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         
     }
     
-    public void lerTabelaFichaMedica(){
+    private void lerTabelaFichaMedica(){
         DefaultTableModel modelFichaMedica = (DefaultTableModel)jtFichaMedica.getModel();
         modelFichaMedica.setRowCount(0);
         FichaMedicaDAO fichaDAO = new FichaMedicaDAO();
@@ -45,6 +44,32 @@ public class ViewFichaMedica extends javax.swing.JFrame {
             });
         }//fim for
     }//fim metodo
+    
+    private void lerTabelaFichaMedicaPeloCodigo(int codigo_FichaMedica) {
+        DefaultTableModel modelFichaMedica = (DefaultTableModel) jtFichaMedica.getModel();
+        modelFichaMedica.setNumRows(0);
+        FichaMedicaDAO fichaDAO = new FichaMedicaDAO();
+        for (FichaMedica f : fichaDAO.lerPorCodigo(codigo_FichaMedica)) {
+            modelFichaMedica.addRow(new Object[]{
+                f.getCodigo_FichaMedica(),
+                f.getCodigo_Animal(),
+                f.getDataNascimento_FichaMedica(),
+                f.getDataEntradaZoo_FichaMedica(),
+                f.getEstadoSaude_FichaMedica(),
+                f.getPeso_FichaMedica(),
+                f.getAltura_FichaMedica()
+            });                        
+        }
+    }
+    
+    private void limparCamposTabelaFichaMedica(){
+        tfCodAnimal.setText("");
+        tfNascimento.setText("");
+        tfEntrada.setText("");
+        cbEstadoSaude.setSelectedItem(null);
+        tfPeso.setText("");
+        tfAltura.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -66,15 +91,17 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         jlEntrada = new javax.swing.JLabel();
         tfEntrada = new javax.swing.JTextField();
         jlEstadoSaude = new javax.swing.JLabel();
-        tfEstadoSaude = new javax.swing.JTextField();
+        cbEstadoSaude = new javax.swing.JComboBox();
         jlPeso = new javax.swing.JLabel();
         tfPeso = new javax.swing.JTextField();
         jlAltura = new javax.swing.JLabel();
         tfAltura = new javax.swing.JTextField();
         jbInserir = new javax.swing.JButton();
         jbAtualizar = new javax.swing.JButton();
-        Pesquisar = new javax.swing.JButton();
+        jbPesquisar = new javax.swing.JButton();
         jbExcluir = new javax.swing.JButton();
+        jlCodFicha = new javax.swing.JLabel();
+        tfCodFicha = new javax.swing.JTextField();
         jpAnimais = new javax.swing.JPanel();
         jpFuncionarios = new javax.swing.JPanel();
         jpProcedimentos = new javax.swing.JPanel();
@@ -103,11 +130,14 @@ public class ViewFichaMedica extends javax.swing.JFrame {
 
         jlEstadoSaude.setText("Estado de Saúde");
 
+        cbEstadoSaude.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Atenção", "Grave" }));
+
         jlPeso.setText("Peso");
 
         jlAltura.setText("Altura");
 
         jbInserir.setText("Inserir");
+        jbInserir.setToolTipText("Digite dos dados nescessários e clique para inserir no banco");
         jbInserir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbInserirActionPerformed(evt);
@@ -116,9 +146,23 @@ public class ViewFichaMedica extends javax.swing.JFrame {
 
         jbAtualizar.setText("Atualizar");
 
-        Pesquisar.setText("Pesquisar");
+        jbPesquisar.setText("Pesquisar");
+        jbPesquisar.setToolTipText("Pesquisa a ficha pelo código digitado");
+        jbPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbPesquisarActionPerformed(evt);
+            }
+        });
 
         jbExcluir.setText("Excluir");
+        jbExcluir.setToolTipText("Selecione uma ficha na tabela e clique para excluir");
+        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExcluirActionPerformed(evt);
+            }
+        });
+
+        jlCodFicha.setText("Código da Ficha");
 
         javax.swing.GroupLayout jpFichaMedicaLayout = new javax.swing.GroupLayout(jpFichaMedica);
         jpFichaMedica.setLayout(jpFichaMedicaLayout);
@@ -127,40 +171,44 @@ public class ViewFichaMedica extends javax.swing.JFrame {
             .addGroup(jpFichaMedicaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(spFichaMedica, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 999, Short.MAX_VALUE)
                     .addGroup(jpFichaMedicaLayout.createSequentialGroup()
-                        .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpFichaMedicaLayout.createSequentialGroup()
                                 .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jlAltura)
                                     .addComponent(jlPeso)
-                                    .addComponent(jlEstadoSaude)
-                                    .addComponent(jlEntrada))
-                                .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jpFichaMedicaLayout.createSequentialGroup()
-                                        .addGap(33, 33, 33)
-                                        .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(tfEstadoSaude, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(tfPeso)
-                                            .addComponent(tfAltura, javax.swing.GroupLayout.Alignment.TRAILING)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpFichaMedicaLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                                        .addComponent(tfEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jlEstadoSaude))
+                                .addGap(36, 36, 36)
+                                .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(tfPeso)
+                                    .addComponent(tfAltura)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpFichaMedicaLayout.createSequentialGroup()
+                                        .addComponent(cbEstadoSaude, 0, 92, Short.MAX_VALUE)
+                                        .addGap(3, 3, 3))))
                             .addGroup(jpFichaMedicaLayout.createSequentialGroup()
                                 .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jlNascimento)
-                                    .addComponent(jlCodAnimal))
+                                    .addComponent(jlCodAnimal)
+                                    .addComponent(jlEntrada))
                                 .addGap(18, 18, 18)
-                                .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfCodAnimal, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                                    .addComponent(tfNascimento))))
-                        .addGap(83, 83, 83)
-                        .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jbInserir)
-                            .addComponent(jbAtualizar)
-                            .addComponent(Pesquisar)
-                            .addComponent(jbExcluir))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfCodAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbInserir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(36, 36, 36)
+                        .addComponent(jlCodFicha)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfCodFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(spFichaMedica, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 999, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpFichaMedicaLayout.setVerticalGroup(
@@ -169,35 +217,45 @@ public class ViewFichaMedica extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(spFichaMedica, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlCodAnimal)
-                    .addComponent(tfCodAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbInserir))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlNascimento)
-                    .addComponent(tfNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbAtualizar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlEntrada)
-                    .addComponent(tfEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Pesquisar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlEstadoSaude)
-                    .addComponent(tfEstadoSaude, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbExcluir))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlPeso)
-                    .addComponent(tfPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpFichaMedicaLayout.createSequentialGroup()
+                        .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlCodAnimal)
+                            .addComponent(tfCodAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlNascimento)
+                            .addComponent(tfNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlEntrada)
+                            .addComponent(tfEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlEstadoSaude)
+                            .addComponent(cbEstadoSaude, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlPeso)
+                            .addComponent(tfPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jpFichaMedicaLayout.createSequentialGroup()
+                        .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jbInserir)
+                            .addComponent(jlCodFicha)
+                            .addComponent(tfCodFicha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbPesquisar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jbAtualizar)
+                            .addComponent(jbExcluir))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlAltura)
                     .addComponent(tfAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
+
+        jpFichaMedicaLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {tfAltura, tfPeso});
 
         tpSistemaFichaMedica.addTab("Ficha Médica", jpFichaMedica);
 
@@ -209,7 +267,7 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         );
         jpAnimaisLayout.setVerticalGroup(
             jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 396, Short.MAX_VALUE)
+            .addGap(0, 422, Short.MAX_VALUE)
         );
 
         tpSistemaFichaMedica.addTab("Cadastro de Animais", jpAnimais);
@@ -222,7 +280,7 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         );
         jpFuncionariosLayout.setVerticalGroup(
             jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 396, Short.MAX_VALUE)
+            .addGap(0, 422, Short.MAX_VALUE)
         );
 
         tpSistemaFichaMedica.addTab("Cadastro de Funcionários", jpFuncionarios);
@@ -235,7 +293,7 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         );
         jpProcedimentosLayout.setVerticalGroup(
             jpProcedimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 396, Short.MAX_VALUE)
+            .addGap(0, 422, Short.MAX_VALUE)
         );
 
         tpSistemaFichaMedica.addTab("Procedimentos", jpProcedimentos);
@@ -248,7 +306,7 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         );
         jpFornecedoresLayout.setVerticalGroup(
             jpFornecedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 396, Short.MAX_VALUE)
+            .addGap(0, 422, Short.MAX_VALUE)
         );
 
         tpSistemaFichaMedica.addTab("Fornecedores", jpFornecedores);
@@ -281,37 +339,66 @@ public class ViewFichaMedica extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+   
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
-        setVisible(false); // Deixa o frame invisível
+        dispose();
     }//GEN-LAST:event_btVoltarActionPerformed
 
     private void jbInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInserirActionPerformed
         try {
             //criar o objeto da classe FichaMedica
             FichaMedica ficha = new FichaMedica(
-                    Integer.parseInt(tfCodAnimal.getText()),
-                    tfNascimento.getText(),
-                    tfEntrada.getText(),
-                    tfEstadoSaude.getText(),
-                    Float.parseFloat(tfPeso.getText()),
-                    Float.parseFloat(tfAltura.getText())
+                Integer.parseInt(tfCodAnimal.getText()),
+                tfNascimento.getText(),
+                tfEntrada.getText(),
+                cbEstadoSaude.getSelectedItem().toString(),
+                Float.parseFloat(tfPeso.getText()),
+                Float.parseFloat(tfAltura.getText())
             );
             //Pegar os textos e mandar pro banco
             FichaMedicaDAO.inserir(ficha);
             //Limpeza dos Campos
-            tfCodAnimal.setText("");
-            tfNascimento.setText("");
-            tfEntrada.setText("");
-            tfEstadoSaude.setText("");
-            tfPeso.setText("");
-            tfAltura.setText("");
+            limparCamposTabelaFichaMedica();
             //atualiza a tabela FichaMedica
             lerTabelaFichaMedica();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
         }//fim try catch
     }//GEN-LAST:event_jbInserirActionPerformed
+
+    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
+        try {
+            FichaMedica ficha = new FichaMedica();
+            FichaMedicaDAO fichaDAO = new FichaMedicaDAO();
+
+            ficha.setCodigo_FichaMedica(
+                    (int)jtFichaMedica.getValueAt(
+                            jtFichaMedica.getSelectedRow(), 0
+                    )
+            );
+            
+            fichaDAO.excluir(ficha);
+
+            limparCamposTabelaFichaMedica();
+
+            lerTabelaFichaMedica();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jbExcluirActionPerformed
+
+    private void jbPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisarActionPerformed
+        try {
+            //Cria os objetos da ficha a ser buscada
+            FichaMedica ficha = new FichaMedica();
+            //Pega o código digitado para busca
+            ficha.setCodigo_FichaMedica(Integer.parseInt(tfCodFicha.getText()));
+            lerTabelaFichaMedicaPeloCodigo(ficha.getCodigo_FichaMedica());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jbPesquisarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -352,13 +439,15 @@ public class ViewFichaMedica extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Pesquisar;
     private javax.swing.JButton btVoltar;
+    private javax.swing.JComboBox cbEstadoSaude;
     private javax.swing.JButton jbAtualizar;
     private javax.swing.JButton jbExcluir;
     private javax.swing.JButton jbInserir;
+    private javax.swing.JButton jbPesquisar;
     private javax.swing.JLabel jlAltura;
     private javax.swing.JLabel jlCodAnimal;
+    private javax.swing.JLabel jlCodFicha;
     private javax.swing.JLabel jlEntrada;
     private javax.swing.JLabel jlEstadoSaude;
     private javax.swing.JLabel jlNascimento;
@@ -372,10 +461,11 @@ public class ViewFichaMedica extends javax.swing.JFrame {
     private javax.swing.JScrollPane spFichaMedica;
     private javax.swing.JTextField tfAltura;
     private javax.swing.JTextField tfCodAnimal;
+    private javax.swing.JTextField tfCodFicha;
     private javax.swing.JTextField tfEntrada;
-    private javax.swing.JTextField tfEstadoSaude;
     private javax.swing.JTextField tfNascimento;
     private javax.swing.JTextField tfPeso;
     private javax.swing.JTabbedPane tpSistemaFichaMedica;
     // End of variables declaration//GEN-END:variables
+
 }
