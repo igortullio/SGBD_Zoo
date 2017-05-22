@@ -3,6 +3,7 @@ package view;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.Principal;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,13 +13,13 @@ import javax.swing.JTextField;
 import model.dao.UsuarioDAO;
 
 public class Login extends JFrame {
-    
-    private JLabel lbUsuario, lbSenha;    
+
+    private JLabel lbUsuario, lbSenha;
     private JTextField tfUsuario;
     private JPasswordField pfSenha;
     private JButton btEntrar, btNovoUsua, btSair;
-    
-    public Login(String titulo){
+
+    public Login(String titulo) {
         super(titulo);
         setLayout(new FlowLayout());
 
@@ -33,7 +34,7 @@ public class Login extends JFrame {
 
         pfSenha = new JPasswordField(15);
         add(pfSenha);
-        
+
         btEntrar = new JButton("Entrar");
         btEntrar.setToolTipText("Entrar na aplicação");
         add(btEntrar);
@@ -53,40 +54,67 @@ public class Login extends JFrame {
         btNovoUsua.addActionListener(handler);
         btSair.addActionListener(handler);
         pfSenha.addActionListener(handler);
-        
+
     }
 
     private class ButtonHandler implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent evento) {
-            
-            if(evento.getSource() == btEntrar || evento.getSource() == pfSenha){
-                if (tfUsuario.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Usuário obrigatório");                   
-                } else if (pfSenha.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Senha obrigatória");
-                } else {
-                    UsuarioDAO usuarioDAO = new UsuarioDAO();                
-                    if(usuarioDAO.ler(tfUsuario.getText(), pfSenha.getText())){
-                        new ViewGlobal().setVisible(true);                        
+            try {
+                if (evento.getSource() == btEntrar || evento.getSource() == pfSenha) {
+                    if (tfUsuario.getText().equals("")) {
+                        JOptionPane.showMessageDialog(null, "Usuário obrigatório");
+                    } else if (pfSenha.getText().equals("")) {
+                        JOptionPane.showMessageDialog(null, "Senha obrigatória");
                     } else {
-                        JOptionPane.showMessageDialog(null, "Usuário e/ou senha incorreta(s)!");
+                        UsuarioDAO usuarioDAO = new UsuarioDAO();
+                        if (usuarioDAO.ler(tfUsuario.getText(), pfSenha.getText())) {
+
+                            // resposta == 0 para Comanda, 1 para Ficha Médica, 2 para Maybe e -1 or 3 para Escape/Cancelar.
+                            String[] opcoes = new String[]{"Comanda", "Ficha Médica", "Cancelar"}; // vetor com 4 posições
+                            int resposta
+                                    = JOptionPane.showOptionDialog(
+                                            null, //frame
+                                            "Qual sistema deseja entrar?",
+                                            "Escolha do sistema",
+                                            JOptionPane.DEFAULT_OPTION,
+                                            JOptionPane.QUESTION_MESSAGE,
+                                            null, //icone
+                                            opcoes,
+                                            opcoes[0]
+                                    );
+                            switch (resposta) {
+                                case 0: //Sistema de Comanda
+                                    new ViewGlobal().setVisible(true);
+                                    break;
+                                case 1: //Sistema de Ficha Médica
+                                    new ViewFichaMedica().setVisible(true);
+                                    break;
+                                case 2:
+                                    //Faz nada!
+                                    break;
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Usuário e/ou senha incorreta(s)!");
+                        }
                     }
-                }                                                
-            } else if (evento.getSource() == btNovoUsua){
-                NovoUsuario objNovoUsuario = new NovoUsuario();               
-                objNovoUsuario.setSize(268, 115);
-                objNovoUsuario.setLocationRelativeTo(null);
-                objNovoUsuario.setResizable(false);
-                //objNovoUsuario.setIconImage(new ImageIcon(getClass().getResource("Imagens/icone_cadastro.png")).getImage());
-                objNovoUsuario.setVisible(true);
-                objNovoUsuario.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            } else if (evento.getSource() == btSair){
-                dispose();
+                } else if (evento.getSource() == btNovoUsua) {
+                    NovoUsuario objNovoUsuario = new NovoUsuario();
+                    objNovoUsuario.setSize(268, 115);
+                    objNovoUsuario.setLocationRelativeTo(null);
+                    objNovoUsuario.setResizable(false);
+                    //objNovoUsuario.setIconImage(new ImageIcon(getClass().getResource("Imagens/icone_cadastro.png")).getImage());
+                    objNovoUsuario.setVisible(true);
+                    objNovoUsuario.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                } else if (evento.getSource() == btSair) {
+                    dispose();
+                }
+            } catch (RuntimeException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Sem conexão com o Banco de Dados\n"+e.getCause().toString(), e.getMessage(), JOptionPane.ERROR_MESSAGE);
             }
-            
         }
     }
-    
+
 }
