@@ -94,13 +94,23 @@ public class FichaMedicaDAO {
         return fichasLista;
     }
     
-    public static void atualizar(){
+    public static void atualizar(FichaMedica ficha){
         Connection conexao = ConexaoMySQL.conectar();
         PreparedStatement stmt = null;
         
         try {
+            stmt = conexao.prepareStatement("UPDATE fichamedica SET Codigo_Animal = ?, DataNascimento_FichaMedica = str_to_date(?, '%d/%m/%Y'), DataEntradaZoo_FichaMedica = str_to_date(?, '%d/%m/%Y'), EstadoSaude_FichaMedica = ?, Peso_FichaMedica = ?, Altura_FichaMedica = ? WHERE Codigo_FichaMedica = ?;");
+            stmt.setInt(1, ficha.getCodigo_Animal());
+            stmt.setString(2, ficha.getDataNascimento_FichaMedica());
+            stmt.setString(3, ficha.getDataEntradaZoo_FichaMedica());
+            stmt.setString(4, ficha.getEstadoSaude_FichaMedica());
+            stmt.setFloat(5, ficha.getPeso_FichaMedica());
+            stmt.setFloat(6, ficha.getAltura_FichaMedica());
+            stmt.setInt(7, ficha.getCodigo_FichaMedica());
             
+            stmt.executeUpdate();
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
         }//fim try catch
     }//fim metodo
 
