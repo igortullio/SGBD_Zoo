@@ -8,12 +8,13 @@ import model.bean.Comanda;
 import model.bean.ItemServico;
 import model.bean.Visitante;
 import model.dao.ComandaDAO;
+import model.dao.Comanda_ItemServicoDAO;
 import model.dao.ItemServicoDAO;
 import model.dao.VisitanteDAO;
 
-public class ViewGlobal extends javax.swing.JFrame {
+public class ViewComanda extends javax.swing.JFrame {
 
-    public ViewGlobal() {
+    public ViewComanda() {
         initComponents();
         
         DefaultTableModel modeloItemServico = (DefaultTableModel) jtItemServico.getModel();
@@ -22,8 +23,12 @@ public class ViewGlobal extends javax.swing.JFrame {
         DefaultTableModel modeloComanda = (DefaultTableModel) jtComanda.getModel();
         jtComanda.setRowSorter(new TableRowSorter(modeloComanda));
         
+        DefaultTableModel modeloComandasAbertas = (DefaultTableModel) jtComandasAbertas.getModel();
+        jtComanda.setRowSorter(new TableRowSorter(modeloComandasAbertas));
+        
         leTabelaComanda();
         leTabelaItemServico();
+        leTabelaComandasAbertas();
     }
     
     public void leTabelaItemServico(){
@@ -50,7 +55,22 @@ public class ViewGlobal extends javax.swing.JFrame {
                v.getCpf(),
                v.getNome(),
                v.getTelefone()
-            });                        
+            });
+        }
+    }
+    
+    public void leTabelaComandasAbertas(){
+        DefaultTableModel modelo = (DefaultTableModel) jtComandasAbertas.getModel();
+        modelo.setNumRows(0);
+        Comanda_ItemServicoDAO comanda_ItemServicoDAO = new Comanda_ItemServicoDAO();
+        
+        for (Comanda c: comanda_ItemServicoDAO.ler()) {
+            modelo.addRow(new Object[]{
+                c.getCodigo(),
+                c.getCpf_visitante(),
+                c.getDataEntrada(),
+                c.getValor()
+            });
         }
         
     }
@@ -85,6 +105,10 @@ public class ViewGlobal extends javax.swing.JFrame {
         tfComanda_ItemServico_Valor = new javax.swing.JTextField();
         btComanda_ItemServico_Adicionar = new javax.swing.JButton();
         btComanda_ItemServico_Cancelar = new javax.swing.JButton();
+        jpComandasAbertas = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jtComandasAbertas = new javax.swing.JTable();
+        btComandasAbertas_Fechar = new javax.swing.JButton();
         jpComanda = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtComanda = new javax.swing.JTable();
@@ -117,10 +141,10 @@ public class ViewGlobal extends javax.swing.JFrame {
         btVisitante_PesquisarCPF = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Sistema Comanda");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setIconImages(null);
         setLocation(new java.awt.Point(0, 0));
-        setLocationByPlatform(true);
         setResizable(false);
 
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
@@ -187,7 +211,7 @@ public class ViewGlobal extends javax.swing.JFrame {
                 .addGroup(jpComanda_ItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbComanda_ItemServico_Valor)
                     .addComponent(tfComanda_ItemServico_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jpComanda_ItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btComanda_ItemServico_Adicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btComanda_ItemServico_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -195,6 +219,43 @@ public class ViewGlobal extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Adicionar Itens", jpComanda_ItemServico);
+
+        jtComandasAbertas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Código da Comanda", "CPF do Visitante", "Data Entrada", "Valor"
+            }
+        ));
+        jScrollPane3.setViewportView(jtComandasAbertas);
+
+        btComandasAbertas_Fechar.setText("Fechar");
+
+        javax.swing.GroupLayout jpComandasAbertasLayout = new javax.swing.GroupLayout(jpComandasAbertas);
+        jpComandasAbertas.setLayout(jpComandasAbertasLayout);
+        jpComandasAbertasLayout.setHorizontalGroup(
+            jpComandasAbertasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpComandasAbertasLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btComandasAbertas_Fechar)
+                .addGap(184, 184, 184))
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
+        );
+        jpComandasAbertasLayout.setVerticalGroup(
+            jpComandasAbertasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpComandasAbertasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btComandasAbertas_Fechar)
+                .addGap(30, 30, 30))
+        );
+
+        jTabbedPane1.addTab("Comandas Abertas", jpComandasAbertas);
 
         jtComanda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -290,7 +351,7 @@ public class ViewGlobal extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btComanda_Abrir)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Abrir Comanda", jpComanda);
@@ -402,7 +463,7 @@ public class ViewGlobal extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btItemServico_Excluir))))
                     .addComponent(lbItemServico_Valor))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cadastro de Itens/Serviços", jpItemServico);
@@ -483,7 +544,7 @@ public class ViewGlobal extends javax.swing.JFrame {
                 .addGroup(jpVisitanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btVisitante_Salvar)
                     .addComponent(btVisitante_Cancelar))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cadastro de Visitantes", jpVisitante);
@@ -692,20 +753,21 @@ public class ViewGlobal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewGlobal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewComanda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewGlobal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewComanda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewGlobal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewComanda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewGlobal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewComanda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewGlobal().setVisible(true);
+                new ViewComanda().setVisible(true);
             }
         });
     }
@@ -716,6 +778,7 @@ public class ViewGlobal extends javax.swing.JFrame {
     private javax.swing.JButton btComanda_ItemServico_Cancelar;
     private javax.swing.JButton btComanda_PesquisaCPF;
     private javax.swing.JButton btComanda_PesquisarNome;
+    private javax.swing.JButton btComandasAbertas_Fechar;
     private javax.swing.JButton btItemServico_Alterar;
     private javax.swing.JButton btItemServico_Excluir;
     private javax.swing.JButton btItemServico_Salvar;
@@ -724,12 +787,15 @@ public class ViewGlobal extends javax.swing.JFrame {
     private javax.swing.JButton btVisitante_Salvar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel jpComanda;
     private javax.swing.JPanel jpComanda_ItemServico;
+    private javax.swing.JPanel jpComandasAbertas;
     private javax.swing.JPanel jpItemServico;
     private javax.swing.JPanel jpVisitante;
     private javax.swing.JTable jtComanda;
+    private javax.swing.JTable jtComandasAbertas;
     private javax.swing.JTable jtItemServico;
     private javax.swing.JLabel lbComanda_Cpf;
     private javax.swing.JLabel lbComanda_ItemServico_CodComanda;
