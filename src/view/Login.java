@@ -75,17 +75,17 @@ public class Login extends JFrame {
                             int resposta
                                     = JOptionPane.showOptionDialog(
                                             null, //frame
-                                            "Selecione o sistema.",
-                                            "ZOO - Login",
+                                            "Qual sistema deseja entrar?",
+                                            "Escolha do sistema",
                                             JOptionPane.DEFAULT_OPTION,
-                                            JOptionPane.DEFAULT_OPTION,
+                                            JOptionPane.QUESTION_MESSAGE,
                                             null, //icone
                                             opcoes,
                                             opcoes[0]
                                     );
                             switch (resposta) {
                                 case 0: //Sistema de Comanda
-                                    new ViewComanda().setVisible(true);
+                                    new ViewGlobal().setVisible(true);
                                     break;
                                 case 1: //Sistema de Ficha Médica
                                     new ViewFichaMedica().setVisible(true);

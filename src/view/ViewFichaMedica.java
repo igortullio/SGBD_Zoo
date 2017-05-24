@@ -120,6 +120,11 @@ public class ViewFichaMedica extends javax.swing.JFrame {
                 "Cód Ficha", "Cód Animal", "Nascimento", "Entrada", "Estado Saúde", "Peso", "Altura"
             }
         ));
+        jtFichaMedica.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtFichaMedicaMouseClicked(evt);
+            }
+        });
         spFichaMedica.setViewportView(jtFichaMedica);
 
         jlCodAnimal.setText("Código do Animal");
@@ -131,6 +136,7 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         jlEstadoSaude.setText("Estado de Saúde");
 
         cbEstadoSaude.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Atenção", "Grave" }));
+        cbEstadoSaude.setSelectedItem(null);
 
         jlPeso.setText("Peso");
 
@@ -145,6 +151,12 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         });
 
         jbAtualizar.setText("Atualizar");
+        jbAtualizar.setToolTipText("Selecione uma ficha na tabela e clique para atualiza-la");
+        jbAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAtualizarActionPerformed(evt);
+            }
+        });
 
         jbPesquisar.setText("Pesquisar");
         jbPesquisar.setToolTipText("Pesquisa a ficha pelo código digitado");
@@ -399,6 +411,45 @@ public class ViewFichaMedica extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_jbPesquisarActionPerformed
+
+    private void jtFichaMedicaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtFichaMedicaMouseClicked
+        try {
+            tfCodAnimal.setText(jtFichaMedica.getValueAt(jtFichaMedica.getSelectedRow(), 1).toString());
+            tfEntrada.setText(jtFichaMedica.getValueAt(jtFichaMedica.getSelectedRow(), 2).toString());
+            tfNascimento.setText(jtFichaMedica.getValueAt(jtFichaMedica.getSelectedRow(), 3).toString());
+            cbEstadoSaude.setSelectedItem(jtFichaMedica.getValueAt(jtFichaMedica.getSelectedRow(), 4).toString());
+            tfPeso.setText(jtFichaMedica.getValueAt(jtFichaMedica.getSelectedRow(), 5).toString());
+            tfAltura.setText(jtFichaMedica.getValueAt(jtFichaMedica.getSelectedRow(), 6).toString());
+        } catch (Exception e) {
+        }
+        
+    }//GEN-LAST:event_jtFichaMedicaMouseClicked
+
+    private void jbAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtualizarActionPerformed
+        try {
+            //selecionar ficha com modificações
+            FichaMedica ficha = new FichaMedica(
+                    Integer.parseInt(jtFichaMedica.getValueAt(jtFichaMedica.getSelectedRow(), 0).toString()),//Codigo_FichaMedica 
+                    Integer.parseInt(tfCodAnimal.getText()),//Codigo_Animal 
+                    tfNascimento.getText(),//DataNascimento_FichaMedica 
+                    tfEntrada.getText(),//DataEntradaZoo_FichaMedica 
+                    cbEstadoSaude.getSelectedItem().toString(),//EstadoSaude_FichaMedica 
+                    Float.parseFloat(tfPeso.getText()),//Peso_FichaMedica 
+                    Float.parseFloat(tfAltura.getText())//Altura_FichaMedica
+            );
+            //alterar no banco
+            FichaMedicaDAO.atualizar(ficha);
+            //Mensagensinha
+            JOptionPane.showMessageDialog(null, "Atualizado.");
+            //atualiza a tabela no frame
+            lerTabelaFichaMedica();
+        } catch (IndexOutOfBoundsException e){
+            JOptionPane.showMessageDialog(null, "Selecione uma ficha na tabela", null, JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jbAtualizarActionPerformed
 
     /**
      * @param args the command line arguments
