@@ -87,21 +87,21 @@
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jlNascimento" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jlCodAnimal" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jlCodAnimalFicha" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jlEntrada" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="tfEntrada" min="-2" pref="95" max="-2" attributes="0"/>
-                                          <Component id="tfCodAnimal" min="-2" pref="50" max="-2" attributes="0"/>
+                                          <Component id="tfCodAnimalFicha" min="-2" pref="50" max="-2" attributes="0"/>
                                           <Component id="tfNascimento" min="-2" pref="95" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jbExcluir" max="32767" attributes="0"/>
-                                  <Component id="jbInserir" max="32767" attributes="0"/>
+                                  <Component id="jbExcluirFicha" max="32767" attributes="0"/>
+                                  <Component id="jbInserirFicha" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                               <Component id="jlCodFicha" min="-2" max="-2" attributes="0"/>
@@ -109,12 +109,12 @@
                               <Component id="tfCodFicha" min="-2" pref="40" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jbPesquisar" max="32767" attributes="0"/>
-                                  <Component id="jbAtualizar" max="32767" attributes="0"/>
+                                  <Component id="jbPesquisarFicha" max="32767" attributes="0"/>
+                                  <Component id="jbAtualizarFicha" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="spFichaMedica" alignment="1" pref="999" max="32767" attributes="0"/>
+                          <Component id="spFichaMedica" alignment="1" pref="1089" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -129,8 +129,8 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jlCodAnimal" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tfCodAnimal" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jlCodAnimalFicha" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfCodAnimalFicha" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -155,15 +155,15 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jbInserir" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jbInserirFicha" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jlCodFicha" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="tfCodFicha" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jbPesquisar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jbPesquisarFicha" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jbAtualizar" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jbExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jbAtualizarFicha" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jbExcluirFicha" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -247,12 +247,12 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="jlCodAnimal">
+            <Component class="javax.swing.JLabel" name="jlCodAnimalFicha">
               <Properties>
                 <Property name="text" type="java.lang.String" value="C&#xf3;digo do Animal"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tfCodAnimal">
+            <Component class="javax.swing.JTextField" name="tfCodAnimalFicha">
             </Component>
             <Component class="javax.swing.JLabel" name="jlNascimento">
               <Properties>
@@ -301,40 +301,40 @@
             </Component>
             <Component class="javax.swing.JTextField" name="tfAltura">
             </Component>
-            <Component class="javax.swing.JButton" name="jbInserir">
+            <Component class="javax.swing.JButton" name="jbInserirFicha">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Inserir"/>
                 <Property name="toolTipText" type="java.lang.String" value="Digite dos dados nescess&#xe1;rios e clique para inserir no banco"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbInserirActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbInserirFichaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jbAtualizar">
+            <Component class="javax.swing.JButton" name="jbAtualizarFicha">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Atualizar"/>
-                <Property name="toolTipText" type="java.lang.String" value="Selecione uma ficha na tabela e clique para atualiza-la"/>
+                <Property name="toolTipText" type="java.lang.String" value="Selecione uma ficha na tabela e clique para atualizar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAtualizarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAtualizarFichaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jbPesquisar">
+            <Component class="javax.swing.JButton" name="jbPesquisarFicha">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pesquisar"/>
                 <Property name="toolTipText" type="java.lang.String" value="Pesquisa a ficha pelo c&#xf3;digo digitado"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbPesquisarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbPesquisarFichaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jbExcluir">
+            <Component class="javax.swing.JButton" name="jbExcluirFicha">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Excluir"/>
                 <Property name="toolTipText" type="java.lang.String" value="Selecione uma ficha na tabela e clique para excluir"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbExcluirActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbExcluirFichaActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jlCodFicha">
@@ -358,15 +358,326 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1019" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jlFamilia" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jlOrdem" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                                          <Component id="tfFamilia" min="-2" pref="94" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="jlSubFilo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jlClasse" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="tfOrdem" alignment="1" pref="94" max="32767" attributes="0"/>
+                                              <Component id="tfClasse" alignment="1" max="32767" attributes="0"/>
+                                              <Component id="tfSubFilo" alignment="1" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jlReino" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jlFilo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="tfReino" max="32767" attributes="0"/>
+                                          <Component id="tfFilo" min="-2" pref="95" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace pref="43" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jlEspecie" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jlGenero" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="tfGenero" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
+                                  <Component id="tfEspecie" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jbExcluirAnimal" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jbInserirAnimal" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="jlCodAnimal" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="tfCodAnimal" min="-2" pref="40" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jbAtualizarAnimal" max="32767" attributes="0"/>
+                                  <Component id="jbPesquisarAnimal" pref="87" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="383" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="spAnimal" alignment="1" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="422" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="spAnimal" min="-2" pref="200" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jlGenero" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfGenero" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jlEspecie" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfEspecie" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jbInserirAnimal" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jlCodAnimal" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfCodAnimal" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jbPesquisarAnimal" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jbAtualizarAnimal" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jbExcluirAnimal" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jlReino" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfReino" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jlFilo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfFilo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jlSubFilo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfSubFilo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="tfClasse" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlClasse" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jlOrdem" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfOrdem" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jlFamilia" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfFamilia" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="18" max="32767" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JScrollPane" name="spAnimal">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="jtAnimal">
+                  <Properties>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="9" rowCount="0">
+                        <Column editable="true" title="C&#xf3;d Animal" type="java.lang.Object"/>
+                        <Column editable="true" title="Reino" type="java.lang.Object"/>
+                        <Column editable="true" title="Filo" type="java.lang.Object"/>
+                        <Column editable="true" title="Sub Filo" type="java.lang.Object"/>
+                        <Column editable="true" title="Classe" type="java.lang.Object"/>
+                        <Column editable="true" title="Ordem" type="java.lang.Object"/>
+                        <Column editable="true" title="Fam&#xed;lia" type="java.lang.Object"/>
+                        <Column editable="true" title="G&#xea;nero" type="java.lang.Object"/>
+                        <Column editable="true" title="Esp&#xe9;cie" type="java.lang.Object"/>
+                      </Table>
+                    </Property>
+                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                      <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                      </TableColumnModel>
+                    </Property>
+                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jtAnimalMouseClicked"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JLabel" name="jlFilo">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Filo"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfFilo">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlReino">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Reino"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfReino">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlClasse">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Classe"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfClasse">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlGenero">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="G&#xea;nero"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfGenero">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlEspecie">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Esp&#xe9;cie"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfEspecie">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlOrdem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ordem"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfOrdem">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlSubFilo">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Sub Filo"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfSubFilo">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlFamilia">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Familia"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfFamilia">
+            </Component>
+            <Component class="javax.swing.JButton" name="jbInserirAnimal">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Inserir"/>
+                <Property name="toolTipText" type="java.lang.String" value="Digite todos dados nescess&#xe1;rios e clique para inserir no banco"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbInserirAnimalActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbAtualizarAnimal">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Atualizar"/>
+                <Property name="toolTipText" type="java.lang.String" value="Selecione um animal na tabela e clique para atualizar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAtualizarAnimalActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbPesquisarAnimal">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Pesquisar"/>
+                <Property name="toolTipText" type="java.lang.String" value="Pesquisa o animal pelo c&#xf3;digo digitado"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbPesquisarAnimalActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbExcluirAnimal">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Excluir"/>
+                <Property name="toolTipText" type="java.lang.String" value="Selecione um animal na tabela e clique para excluir"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbExcluirAnimalActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlCodAnimal">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="C&#xf3;digo do Animal"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfCodAnimal">
+            </Component>
+          </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jpFuncionarios">
           <Constraints>
@@ -380,7 +691,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1019" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="1109" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -402,7 +713,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1019" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="1109" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -424,7 +735,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1019" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="1109" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">

@@ -3,8 +3,10 @@ package view;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import model.bean.Animal;
 import model.dao.FichaMedicaDAO;
 import model.bean.FichaMedica;
+import model.dao.AnimalDAO;
 
 /**
  * Tela do sistema de ficha médica do animal
@@ -24,7 +26,11 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         DefaultTableModel modeloFichaMedica = (DefaultTableModel) jtFichaMedica.getModel();
         jtFichaMedica.setRowSorter(new TableRowSorter(modeloFichaMedica));
         
+        DefaultTableModel modeloAnimal = (DefaultTableModel) jtAnimal.getModel();
+        jtAnimal.setRowSorter(new TableRowSorter(modeloAnimal));
+        
         lerTabelaFichaMedica();
+        lerTabelaAnimal();
         
     }
     
@@ -41,6 +47,25 @@ public class ViewFichaMedica extends javax.swing.JFrame {
                 f.getEstadoSaude_FichaMedica(),
                 f.getPeso_FichaMedica(),
                 f.getAltura_FichaMedica()
+            });
+        }//fim for
+    }//fim 
+    
+    private void lerTabelaAnimal(){
+        DefaultTableModel modelAnimal = (DefaultTableModel)jtAnimal.getModel();
+        modelAnimal.setRowCount(0);
+        AnimalDAO animalDAO = new AnimalDAO();
+        for (Animal a : animalDAO.ler()) {
+            modelAnimal.addRow(new Object[]{
+                a.getCodigo_Animal(),
+                a.getReino_Animal(),
+                a.getFilo_Animal(),
+                a.getSubFilo_Animal(),
+                a.getClasse_Animal(),
+                a.getOrdem_Animal(),
+                a.getFamilia_Animal(),
+                a.getGenero_Animal(),
+                a.getEspecie_Animal()
             });
         }//fim for
     }//fim metodo
@@ -62,13 +87,43 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         }
     }
     
+    private void lerTabelaAnimalPeloCodigo(int codigo_Animal) {
+        DefaultTableModel modelAnimal = (DefaultTableModel) jtAnimal.getModel();
+        modelAnimal.setNumRows(0);
+        AnimalDAO fichaDAO = new AnimalDAO();
+        for (Animal a : AnimalDAO.lerPorCodigo(codigo_Animal)) {
+            modelAnimal.addRow(new Object[]{
+                a.getCodigo_Animal(),
+                a.getReino_Animal(),
+                a.getFilo_Animal(),
+                a.getSubFilo_Animal(),
+                a.getClasse_Animal(),
+                a.getOrdem_Animal(),
+                a.getFamilia_Animal(),
+                a.getGenero_Animal(),
+                a.getEspecie_Animal()
+            });                        
+        }
+    }
+    
     private void limparCamposTabelaFichaMedica(){
-        tfCodAnimal.setText("");
+        tfCodAnimalFicha.setText("");
         tfNascimento.setText("");
         tfEntrada.setText("");
         cbEstadoSaude.setSelectedItem(null);
         tfPeso.setText("");
         tfAltura.setText("");
+    }
+    
+    private void limparCamposTabelaAnimal(){
+        tfReino.setText("");
+        tfFilo.setText("");
+        tfSubFilo.setText("");
+        tfClasse.setText("");
+        tfOrdem.setText("");
+        tfFamilia.setText("");
+        tfGenero.setText("");
+        tfEspecie.setText("");
     }
 
     /**
@@ -84,8 +139,8 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         jpFichaMedica = new javax.swing.JPanel();
         spFichaMedica = new javax.swing.JScrollPane();
         jtFichaMedica = new javax.swing.JTable();
-        jlCodAnimal = new javax.swing.JLabel();
-        tfCodAnimal = new javax.swing.JTextField();
+        jlCodAnimalFicha = new javax.swing.JLabel();
+        tfCodAnimalFicha = new javax.swing.JTextField();
         jlNascimento = new javax.swing.JLabel();
         tfNascimento = new javax.swing.JTextField();
         jlEntrada = new javax.swing.JLabel();
@@ -96,13 +151,37 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         tfPeso = new javax.swing.JTextField();
         jlAltura = new javax.swing.JLabel();
         tfAltura = new javax.swing.JTextField();
-        jbInserir = new javax.swing.JButton();
-        jbAtualizar = new javax.swing.JButton();
-        jbPesquisar = new javax.swing.JButton();
-        jbExcluir = new javax.swing.JButton();
+        jbInserirFicha = new javax.swing.JButton();
+        jbAtualizarFicha = new javax.swing.JButton();
+        jbPesquisarFicha = new javax.swing.JButton();
+        jbExcluirFicha = new javax.swing.JButton();
         jlCodFicha = new javax.swing.JLabel();
         tfCodFicha = new javax.swing.JTextField();
         jpAnimais = new javax.swing.JPanel();
+        spAnimal = new javax.swing.JScrollPane();
+        jtAnimal = new javax.swing.JTable();
+        jlFilo = new javax.swing.JLabel();
+        tfFilo = new javax.swing.JTextField();
+        jlReino = new javax.swing.JLabel();
+        tfReino = new javax.swing.JTextField();
+        jlClasse = new javax.swing.JLabel();
+        tfClasse = new javax.swing.JTextField();
+        jlGenero = new javax.swing.JLabel();
+        tfGenero = new javax.swing.JTextField();
+        jlEspecie = new javax.swing.JLabel();
+        tfEspecie = new javax.swing.JTextField();
+        jlOrdem = new javax.swing.JLabel();
+        tfOrdem = new javax.swing.JTextField();
+        jlSubFilo = new javax.swing.JLabel();
+        tfSubFilo = new javax.swing.JTextField();
+        jlFamilia = new javax.swing.JLabel();
+        tfFamilia = new javax.swing.JTextField();
+        jbInserirAnimal = new javax.swing.JButton();
+        jbAtualizarAnimal = new javax.swing.JButton();
+        jbPesquisarAnimal = new javax.swing.JButton();
+        jbExcluirAnimal = new javax.swing.JButton();
+        jlCodAnimal = new javax.swing.JLabel();
+        tfCodAnimal = new javax.swing.JTextField();
         jpFuncionarios = new javax.swing.JPanel();
         jpProcedimentos = new javax.swing.JPanel();
         jpFornecedores = new javax.swing.JPanel();
@@ -127,7 +206,7 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         });
         spFichaMedica.setViewportView(jtFichaMedica);
 
-        jlCodAnimal.setText("Código do Animal");
+        jlCodAnimalFicha.setText("Código do Animal");
 
         jlNascimento.setText("Data de Nascimento");
 
@@ -142,35 +221,35 @@ public class ViewFichaMedica extends javax.swing.JFrame {
 
         jlAltura.setText("Altura");
 
-        jbInserir.setText("Inserir");
-        jbInserir.setToolTipText("Digite dos dados nescessários e clique para inserir no banco");
-        jbInserir.addActionListener(new java.awt.event.ActionListener() {
+        jbInserirFicha.setText("Inserir");
+        jbInserirFicha.setToolTipText("Digite dos dados nescessários e clique para inserir no banco");
+        jbInserirFicha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbInserirActionPerformed(evt);
+                jbInserirFichaActionPerformed(evt);
             }
         });
 
-        jbAtualizar.setText("Atualizar");
-        jbAtualizar.setToolTipText("Selecione uma ficha na tabela e clique para atualiza-la");
-        jbAtualizar.addActionListener(new java.awt.event.ActionListener() {
+        jbAtualizarFicha.setText("Atualizar");
+        jbAtualizarFicha.setToolTipText("Selecione uma ficha na tabela e clique para atualizar");
+        jbAtualizarFicha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbAtualizarActionPerformed(evt);
+                jbAtualizarFichaActionPerformed(evt);
             }
         });
 
-        jbPesquisar.setText("Pesquisar");
-        jbPesquisar.setToolTipText("Pesquisa a ficha pelo código digitado");
-        jbPesquisar.addActionListener(new java.awt.event.ActionListener() {
+        jbPesquisarFicha.setText("Pesquisar");
+        jbPesquisarFicha.setToolTipText("Pesquisa a ficha pelo código digitado");
+        jbPesquisarFicha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbPesquisarActionPerformed(evt);
+                jbPesquisarFichaActionPerformed(evt);
             }
         });
 
-        jbExcluir.setText("Excluir");
-        jbExcluir.setToolTipText("Selecione uma ficha na tabela e clique para excluir");
-        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+        jbExcluirFicha.setText("Excluir");
+        jbExcluirFicha.setToolTipText("Selecione uma ficha na tabela e clique para excluir");
+        jbExcluirFicha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbExcluirActionPerformed(evt);
+                jbExcluirFichaActionPerformed(evt);
             }
         });
 
@@ -200,27 +279,27 @@ public class ViewFichaMedica extends javax.swing.JFrame {
                             .addGroup(jpFichaMedicaLayout.createSequentialGroup()
                                 .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jlNascimento)
-                                    .addComponent(jlCodAnimal)
+                                    .addComponent(jlCodAnimalFicha)
                                     .addComponent(jlEntrada))
                                 .addGap(18, 18, 18)
                                 .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(tfEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfCodAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfCodAnimalFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tfNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(18, 18, 18)
                         .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jbExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbInserir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jbExcluirFicha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbInserirFicha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(36, 36, 36)
                         .addComponent(jlCodFicha)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfCodFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jbPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jbPesquisarFicha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbAtualizarFicha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(spFichaMedica, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 999, Short.MAX_VALUE))
+                    .addComponent(spFichaMedica, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1089, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpFichaMedicaLayout.setVerticalGroup(
@@ -232,8 +311,8 @@ public class ViewFichaMedica extends javax.swing.JFrame {
                 .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpFichaMedicaLayout.createSequentialGroup()
                         .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlCodAnimal)
-                            .addComponent(tfCodAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jlCodAnimalFicha)
+                            .addComponent(tfCodAnimalFicha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jlNascimento)
@@ -252,14 +331,14 @@ public class ViewFichaMedica extends javax.swing.JFrame {
                             .addComponent(tfPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jpFichaMedicaLayout.createSequentialGroup()
                         .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbInserir)
+                            .addComponent(jbInserirFicha)
                             .addComponent(jlCodFicha)
                             .addComponent(tfCodFicha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbPesquisar))
+                            .addComponent(jbPesquisarFicha))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbAtualizar)
-                            .addComponent(jbExcluir))))
+                            .addComponent(jbAtualizarFicha)
+                            .addComponent(jbExcluirFicha))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpFichaMedicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlAltura)
@@ -271,15 +350,177 @@ public class ViewFichaMedica extends javax.swing.JFrame {
 
         tpSistemaFichaMedica.addTab("Ficha Médica", jpFichaMedica);
 
+        jtAnimal.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Cód Animal", "Reino", "Filo", "Sub Filo", "Classe", "Ordem", "Família", "Gênero", "Espécie"
+            }
+        ));
+        jtAnimal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtAnimalMouseClicked(evt);
+            }
+        });
+        spAnimal.setViewportView(jtAnimal);
+
+        jlFilo.setText("Filo");
+
+        jlReino.setText("Reino");
+
+        jlClasse.setText("Classe");
+
+        jlGenero.setText("Gênero");
+
+        jlEspecie.setText("Espécie");
+
+        jlOrdem.setText("Ordem");
+
+        jlSubFilo.setText("Sub Filo");
+
+        jlFamilia.setText("Familia");
+
+        jbInserirAnimal.setText("Inserir");
+        jbInserirAnimal.setToolTipText("Digite todos dados nescessários e clique para inserir no banco");
+        jbInserirAnimal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbInserirAnimalActionPerformed(evt);
+            }
+        });
+
+        jbAtualizarAnimal.setText("Atualizar");
+        jbAtualizarAnimal.setToolTipText("Selecione um animal na tabela e clique para atualizar");
+        jbAtualizarAnimal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAtualizarAnimalActionPerformed(evt);
+            }
+        });
+
+        jbPesquisarAnimal.setText("Pesquisar");
+        jbPesquisarAnimal.setToolTipText("Pesquisa o animal pelo código digitado");
+        jbPesquisarAnimal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbPesquisarAnimalActionPerformed(evt);
+            }
+        });
+
+        jbExcluirAnimal.setText("Excluir");
+        jbExcluirAnimal.setToolTipText("Selecione um animal na tabela e clique para excluir");
+        jbExcluirAnimal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExcluirAnimalActionPerformed(evt);
+            }
+        });
+
+        jlCodAnimal.setText("Código do Animal");
+
         javax.swing.GroupLayout jpAnimaisLayout = new javax.swing.GroupLayout(jpAnimais);
         jpAnimais.setLayout(jpAnimaisLayout);
         jpAnimaisLayout.setHorizontalGroup(
             jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1019, Short.MAX_VALUE)
+            .addGroup(jpAnimaisLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpAnimaisLayout.createSequentialGroup()
+                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jpAnimaisLayout.createSequentialGroup()
+                                    .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jlFamilia, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jlOrdem))
+                                    .addGap(22, 22, 22)
+                                    .addComponent(tfFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jpAnimaisLayout.createSequentialGroup()
+                                    .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jlSubFilo, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jlClasse, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(tfOrdem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                                        .addComponent(tfClasse, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(tfSubFilo, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addGroup(jpAnimaisLayout.createSequentialGroup()
+                                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlReino)
+                                    .addComponent(jlFilo))
+                                .addGap(27, 27, 27)
+                                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfReino)
+                                    .addComponent(tfFilo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlEspecie)
+                            .addComponent(jlGenero))
+                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(65, 65, 65)
+                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbExcluirAnimal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbInserirAnimal))
+                        .addGap(36, 36, 36)
+                        .addComponent(jlCodAnimal)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfCodAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbAtualizarAnimal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbPesquisarAnimal, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
+                        .addGap(0, 383, Short.MAX_VALUE))
+                    .addComponent(spAnimal, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
         jpAnimaisLayout.setVerticalGroup(
             jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 422, Short.MAX_VALUE)
+            .addGroup(jpAnimaisLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(spAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpAnimaisLayout.createSequentialGroup()
+                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlGenero)
+                            .addComponent(tfGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlEspecie)
+                            .addComponent(tfEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jpAnimaisLayout.createSequentialGroup()
+                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jbInserirAnimal)
+                            .addComponent(jlCodAnimal)
+                            .addComponent(tfCodAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbPesquisarAnimal))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jbAtualizarAnimal)
+                            .addComponent(jbExcluirAnimal)))
+                    .addGroup(jpAnimaisLayout.createSequentialGroup()
+                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlReino)
+                            .addComponent(tfReino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlFilo)
+                            .addComponent(tfFilo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(1, 1, 1)
+                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlSubFilo)
+                    .addComponent(tfSubFilo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfClasse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlClasse))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlOrdem)
+                    .addComponent(tfOrdem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlFamilia)
+                    .addComponent(tfFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         tpSistemaFichaMedica.addTab("Cadastro de Animais", jpAnimais);
@@ -288,7 +529,7 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         jpFuncionarios.setLayout(jpFuncionariosLayout);
         jpFuncionariosLayout.setHorizontalGroup(
             jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1019, Short.MAX_VALUE)
+            .addGap(0, 1109, Short.MAX_VALUE)
         );
         jpFuncionariosLayout.setVerticalGroup(
             jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,7 +542,7 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         jpProcedimentos.setLayout(jpProcedimentosLayout);
         jpProcedimentosLayout.setHorizontalGroup(
             jpProcedimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1019, Short.MAX_VALUE)
+            .addGap(0, 1109, Short.MAX_VALUE)
         );
         jpProcedimentosLayout.setVerticalGroup(
             jpProcedimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -314,7 +555,7 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         jpFornecedores.setLayout(jpFornecedoresLayout);
         jpFornecedoresLayout.setHorizontalGroup(
             jpFornecedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1019, Short.MAX_VALUE)
+            .addGap(0, 1109, Short.MAX_VALUE)
         );
         jpFornecedoresLayout.setVerticalGroup(
             jpFornecedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -356,11 +597,11 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btVoltarActionPerformed
 
-    private void jbInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInserirActionPerformed
+    private void jbInserirFichaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInserirFichaActionPerformed
         try {
             //criar o objeto da classe FichaMedica
             FichaMedica ficha = new FichaMedica(
-                Integer.parseInt(tfCodAnimal.getText()),
+                Integer.parseInt(tfCodAnimalFicha.getText()),
                 tfNascimento.getText(),
                 tfEntrada.getText(),
                 cbEstadoSaude.getSelectedItem().toString(),
@@ -376,9 +617,9 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }//fim try catch
-    }//GEN-LAST:event_jbInserirActionPerformed
+    }//GEN-LAST:event_jbInserirFichaActionPerformed
 
-    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
+    private void jbExcluirFichaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirFichaActionPerformed
         try {
             FichaMedica ficha = new FichaMedica();
             FichaMedicaDAO fichaDAO = new FichaMedicaDAO();
@@ -398,9 +639,9 @@ public class ViewFichaMedica extends javax.swing.JFrame {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e);
         }
-    }//GEN-LAST:event_jbExcluirActionPerformed
+    }//GEN-LAST:event_jbExcluirFichaActionPerformed
 
-    private void jbPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisarActionPerformed
+    private void jbPesquisarFichaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisarFichaActionPerformed
         try {
             //Cria os objetos da ficha a ser buscada
             FichaMedica ficha = new FichaMedica();
@@ -410,11 +651,11 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-    }//GEN-LAST:event_jbPesquisarActionPerformed
+    }//GEN-LAST:event_jbPesquisarFichaActionPerformed
 
     private void jtFichaMedicaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtFichaMedicaMouseClicked
         try {
-            tfCodAnimal.setText(jtFichaMedica.getValueAt(jtFichaMedica.getSelectedRow(), 1).toString());
+            tfCodAnimalFicha.setText(jtFichaMedica.getValueAt(jtFichaMedica.getSelectedRow(), 1).toString());
             tfEntrada.setText(jtFichaMedica.getValueAt(jtFichaMedica.getSelectedRow(), 2).toString());
             tfNascimento.setText(jtFichaMedica.getValueAt(jtFichaMedica.getSelectedRow(), 3).toString());
             cbEstadoSaude.setSelectedItem(jtFichaMedica.getValueAt(jtFichaMedica.getSelectedRow(), 4).toString());
@@ -425,12 +666,12 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jtFichaMedicaMouseClicked
 
-    private void jbAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtualizarActionPerformed
+    private void jbAtualizarFichaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtualizarFichaActionPerformed
         try {
             //selecionar ficha com modificações
             FichaMedica ficha = new FichaMedica(
                     Integer.parseInt(jtFichaMedica.getValueAt(jtFichaMedica.getSelectedRow(), 0).toString()),//Codigo_FichaMedica 
-                    Integer.parseInt(tfCodAnimal.getText()),//Codigo_Animal 
+                    Integer.parseInt(tfCodAnimalFicha.getText()),//Codigo_Animal 
                     tfNascimento.getText(),//DataNascimento_FichaMedica 
                     tfEntrada.getText(),//DataEntradaZoo_FichaMedica 
                     cbEstadoSaude.getSelectedItem().toString(),//EstadoSaude_FichaMedica 
@@ -449,7 +690,107 @@ public class ViewFichaMedica extends javax.swing.JFrame {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e);
         }
-    }//GEN-LAST:event_jbAtualizarActionPerformed
+    }//GEN-LAST:event_jbAtualizarFichaActionPerformed
+
+    private void jtAnimalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtAnimalMouseClicked
+        try {
+            tfReino.setText(jtAnimal.getValueAt(jtAnimal.getSelectedRow(), 1).toString());
+            tfFilo.setText(jtAnimal.getValueAt(jtAnimal.getSelectedRow(), 2).toString());
+            tfSubFilo.setText(jtAnimal.getValueAt(jtAnimal.getSelectedRow(), 3).toString());
+            tfClasse.setText(jtAnimal.getValueAt(jtAnimal.getSelectedRow(), 4).toString());
+            tfOrdem.setText(jtAnimal.getValueAt(jtAnimal.getSelectedRow(), 5).toString());
+            tfFamilia.setText(jtAnimal.getValueAt(jtAnimal.getSelectedRow(), 6).toString());
+            tfGenero.setText(jtAnimal.getValueAt(jtAnimal.getSelectedRow(), 7).toString());
+            tfEspecie.setText(jtAnimal.getValueAt(jtAnimal.getSelectedRow(), 8).toString());
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jtAnimalMouseClicked
+
+    private void jbInserirAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInserirAnimalActionPerformed
+        try {
+            //criar o objeto da classe Animal
+            Animal animal = new Animal(
+                tfReino.getText(),//Reino_Animal 
+                tfFilo.getText(),//Filo_Animal 
+                tfSubFilo.getText(),//SubFilo_Animal 
+                tfClasse.getText(),//Classe_Animal 
+                tfOrdem.getText(),//Ordem_Animal 
+                tfFamilia.getText(),//Familia_Animal 
+                tfGenero.getText(),//Genero_Animal 
+                tfEspecie.getText()//Especie_Animal
+            );
+            //Pegar os textos e mandar pro banco
+            AnimalDAO.inserir(animal);
+            //Limpeza dos Campos
+            limparCamposTabelaAnimal();
+            //atualiza a tabela Animal
+            lerTabelaAnimal();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }//fim try catch
+    }//GEN-LAST:event_jbInserirAnimalActionPerformed
+
+    private void jbAtualizarAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtualizarAnimalActionPerformed
+        try {
+            //selecionar animal com modificações
+            Animal animal = new Animal(
+                    Integer.parseInt(jtAnimal.getValueAt(jtAnimal.getSelectedRow(), 0).toString()),//Codigo_Animal 
+                    tfReino.getText(),//Reino_Animal 
+                    tfFilo.getText(),//Filo_Animal 
+                    tfSubFilo.getText(),//SubFilo_Animal 
+                    tfClasse.getText(),//Classe_Animal 
+                    tfOrdem.getText(),//Ordem_Animal 
+                    tfFamilia.getText(),//Familia_Animal 
+                    tfGenero.getText(),//Genero_Animal 
+                    tfEspecie.getText()//Especie_Animal
+            );
+            //alterar no banco
+            AnimalDAO.atualizar(animal);
+            //Mensagensinha
+            JOptionPane.showMessageDialog(null, "Atualizado.");
+            //atualiza a tabela no frame
+            lerTabelaAnimal();
+        } catch (IndexOutOfBoundsException e){
+            JOptionPane.showMessageDialog(null, "Selecione um animal na tabela", null, JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jbAtualizarAnimalActionPerformed
+
+    private void jbPesquisarAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisarAnimalActionPerformed
+        try {
+            //Cria os objetos do animal a ser buscada
+            Animal animal = new Animal();
+            //Pega o código digitado para busca
+            animal.setCodigo_Animal(Integer.parseInt(tfCodAnimal.getText()));
+            lerTabelaAnimalPeloCodigo(animal.getCodigo_Animal());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jbPesquisarAnimalActionPerformed
+
+    private void jbExcluirAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirAnimalActionPerformed
+        try {
+            Animal animal = new Animal();
+            AnimalDAO animalDAO = new AnimalDAO();
+
+            animal.setCodigo_Animal(
+                    (int)jtAnimal.getValueAt(
+                            jtAnimal.getSelectedRow(), 0
+                    )
+            );
+            
+            animalDAO.excluir(animal);
+
+            limparCamposTabelaAnimal();
+
+            lerTabelaAnimal();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jbExcluirAnimalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -492,30 +833,54 @@ public class ViewFichaMedica extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btVoltar;
     private javax.swing.JComboBox cbEstadoSaude;
-    private javax.swing.JButton jbAtualizar;
-    private javax.swing.JButton jbExcluir;
-    private javax.swing.JButton jbInserir;
-    private javax.swing.JButton jbPesquisar;
+    private javax.swing.JButton jbAtualizarAnimal;
+    private javax.swing.JButton jbAtualizarFicha;
+    private javax.swing.JButton jbExcluirAnimal;
+    private javax.swing.JButton jbExcluirFicha;
+    private javax.swing.JButton jbInserirAnimal;
+    private javax.swing.JButton jbInserirFicha;
+    private javax.swing.JButton jbPesquisarAnimal;
+    private javax.swing.JButton jbPesquisarFicha;
     private javax.swing.JLabel jlAltura;
+    private javax.swing.JLabel jlClasse;
     private javax.swing.JLabel jlCodAnimal;
+    private javax.swing.JLabel jlCodAnimalFicha;
     private javax.swing.JLabel jlCodFicha;
     private javax.swing.JLabel jlEntrada;
+    private javax.swing.JLabel jlEspecie;
     private javax.swing.JLabel jlEstadoSaude;
+    private javax.swing.JLabel jlFamilia;
+    private javax.swing.JLabel jlFilo;
+    private javax.swing.JLabel jlGenero;
     private javax.swing.JLabel jlNascimento;
+    private javax.swing.JLabel jlOrdem;
     private javax.swing.JLabel jlPeso;
+    private javax.swing.JLabel jlReino;
+    private javax.swing.JLabel jlSubFilo;
     private javax.swing.JPanel jpAnimais;
     private javax.swing.JPanel jpFichaMedica;
     private javax.swing.JPanel jpFornecedores;
     private javax.swing.JPanel jpFuncionarios;
     private javax.swing.JPanel jpProcedimentos;
+    private javax.swing.JTable jtAnimal;
     private javax.swing.JTable jtFichaMedica;
+    private javax.swing.JScrollPane spAnimal;
     private javax.swing.JScrollPane spFichaMedica;
     private javax.swing.JTextField tfAltura;
+    private javax.swing.JTextField tfClasse;
     private javax.swing.JTextField tfCodAnimal;
+    private javax.swing.JTextField tfCodAnimalFicha;
     private javax.swing.JTextField tfCodFicha;
     private javax.swing.JTextField tfEntrada;
+    private javax.swing.JTextField tfEspecie;
+    private javax.swing.JTextField tfFamilia;
+    private javax.swing.JTextField tfFilo;
+    private javax.swing.JTextField tfGenero;
     private javax.swing.JTextField tfNascimento;
+    private javax.swing.JTextField tfOrdem;
     private javax.swing.JTextField tfPeso;
+    private javax.swing.JTextField tfReino;
+    private javax.swing.JTextField tfSubFilo;
     private javax.swing.JTabbedPane tpSistemaFichaMedica;
     // End of variables declaration//GEN-END:variables
 
