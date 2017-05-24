@@ -8,6 +8,7 @@ import model.bean.Comanda;
 import model.bean.Comanda_ItemServico;
 import model.bean.ItemServico;
 import model.bean.Visitante;
+import model.bean.JoinValorTotal;
 import model.dao.ComandaDAO;
 import model.dao.Comanda_ItemServicoDAO;
 import model.dao.ItemServicoDAO;
@@ -27,9 +28,26 @@ public class ViewGlobal extends javax.swing.JFrame {
         DefaultTableModel modeloFechaComanda = (DefaultTableModel) jtFechaComanda_ComandasAbertas.getModel();
         jtFechaComanda_ComandasAbertas.setRowSorter(new TableRowSorter(modeloFechaComanda));
         
-        leTabelaComanda();
+        DefaultTableModel modeloJoin = (DefaultTableModel) jtFechaComanda_ComandasAbertas.getModel();
+        jtFechaComanda_ComandasAbertas.setRowSorter(new TableRowSorter(modeloJoin));
+        
+        leTabelaVisitante();
         leTabelaItemServico();
         leTabelaComandasAbertas();
+        leJoin();
+    }
+    
+    public void leJoin(){
+        DefaultTableModel modelo = (DefaultTableModel) jtTotalComandas.getModel();
+        modelo.setNumRows(0);
+        ComandaDAO comandaDAO = new ComandaDAO();
+        
+        for (JoinValorTotal c: comandaDAO.lerJoin()) {
+            modelo.addRow(new Object[]{
+               c.getNome(),
+               c.getValor()
+            });                        
+        }       
     }
     
     public void leTabelaComandasAbertas(){
@@ -61,7 +79,7 @@ public class ViewGlobal extends javax.swing.JFrame {
         }        
     }
     
-    public void leTabelaComanda(){
+    public void leTabelaVisitante(){
         DefaultTableModel modelo = (DefaultTableModel) jtVistantes.getModel();
         modelo.setNumRows(0);
         VisitanteDAO visitanteDAO = new VisitanteDAO();
@@ -143,12 +161,18 @@ public class ViewGlobal extends javax.swing.JFrame {
         lbVisitante_Telefone = new javax.swing.JLabel();
         btVisitante_Cancelar = new javax.swing.JButton();
         btVisitante_PesquisarCPF = new javax.swing.JButton();
+        jpJoin = new javax.swing.JPanel();
+        lbJoin_ValorTotal = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jtTotalComandas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Sistema de Comanda");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setIconImages(null);
         setLocation(new java.awt.Point(0, 0));
         setLocationByPlatform(true);
+        setResizable(false);
 
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
 
@@ -169,6 +193,11 @@ public class ViewGlobal extends javax.swing.JFrame {
         });
 
         btComanda_ItemServico_Cancelar.setText("Cancelar");
+        btComanda_ItemServico_Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btComanda_ItemServico_CancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpComanda_ItemServicoLayout = new javax.swing.GroupLayout(jpComanda_ItemServico);
         jpComanda_ItemServico.setLayout(jpComanda_ItemServicoLayout);
@@ -182,16 +211,16 @@ public class ViewGlobal extends javax.swing.JFrame {
                     .addComponent(lbComanda_ItemServico_CodComanda, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(25, 25, 25)
                 .addGroup(jpComanda_ItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfComanda_ItemServico_Quantidade, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+                    .addComponent(tfComanda_ItemServico_Quantidade, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
                     .addComponent(tfComanda_ItemServico_CodItemServico)
-                    .addComponent(tfComanda_ItemServico_CodComanda))
+                    .addComponent(tfComanda_ItemServico_CodComanda)
+                    .addGroup(jpComanda_ItemServicoLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(btComanda_ItemServico_Adicionar)
+                        .addGap(35, 35, 35)
+                        .addComponent(btComanda_ItemServico_Cancelar)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jpComanda_ItemServicoLayout.createSequentialGroup()
-                .addGap(173, 173, 173)
-                .addComponent(btComanda_ItemServico_Adicionar)
-                .addGap(35, 35, 35)
-                .addComponent(btComanda_ItemServico_Cancelar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpComanda_ItemServicoLayout.setVerticalGroup(
             jpComanda_ItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,11 +237,11 @@ public class ViewGlobal extends javax.swing.JFrame {
                 .addGroup(jpComanda_ItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbComanda_ItemServico_Quantidade)
                     .addComponent(tfComanda_ItemServico_Quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGap(31, 31, 31)
                 .addGroup(jpComanda_ItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btComanda_ItemServico_Adicionar)
                     .addComponent(btComanda_ItemServico_Cancelar))
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Adicionar Itens", jpComanda_ItemServico);
@@ -275,33 +304,30 @@ public class ViewGlobal extends javax.swing.JFrame {
         jpAbrirComandaLayout.setHorizontalGroup(
             jpAbrirComandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpAbrirComandaLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jpAbrirComandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpAbrirComandaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jpAbrirComandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpAbrirComandaLayout.createSequentialGroup()
-                                .addComponent(lbAbrirComanda_Nome)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfAbrirComanda_Nome, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btAbrirComanda_PesquisarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jpAbrirComandaLayout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(lbAbrirComanda_Cpf)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfAbrirComanda_Cpf, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btAbrirComanda_PesquisaCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(lbAbrirComanda_Nome)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfAbrirComanda_Nome, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btAbrirComanda_PesquisarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpAbrirComandaLayout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(12, 12, 12)
+                        .addComponent(lbAbrirComanda_Cpf)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfAbrirComanda_Cpf, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btAbrirComanda_PesquisaCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jpAbrirComandaLayout.createSequentialGroup()
                         .addComponent(lbAbrirComanda_Tabela)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jpAbrirComandaLayout.createSequentialGroup()
-                .addGap(229, 229, 229)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpAbrirComandaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btAbrirComanda_Abrir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(232, 232, 232))
         );
         jpAbrirComandaLayout.setVerticalGroup(
             jpAbrirComandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,16 +345,16 @@ public class ViewGlobal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbAbrirComanda_Tabela)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(btAbrirComanda_Abrir)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Abrir Comanda", jpAbrirComanda);
 
         lbFechaComanda_Tabela.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbFechaComanda_Tabela.setText("Tabela de Comandas:");
+        lbFechaComanda_Tabela.setText("Tabela de Comandas Abertas:");
 
         jtFechaComanda_ComandasAbertas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -372,7 +398,7 @@ public class ViewGlobal extends javax.swing.JFrame {
                 .addGroup(jpFecharComandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpFecharComandaLayout.createSequentialGroup()
                         .addGroup(jpFecharComandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
                             .addGroup(jpFecharComandaLayout.createSequentialGroup()
                                 .addComponent(lbFechaComanda_Tabela)
                                 .addGap(0, 0, Short.MAX_VALUE)))
@@ -391,13 +417,13 @@ public class ViewGlobal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lbFechaComanda_Tabela)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jpFecharComandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbFechaComanda_NumeroComanda)
                     .addComponent(tfFechaComanda_NumeroComanda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btFechaComanda_Fechar))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
 
         jTabbedPane1.addTab("Fechar Comanda", jpFecharComanda);
@@ -485,7 +511,7 @@ public class ViewGlobal extends javax.swing.JFrame {
                                 .addGroup(jpItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbItemServico_Valor)
                                     .addComponent(tfItemServico_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jpItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpItemServicoLayout.createSequentialGroup()
@@ -494,7 +520,7 @@ public class ViewGlobal extends javax.swing.JFrame {
                             .addGroup(jpItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(btItemServico_Alterar, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(btItemServico_Excluir, javax.swing.GroupLayout.Alignment.TRAILING)))
-                        .addGap(12, 12, 12))))
+                        .addGap(6, 6, 6))))
         );
         jpItemServicoLayout.setVerticalGroup(
             jpItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -511,14 +537,14 @@ public class ViewGlobal extends javax.swing.JFrame {
                 .addComponent(lbItemServico_Tabela)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpItemServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jpItemServicoLayout.createSequentialGroup()
                         .addComponent(btItemServico_Salvar)
                         .addGap(18, 18, 18)
                         .addComponent(btItemServico_Alterar)
                         .addGap(18, 18, 18)
-                        .addComponent(btItemServico_Excluir)))
-                .addContainerGap(49, Short.MAX_VALUE))
+                        .addComponent(btItemServico_Excluir))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cadastro de Itens/Serviços", jpItemServico);
@@ -566,18 +592,18 @@ public class ViewGlobal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jpVisitanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpVisitanteLayout.createSequentialGroup()
-                        .addComponent(tfVisitante_Cpf, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+                        .addComponent(tfVisitante_Cpf, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(btVisitante_PesquisarCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(tfVisitante_Nome)
                     .addComponent(tfVisitante_Telefone))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpVisitanteLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jpVisitanteLayout.createSequentialGroup()
+                .addGap(217, 217, 217)
                 .addComponent(btVisitante_Salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btVisitante_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(167, 167, 167))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpVisitanteLayout.setVerticalGroup(
             jpVisitanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -595,22 +621,61 @@ public class ViewGlobal extends javax.swing.JFrame {
                 .addGroup(jpVisitanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfVisitante_Telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbVisitante_Telefone))
-                .addGap(31, 31, 31)
+                .addGap(30, 30, 30)
                 .addGroup(jpVisitanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btVisitante_Salvar)
                     .addComponent(btVisitante_Cancelar))
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cadastro de Visitantes", jpVisitante);
+
+        lbJoin_ValorTotal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbJoin_ValorTotal.setText("Valor Total das Comandas:");
+
+        jtTotalComandas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Nome do Visitante", "Valor Total"
+            }
+        ));
+        jScrollPane4.setViewportView(jtTotalComandas);
+
+        javax.swing.GroupLayout jpJoinLayout = new javax.swing.GroupLayout(jpJoin);
+        jpJoin.setLayout(jpJoinLayout);
+        jpJoinLayout.setHorizontalGroup(
+            jpJoinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpJoinLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpJoinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpJoinLayout.createSequentialGroup()
+                        .addComponent(lbJoin_ValorTotal)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jpJoinLayout.setVerticalGroup(
+            jpJoinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpJoinLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbJoin_ValorTotal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("Valor das Comandas", jpJoin);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -618,6 +683,7 @@ public class ViewGlobal extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btItemServico_SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btItemServico_SalvarActionPerformed
@@ -713,6 +779,8 @@ public class ViewGlobal extends javax.swing.JFrame {
         tfVisitante_Cpf.setText("");
         tfVisitante_Nome.setText("");
         tfVisitante_Telefone.setText("");
+        
+        leTabelaVisitante();
     }//GEN-LAST:event_btVisitante_SalvarActionPerformed
 
     private void btVisitante_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisitante_CancelarActionPerformed
@@ -787,6 +855,8 @@ public class ViewGlobal extends javax.swing.JFrame {
             comanda.setCpf_visitante(Double.parseDouble(tfAbrirComanda_Cpf.getText()));
 
             comandaDAO.abre(comanda);
+            
+            leTabelaComandasAbertas();
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um CPF.");
         }
@@ -811,6 +881,21 @@ public class ViewGlobal extends javax.swing.JFrame {
 
     private void btFechaComanda_FecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFechaComanda_FecharActionPerformed
         
+        if (!tfFechaComanda_NumeroComanda.getText().equals("")) {                    
+            Comanda comanda = new Comanda();
+            ComandaDAO comandaDAO = new ComandaDAO();   
+            
+            comanda.setCodigoComanda(Integer.parseInt(tfFechaComanda_NumeroComanda.getText()));
+            
+            comandaDAO.fecha(comanda);
+            
+            tfFechaComanda_NumeroComanda.setText("");
+            
+            leTabelaComandasAbertas();
+        
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione uma comanda.");
+        }
         
         
     }//GEN-LAST:event_btFechaComanda_FecharActionPerformed
@@ -826,11 +911,23 @@ public class ViewGlobal extends javax.swing.JFrame {
             comandaItemServico.setQuantidade(Integer.parseInt(tfComanda_ItemServico_Quantidade.getText()));
 
             comandaItemServicoDAO.insere(comandaItemServico);
+            
+            tfComanda_ItemServico_CodComanda.setText("");
+            tfComanda_ItemServico_CodItemServico.setText("");
+            tfComanda_ItemServico_Quantidade.setText("");
         } else {
             JOptionPane.showMessageDialog(null, "Preencha os campos.");
         }
         
     }//GEN-LAST:event_btComanda_ItemServico_AdicionarActionPerformed
+
+    private void btComanda_ItemServico_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btComanda_ItemServico_CancelarActionPerformed
+        
+        tfComanda_ItemServico_CodComanda.setText("");
+        tfComanda_ItemServico_CodItemServico.setText("");
+        tfComanda_ItemServico_Quantidade.setText("");
+        
+    }//GEN-LAST:event_btComanda_ItemServico_CancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -883,14 +980,17 @@ public class ViewGlobal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel jpAbrirComanda;
     private javax.swing.JPanel jpComanda_ItemServico;
     private javax.swing.JPanel jpFecharComanda;
     private javax.swing.JPanel jpItemServico;
+    private javax.swing.JPanel jpJoin;
     private javax.swing.JPanel jpVisitante;
     private javax.swing.JTable jtFechaComanda_ComandasAbertas;
     private javax.swing.JTable jtItemServico;
+    private javax.swing.JTable jtTotalComandas;
     private javax.swing.JTable jtVistantes;
     private javax.swing.JLabel lbAbrirComanda_Cpf;
     private javax.swing.JLabel lbAbrirComanda_Nome;
@@ -903,6 +1003,7 @@ public class ViewGlobal extends javax.swing.JFrame {
     private javax.swing.JLabel lbItemServico_Descricao;
     private javax.swing.JLabel lbItemServico_Tabela;
     private javax.swing.JLabel lbItemServico_Valor;
+    private javax.swing.JLabel lbJoin_ValorTotal;
     private javax.swing.JLabel lbVisitante_Cpf;
     private javax.swing.JLabel lbVisitante_Nome;
     private javax.swing.JLabel lbVisitante_Telefone;

@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.bean.Comanda;
+import model.bean.JoinValorTotal;
 import model.bean.Visitante;
 
 public class ComandaDAO {
@@ -37,7 +38,25 @@ public class ComandaDAO {
         
     }
     
-    public void fecha() { //PARA FECHAR O VALOR_COMANDA TEM QUE SER DEFINIDO
+    public void fecha(Comanda comanda) { //PARA FECHAR O VALOR_COMANDA TEM QUE SER DEFINIDO
+        
+        Connection conexao = ConexaoMySQL.conectar();
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = conexao.prepareStatement("UPDATE comanda SET Valor_Comanda = (SELECT SUM(Valor_ItemServico * Quantidade_ItemServico) FROM comanda_itemservico WHERE Codigo_Comanda = ?) WHERE Codigo_Comanda = ?");
+            stmt.setDouble(1, comanda.getCodigoComanda());            
+            stmt.setDouble(2, comanda.getCodigoComanda());            
+            
+            stmt.executeUpdate();                        
+            
+            JOptionPane.showMessageDialog(null, "Comanda fechada!");
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao abrir: "+ex);
+        } finally {
+            ConexaoMySQL.desconectar(conexao, stmt);
+        }
         
     }
     
@@ -49,7 +68,7 @@ public class ComandaDAO {
         List<Comanda> comandas = new ArrayList<>();        
         
         try {
-            stmt = conexao.prepareStatement("SELECT * FROM comanda");
+            stmt = conexao.prepareStatement("SELECT * FROM comanda WHERE Valor_Comanda is null");
             
             rs = stmt.executeQuery();
             
@@ -72,6 +91,36 @@ public class ComandaDAO {
         
         return comandas;
         
+    }
+    
+    public List<JoinValorTotal> lerJoin(){        
+        Connection conexao = ConexaoMySQL.conectar();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        List<JoinValorTotal> listaJoin = new ArrayList<>();
+        
+        try {
+            stmt = conexao.prepareStatement("SELECT * FROM valortotal");
+            
+            rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                JoinValorTotal join = new JoinValorTotal();
+                
+                join.setNome(rs.getString("Nome do Visitante"));
+                join.setValor(rs.getDouble("Valor Total"));
+                
+                listaJoin.add(join);
+                                
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " +ex);
+        } finally {
+            ConexaoMySQL.desconectar(conexao, stmt, rs);
+        }
+        
+        return listaJoin;
     }
     
     public List<Visitante> lerPorNome(String nomeVistante){
