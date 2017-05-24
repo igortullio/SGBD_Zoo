@@ -50,7 +50,7 @@ public class ItemServicoDAO {
             while (rs.next()) {
                 ItemServico item = new ItemServico();
                 
-                item.setCodigo(rs.getInt("Codigo_ItemServico"));
+                item.setCodigoItemServico(rs.getInt("Codigo_ItemServico"));
                 item.setDescricao(rs.getString("Descricao_ItemServico"));
                 item.setValor(rs.getDouble("Valor_ItemServico"));
                 
@@ -76,7 +76,7 @@ public class ItemServicoDAO {
             
             stmt.setString(1, item.getDescricao());
             stmt.setDouble(2, item.getValor());
-            stmt.setDouble(3, item.getCodigo());
+            stmt.setDouble(3, item.getCodigoItemServico());
             
             stmt.executeUpdate();
             
@@ -97,7 +97,7 @@ public class ItemServicoDAO {
         try {
             stmt = conexao.prepareStatement("DELETE FROM itemservico WHERE Codigo_ItemServico = ?");
                         
-            stmt.setDouble(1, item.getCodigo());
+            stmt.setDouble(1, item.getCodigoItemServico());
             
             stmt.executeUpdate();
             

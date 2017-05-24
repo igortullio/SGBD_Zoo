@@ -41,26 +41,27 @@ public class ComandaDAO {
         
     }
     
-    public List<Visitante> ler(){
+    public List<Comanda> ler(){
         Connection conexao = ConexaoMySQL.conectar();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
-        List<Visitante> visitantes = new ArrayList<>();        
+        List<Comanda> comandas = new ArrayList<>();        
         
         try {
-            stmt = conexao.prepareStatement("SELECT * FROM visitante");
+            stmt = conexao.prepareStatement("SELECT * FROM comanda");
             
             rs = stmt.executeQuery();
             
             while (rs.next()) {
-                Visitante item = new Visitante();
+                Comanda comanda = new Comanda();
                 
-                item.setCpf(rs.getDouble("Cpf_Visitante"));
-                item.setNome(rs.getString("Nome_Visitante"));
-                item.setTelefone(rs.getDouble("Telefone_Visitante"));
+                comanda.setCodigoComanda(rs.getInt("Codigo_Comanda"));
+                comanda.setCpf_visitante(rs.getDouble("Cpf_Visitante"));
+                comanda.setDataEntrada(rs.getString("DataEntrada_Comanda"));
+                comanda.setValor(rs.getDouble("Valor_Comanda"));                
                 
-                visitantes.add(item);
+                comandas.add(comanda);
                                 
             }
         } catch (SQLException ex) {
@@ -69,7 +70,7 @@ public class ComandaDAO {
             ConexaoMySQL.desconectar(conexao, stmt, rs);
         }
         
-        return visitantes;
+        return comandas;
         
     }
     

@@ -4,17 +4,17 @@ package model.bean;
 
 public class Comanda {
     
-    private int codigo;
+    private int codigoComanda;
     private double cpf_visitante;
     private String dataEntrada;
     private double valor;
 
-    public int getCodigo() {
-        return codigo;
+    public int getCodigoComanda() {
+        return codigoComanda;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setCodigoComanda(int codigo) {
+        this.codigoComanda = codigo;
     }
 
     public double getCpf_visitante() {

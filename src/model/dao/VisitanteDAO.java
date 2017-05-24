@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import model.bean.Visitante;
 
@@ -61,6 +63,38 @@ public class VisitanteDAO {
         }
         
         return existe;
+    }
+    
+    public List<Visitante> ler(){
+        Connection conexao = ConexaoMySQL.conectar();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        List<Visitante> visitantes = new ArrayList<>();        
+        
+        try {
+            stmt = conexao.prepareStatement("SELECT * FROM visitante");
+            
+            rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                Visitante item = new Visitante();
+                
+                item.setCpf(rs.getDouble("Cpf_Visitante"));
+                item.setNome(rs.getString("Nome_Visitante"));
+                item.setTelefone(rs.getDouble("Telefone_Visitante"));
+                
+                visitantes.add(item);
+                                
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " +ex);
+        } finally {
+            ConexaoMySQL.desconectar(conexao, stmt, rs);
+        }
+        
+        return visitantes;
+        
     }
     
 }

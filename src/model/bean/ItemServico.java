@@ -3,16 +3,16 @@ package model.bean;
 
 public class ItemServico {
     
-    private int codigo;
+    private int codigoItemServico;
     private String descricao;
     private double valor;
 
-    public int getCodigo() {
-        return codigo;
+    public int getCodigoItemServico() {
+        return codigoItemServico;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setCodigoItemServico(int codigo) {
+        this.codigoItemServico = codigo;
     }
 
     public String getDescricao() {
