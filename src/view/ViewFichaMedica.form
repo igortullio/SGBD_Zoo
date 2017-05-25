@@ -27,7 +27,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="tpSistemaFichaMedica" alignment="0" max="32767" attributes="0"/>
+          <Component id="tpSistemaFichaMedica" alignment="0" pref="1013" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Component id="btVoltar" min="-2" max="-2" attributes="0"/>
@@ -114,7 +114,7 @@
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="spFichaMedica" alignment="1" pref="970" max="32767" attributes="0"/>
+                          <Component id="spFichaMedica" alignment="1" pref="988" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -361,7 +361,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="spAnimal" alignment="0" pref="970" max="32767" attributes="0"/>
+                          <Component id="spAnimal" alignment="0" pref="988" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
@@ -772,8 +772,44 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <Component id="jScrollPane1" pref="601" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane4" min="-2" pref="240" max="-2" attributes="0"/>
+                      <EmptySpace pref="161" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jlCPF" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="tfCpfFuncionario" min="-2" pref="147" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jlNome" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="tfNome" min="-2" pref="149" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jlRG" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="tfRGFuncionario" min="-2" pref="84" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jbInserirFuncionario" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jbExcluirFuncionario" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jbAtualizarFuncionario" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
@@ -790,48 +826,26 @@
                                   <Component id="tfTelefoneFuncionario" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jlCPF" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="tfCpfFuncionario" min="-2" pref="149" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jlNome" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="tfNome" min="-2" pref="149" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jlRG" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="tfRGFuncionario" min="-2" pref="84" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jbInserirFuncionario" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jbExcluirFuncionario" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                               <Component id="jlCodigoFuncionario" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="tfCodigoFuncionario" min="-2" pref="45" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jbPesquisarFuncionario" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jbAtualizarFuncionario" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfCodigoFuncionario" min="-2" pref="66" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jbPesquisarFuncionario" min="-2" pref="111" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="jlFuncionario_FichaMedica" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="tfFuncionario_FichaMedica" min="-2" pref="70" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jbCadastraFuncionarioFicha" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane1" min="-2" pref="989" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -839,7 +853,10 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="220" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane4" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" alignment="0" pref="217" max="32767" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jlNome" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -849,29 +866,49 @@
                           <Component id="jlCodigoFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfCodigoFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jbPesquisarFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jbAtualizarFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tfCpfFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jlCPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="tfCpfFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jlCPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jlRG" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfRGFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jbAtualizarFuncionario" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="tfFuncaoFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jlFuncao" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jlTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfTelefoneFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="tfFuncionario_FichaMedica" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jlFuncionario_FichaMedica" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jbCadastraFuncionarioFicha" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jlRG" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfRGFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tfFuncaoFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jlFuncao" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jlTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfTelefoneFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -905,38 +942,43 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JTextField" name="tfNome">
-            </Component>
             <Component class="javax.swing.JLabel" name="jlNome">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nome"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfNome">
             </Component>
             <Component class="javax.swing.JLabel" name="jlCPF">
               <Properties>
                 <Property name="text" type="java.lang.String" value="CPF"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JTextField" name="tfCpfFuncionario">
+            </Component>
             <Component class="javax.swing.JLabel" name="jlRG">
               <Properties>
                 <Property name="text" type="java.lang.String" value="RG"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfRGFuncionario">
             </Component>
             <Component class="javax.swing.JLabel" name="jlFuncao">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Fun&#xe7;&#xe3;o"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JTextField" name="tfFuncaoFuncionario">
+            </Component>
             <Component class="javax.swing.JLabel" name="jlTelefone">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Telefone"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tfFuncaoFuncionario">
-            </Component>
-            <Component class="javax.swing.JTextField" name="tfRGFuncionario">
-            </Component>
-            <Component class="javax.swing.JTextField" name="tfCpfFuncionario">
+            <Component class="javax.swing.JTextField" name="tfTelefoneFuncionario">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfTelefoneFuncionarioActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbInserirFuncionario">
               <Properties>
@@ -944,6 +986,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbInserirFuncionarioActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbAtualizarFuncionario">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Atualizar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAtualizarFuncionarioActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbExcluirFuncionario">
@@ -969,16 +1019,40 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbPesquisarFuncionarioActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jbAtualizarFuncionario">
+            <Component class="javax.swing.JTextField" name="tfFuncionario_FichaMedica">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlFuncionario_FichaMedica">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Atualizar"/>
+                <Property name="text" type="java.lang.String" value="Ficha M&#xe9;dica"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbCadastraFuncionarioFicha">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cadastrar Ficha para Funcion&#xe1;rio"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAtualizarFuncionarioActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCadastraFuncionarioFichaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="tfTelefoneFuncionario">
-            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane4">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="jtFuncionarioFicha">
+                  <Properties>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="2" rowCount="0">
+                        <Column editable="true" title="Funcion&#xe1;rio" type="java.lang.Object"/>
+                        <Column editable="true" title="Ficha" type="java.lang.Object"/>
+                      </Table>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jpProcedimentos">
@@ -1023,7 +1097,7 @@
                           <Component id="jlDescricaoProcedimento" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="tfProcedimentos_Descricao" alignment="0" min="-2" pref="325" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="364" max="32767" attributes="0"/>
+                      <EmptySpace pref="382" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1209,7 +1283,7 @@
                               <Component id="jbInserirFuncao" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jbAtualiza_Funcao" min="-2" pref="89" max="-2" attributes="0"/>
-                              <EmptySpace pref="328" max="32767" attributes="0"/>
+                              <EmptySpace pref="346" max="32767" attributes="0"/>
                               <Component id="jbVerifica" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="261" max="-2" attributes="0"/>
                           </Group>

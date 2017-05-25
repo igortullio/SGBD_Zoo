@@ -8,12 +8,15 @@ import model.dao.FichaMedicaDAO;
 import model.bean.FichaMedica;
 import model.bean.Funcao;
 import model.bean.Funcionario;
+import model.bean.FuncionarioFichaJOIN;
 import model.bean.FuncionarioSalarioJOIN;
+import model.bean.Funcionario_FichaMedica;
 import model.bean.Procedimentos;
 import model.bean.Responsavel;
 import model.dao.AnimalDAO;
 import model.dao.FuncaoDAO;
 import model.dao.FuncionarioDAO;
+import model.dao.Funcionario_FichaMedicaDAO;
 import model.dao.ProcedimentosDAO;
 import model.dao.ResponsavelDAO;
 
@@ -51,6 +54,9 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         DefaultTableModel modeloJOIN = (DefaultTableModel) jtJOIN_Funcao.getModel();
         jtJOIN_Funcao.setRowSorter(new TableRowSorter(modeloJOIN));
         
+        DefaultTableModel modeloFuncionarioFicha = (DefaultTableModel) jtFuncionarioFicha.getModel();
+        jtFuncionarioFicha.setRowSorter(new TableRowSorter(modeloFuncionarioFicha));
+        
         //Parte do Elton
         DefaultTableModel modeloProcedimento = (DefaultTableModel) jtProcedimento.getModel();
         jtProcedimento.setRowSorter(new TableRowSorter(modeloProcedimento));
@@ -59,6 +65,7 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         lerTabelaAnimal();
         lerTabelaResponsavel();
         lerTabelaFuncionario();//Parte do Caio
+        lerTabelaFuncionarioFicha();
         lerTabelaFuncao();//Parte do Caio
         lerTabelaProcedimento();//Parte do Elton
         
@@ -168,6 +175,17 @@ public class ViewFichaMedica extends javax.swing.JFrame {
             });
         }//fim for
         
+    }
+    
+    private void lerTabelaFuncionarioFicha(){
+        DefaultTableModel modelJOIN = (DefaultTableModel) jtFuncionarioFicha.getModel();
+        modelJOIN.setRowCount(0);
+        Funcionario_FichaMedicaDAO funcaoDAO = new Funcionario_FichaMedicaDAO();
+        for (FuncionarioFichaJOIN f : funcaoDAO.lerJoin()) {
+            modelJOIN.addRow(new Object[]{
+                f.getNomeFuncionario(),
+                f.getCodigoFicha()});
+        }//fim for
     }
     
     private void lerTabelaFichaMedicaPeloCodigo(int codigo_FichaMedica) {
@@ -318,22 +336,27 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         jpFuncionarios = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtFuncionario = new javax.swing.JTable();
-        tfNome = new javax.swing.JTextField();
         jlNome = new javax.swing.JLabel();
+        tfNome = new javax.swing.JTextField();
         jlCPF = new javax.swing.JLabel();
-        jlRG = new javax.swing.JLabel();
-        jlFuncao = new javax.swing.JLabel();
-        jlTelefone = new javax.swing.JLabel();
-        tfFuncaoFuncionario = new javax.swing.JTextField();
-        tfRGFuncionario = new javax.swing.JTextField();
         tfCpfFuncionario = new javax.swing.JTextField();
+        jlRG = new javax.swing.JLabel();
+        tfRGFuncionario = new javax.swing.JTextField();
+        jlFuncao = new javax.swing.JLabel();
+        tfFuncaoFuncionario = new javax.swing.JTextField();
+        jlTelefone = new javax.swing.JLabel();
+        tfTelefoneFuncionario = new javax.swing.JTextField();
         jbInserirFuncionario = new javax.swing.JButton();
+        jbAtualizarFuncionario = new javax.swing.JButton();
         jbExcluirFuncionario = new javax.swing.JButton();
         jlCodigoFuncionario = new javax.swing.JLabel();
         tfCodigoFuncionario = new javax.swing.JTextField();
         jbPesquisarFuncionario = new javax.swing.JButton();
-        jbAtualizarFuncionario = new javax.swing.JButton();
-        tfTelefoneFuncionario = new javax.swing.JTextField();
+        tfFuncionario_FichaMedica = new javax.swing.JTextField();
+        jlFuncionario_FichaMedica = new javax.swing.JLabel();
+        jbCadastraFuncionarioFicha = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jtFuncionarioFicha = new javax.swing.JTable();
         jpProcedimentos = new javax.swing.JPanel();
         jtProcedimentos = new javax.swing.JScrollPane();
         jtProcedimento = new javax.swing.JTable();
@@ -478,7 +501,7 @@ public class ViewFichaMedica extends javax.swing.JFrame {
                             .addComponent(jbPesquisarFicha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jbAtualizarFicha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(spFichaMedica, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 970, Short.MAX_VALUE))
+                    .addComponent(spFichaMedica, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpFichaMedicaLayout.setVerticalGroup(
@@ -619,7 +642,7 @@ public class ViewFichaMedica extends javax.swing.JFrame {
             .addGroup(jpAnimaisLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(spAnimal, javax.swing.GroupLayout.DEFAULT_SIZE, 970, Short.MAX_VALUE)
+                    .addComponent(spAnimal, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE)
                     .addGroup(jpAnimaisLayout.createSequentialGroup()
                         .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpAnimaisLayout.createSequentialGroup()
@@ -769,10 +792,23 @@ public class ViewFichaMedica extends javax.swing.JFrame {
 
         jlTelefone.setText("Telefone");
 
+        tfTelefoneFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfTelefoneFuncionarioActionPerformed(evt);
+            }
+        });
+
         jbInserirFuncionario.setText("Inserir");
         jbInserirFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbInserirFuncionarioActionPerformed(evt);
+            }
+        });
+
+        jbAtualizarFuncionario.setText("Atualizar");
+        jbAtualizarFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAtualizarFuncionarioActionPerformed(evt);
             }
         });
 
@@ -792,20 +828,59 @@ public class ViewFichaMedica extends javax.swing.JFrame {
             }
         });
 
-        jbAtualizarFuncionario.setText("Atualizar");
-        jbAtualizarFuncionario.addActionListener(new java.awt.event.ActionListener() {
+        jlFuncionario_FichaMedica.setText("Ficha Médica");
+
+        jbCadastraFuncionarioFicha.setText("Cadastrar Ficha para Funcionário");
+        jbCadastraFuncionarioFicha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbAtualizarFuncionarioActionPerformed(evt);
+                jbCadastraFuncionarioFichaActionPerformed(evt);
             }
         });
+
+        jtFuncionarioFicha.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Funcionário", "Ficha"
+            }
+        ));
+        jScrollPane4.setViewportView(jtFuncionarioFicha);
 
         javax.swing.GroupLayout jpFuncionariosLayout = new javax.swing.GroupLayout(jpFuncionarios);
         jpFuncionarios.setLayout(jpFuncionariosLayout);
         jpFuncionariosLayout.setHorizontalGroup(
             jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpFuncionariosLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(161, Short.MAX_VALUE))
+            .addGroup(jpFuncionariosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpFuncionariosLayout.createSequentialGroup()
+                        .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpFuncionariosLayout.createSequentialGroup()
+                                .addComponent(jlCPF)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tfCpfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jpFuncionariosLayout.createSequentialGroup()
+                                    .addComponent(jlNome)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jpFuncionariosLayout.createSequentialGroup()
+                                    .addComponent(jlRG)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(tfRGFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpFuncionariosLayout.createSequentialGroup()
+                                .addComponent(jbInserirFuncionario)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbExcluirFuncionario))
+                            .addComponent(jbAtualizarFuncionario)))
                     .addGroup(jpFuncionariosLayout.createSequentialGroup()
                         .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpFuncionariosLayout.createSequentialGroup()
@@ -816,46 +891,30 @@ public class ViewFichaMedica extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfFuncaoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfTelefoneFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(tfTelefoneFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpFuncionariosLayout.createSequentialGroup()
-                        .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jpFuncionariosLayout.createSequentialGroup()
-                                .addComponent(jlCPF)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tfCpfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(79, 79, 79))
-                            .addGroup(jpFuncionariosLayout.createSequentialGroup()
-                                .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jpFuncionariosLayout.createSequentialGroup()
-                                        .addComponent(jlNome)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jpFuncionariosLayout.createSequentialGroup()
-                                        .addComponent(jlRG)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(tfRGFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addComponent(jbInserirFuncionario)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbExcluirFuncionario)
-                        .addGap(52, 52, 52)
+                        .addGap(14, 14, 14)
                         .addComponent(jlCodigoFuncionario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfCodigoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbPesquisarFuncionario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbAtualizarFuncionario)))
+                        .addComponent(tfCodigoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbPesquisarFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpFuncionariosLayout.createSequentialGroup()
+                            .addComponent(jlFuncionario_FichaMedica)
+                            .addGap(18, 18, 18)
+                            .addComponent(tfFuncionario_FichaMedica, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jbCadastraFuncionarioFicha, javax.swing.GroupLayout.Alignment.TRAILING)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jpFuncionariosLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 989, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1, Short.MAX_VALUE))
         );
         jpFuncionariosLayout.setVerticalGroup(
             jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpFuncionariosLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlNome)
@@ -864,25 +923,38 @@ public class ViewFichaMedica extends javax.swing.JFrame {
                     .addComponent(jbExcluirFuncionario)
                     .addComponent(jlCodigoFuncionario)
                     .addComponent(tfCodigoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbPesquisarFuncionario)
-                    .addComponent(jbAtualizarFuncionario))
-                .addGap(2, 2, 2)
-                .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfCpfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlCPF))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlRG)
-                    .addComponent(tfRGFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfFuncaoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlFuncao))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlTelefone)
-                    .addComponent(tfTelefoneFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38))
+                    .addComponent(jbPesquisarFuncionario))
+                .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpFuncionariosLayout.createSequentialGroup()
+                        .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpFuncionariosLayout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(tfCpfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jlCPF))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jlRG)
+                                    .addComponent(tfRGFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jpFuncionariosLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbAtualizarFuncionario)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfFuncaoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlFuncao))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlTelefone)
+                            .addComponent(tfTelefoneFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jpFuncionariosLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfFuncionario_FichaMedica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlFuncionario_FichaMedica))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbCadastraFuncionarioFicha)))
+                .addGap(41, 41, 41))
         );
 
         tpSistemaFichaMedica.addTab("Cadastro de Funcionários", jpFuncionarios);
@@ -982,7 +1054,7 @@ public class ViewFichaMedica extends javax.swing.JFrame {
                         .addComponent(AtualizarProcedimentos))
                     .addComponent(jlDescricaoProcedimento)
                     .addComponent(tfProcedimentos_Descricao, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(364, Short.MAX_VALUE))
+                .addContainerGap(382, Short.MAX_VALUE))
         );
         jpProcedimentosLayout.setVerticalGroup(
             jpProcedimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1104,7 +1176,7 @@ public class ViewFichaMedica extends javax.swing.JFrame {
                         .addComponent(jbInserirFuncao)
                         .addGap(18, 18, 18)
                         .addComponent(jbAtualiza_Funcao, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 328, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 346, Short.MAX_VALUE)
                         .addComponent(jbVerifica)
                         .addGap(261, 261, 261))))
         );
@@ -1148,7 +1220,7 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tpSistemaFichaMedica)
+            .addComponent(tpSistemaFichaMedica, javax.swing.GroupLayout.DEFAULT_SIZE, 1013, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btVoltar)
@@ -1369,101 +1441,6 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         lerTabelaResponsavel();
     }//GEN-LAST:event_jbAtualizarResponsavelActionPerformed
 
-    private void jtFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtFuncionarioMouseClicked
-        try {
-
-            tfNome.setText(jtFuncionario.getValueAt(jtFuncionario.getSelectedRow(), 1).toString());
-            tfCpfFuncionario.setText(jtFuncionario.getValueAt(jtFuncionario.getSelectedRow(), 2).toString());
-            tfRGFuncionario.setText(jtFuncionario.getValueAt(jtFuncionario.getSelectedRow(), 3).toString());
-            tfFuncaoFuncionario.setText(jtFuncionario.getValueAt(jtFuncionario.getSelectedRow(), 4).toString());
-            tfTelefoneFuncionario.setText(jtFuncionario.getValueAt(jtFuncionario.getSelectedRow(), 6).toString());
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_jtFuncionarioMouseClicked
-
-    private void jbInserirFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInserirFuncionarioActionPerformed
-        if (evt.getSource() == jbInserirFuncionario) {
-            Funcionario funcionario = new Funcionario();
-            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-
-            int cf = Integer.parseInt(tfFuncaoFuncionario.getText());
-            funcionario.setCodigo_funcao(cf);
-            funcionario.setNome_funcionario(tfNome.getText());
-            funcionario.setCpf_funcionario(tfCpfFuncionario.getText());
-            int rg = Integer.parseInt(tfRGFuncionario.getText());
-            funcionario.setRg_funcionario(rg);
-            funcionario.setTelefone_funcionario(tfTelefoneFuncionario.getText());
-
-            java.util.Date dt = new java.util.Date();
-            java.text.SimpleDateFormat sdf
-            = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String currentTime = sdf.format(dt);
-
-            funcionario.setDataEntrada_funcionario(currentTime);
-
-            funcionarioDAO.salvar(funcionario);
-
-        }
-    }//GEN-LAST:event_jbInserirFuncionarioActionPerformed
-
-    private void jbExcluirFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirFuncionarioActionPerformed
-        try {
-            Funcionario funcionario = new Funcionario();
-            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-
-            funcionario.setCodigo_funcionario(
-                (int) jtFuncionario.getValueAt(
-                    jtFuncionario.getSelectedRow(), 0
-                )
-            );
-            funcionarioDAO.excluir(funcionario);
-
-            limparCamposTabelaFuncionario();
-
-            lerTabelaFuncionario();
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }//GEN-LAST:event_jbExcluirFuncionarioActionPerformed
-
-    private void jbPesquisarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisarFuncionarioActionPerformed
-        try {
-            //Cria os objetos da ficha a ser buscada
-            Funcionario funcionario = new Funcionario();
-            //Pega o código digitado para busca
-            funcionario.setCodigo_funcionario(Integer.parseInt(tfCodigoFuncionario.getText()));
-            lerTabelaFuncionarioPeloCodigo(funcionario.getCodigo_funcionario());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }//GEN-LAST:event_jbPesquisarFuncionarioActionPerformed
-
-    private void jbAtualizarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtualizarFuncionarioActionPerformed
-        try {
-
-            Funcionario funcionario = new Funcionario(
-                Integer.parseInt(jtFuncionario.getValueAt(jtFuncionario.getSelectedRow(), 0).toString()),//Codigo_FichaMedica
-                tfNome.getText(),
-                tfCpfFuncionario.getText(),
-                Integer.parseInt(tfRGFuncionario.getText()),
-                Integer.parseInt(tfFuncaoFuncionario.getText()),
-                tfTelefoneFuncionario.getText()
-            );
-            //alterar no banco
-            FuncionarioDAO.atualizar(funcionario);
-            //Mensagensinha
-            JOptionPane.showMessageDialog(null, "Atualizado.");
-            //atualiza a tabela no frame
-            lerTabelaFuncionario();
-        } catch (IndexOutOfBoundsException e) {
-            JOptionPane.showMessageDialog(null, "Selecione uma ficha na tabela", null, JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }//GEN-LAST:event_jbAtualizarFuncionarioActionPerformed
-
     private void jtFuncaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtFuncaoMouseClicked
         try {
             tfDescricaoFuncao.setText(jtFuncao.getValueAt(jtFuncao.getSelectedRow(), 1).toString());
@@ -1483,6 +1460,8 @@ public class ViewFichaMedica extends javax.swing.JFrame {
             double salario = Double.parseDouble(tfSalarioFuncao.getText());
             funcao.setSalario_funcao(salario);
             funcaoDAO.salvar(funcao);
+            
+            lerTabelaFuncao();
 
         }
     }//GEN-LAST:event_jbInserirFuncaoActionPerformed
@@ -1603,6 +1582,122 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfProcedimentos_DescricaoActionPerformed
 
+    private void jtFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtFuncionarioMouseClicked
+        try {
+
+            tfNome.setText(jtFuncionario.getValueAt(jtFuncionario.getSelectedRow(), 1).toString());
+            tfCpfFuncionario.setText(jtFuncionario.getValueAt(jtFuncionario.getSelectedRow(), 2).toString());
+            tfRGFuncionario.setText(jtFuncionario.getValueAt(jtFuncionario.getSelectedRow(), 3).toString());
+            tfFuncaoFuncionario.setText(jtFuncionario.getValueAt(jtFuncionario.getSelectedRow(), 4).toString());
+            tfTelefoneFuncionario.setText(jtFuncionario.getValueAt(jtFuncionario.getSelectedRow(), 6).toString());
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jtFuncionarioMouseClicked
+
+    private void tfTelefoneFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTelefoneFuncionarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfTelefoneFuncionarioActionPerformed
+
+    private void jbInserirFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInserirFuncionarioActionPerformed
+        if (evt.getSource() == jbInserirFuncionario) {
+            Funcionario funcionario = new Funcionario();
+            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+
+            int cf = Integer.parseInt(tfFuncaoFuncionario.getText());
+            funcionario.setCodigo_funcao(cf);
+            funcionario.setNome_funcionario(tfNome.getText());
+            funcionario.setCpf_funcionario(tfCpfFuncionario.getText());
+            int rg = Integer.parseInt(tfRGFuncionario.getText());
+            funcionario.setRg_funcionario(rg);
+            funcionario.setTelefone_funcionario(tfTelefoneFuncionario.getText());
+            java.util.Date dt = new java.util.Date();
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String currentTime = sdf.format(dt);
+
+            funcionario.setDataEntrada_funcionario(currentTime);
+
+            funcionarioDAO.salvar(funcionario);
+            
+            lerTabelaFuncionario();
+
+        }
+    }//GEN-LAST:event_jbInserirFuncionarioActionPerformed
+
+    private void jbAtualizarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtualizarFuncionarioActionPerformed
+        try {
+
+            Funcionario funcionario = new Funcionario(
+                Integer.parseInt(jtFuncionario.getValueAt(jtFuncionario.getSelectedRow(), 0).toString()),//Codigo_FichaMedica
+                tfNome.getText(),
+                tfCpfFuncionario.getText(),
+                Integer.parseInt(tfRGFuncionario.getText()),
+                Integer.parseInt(tfFuncaoFuncionario.getText()),
+                tfTelefoneFuncionario.getText()
+            );
+            //alterar no banco
+            FuncionarioDAO.atualizar(funcionario);
+            //Mensagensinha
+            JOptionPane.showMessageDialog(null, "Atualizado.");
+            //atualiza a tabela no frame
+            lerTabelaFuncionario();
+        } catch (IndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(null, "Selecione uma ficha na tabela", null, JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jbAtualizarFuncionarioActionPerformed
+
+    private void jbExcluirFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirFuncionarioActionPerformed
+        try {
+            Funcionario funcionario = new Funcionario();
+            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+
+            funcionario.setCodigo_funcionario(
+                (int) jtFuncionario.getValueAt(
+                    jtFuncionario.getSelectedRow(), 0
+                )
+            );
+            funcionarioDAO.excluir(funcionario);
+
+            limparCamposTabelaFuncionario();
+
+            lerTabelaFuncionario();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jbExcluirFuncionarioActionPerformed
+
+    private void jbPesquisarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisarFuncionarioActionPerformed
+        try {
+            //Cria os objetos da ficha a ser buscada
+            Funcionario funcionario = new Funcionario();
+            //Pega o código digitado para busca
+            funcionario.setCodigo_funcionario(Integer.parseInt(tfCodigoFuncionario.getText()));
+            lerTabelaFuncionarioPeloCodigo(funcionario.getCodigo_funcionario());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jbPesquisarFuncionarioActionPerformed
+
+    private void jbCadastraFuncionarioFichaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastraFuncionarioFichaActionPerformed
+        if (evt.getSource() == jbCadastraFuncionarioFicha) {
+            Funcionario_FichaMedica ficha = new Funcionario_FichaMedica();
+            Funcionario_FichaMedicaDAO fichaDAO = new Funcionario_FichaMedicaDAO();
+
+            int cf = Integer.parseInt(tfFuncionario_FichaMedica.getText());
+            ficha.setCodigo_fichaMedica(cf);
+
+            int rg = Integer.parseInt(tfCodigoFuncionario.getText());
+            ficha.setCodigo_funcionario(rg);
+
+            fichaDAO.gravar(ficha);
+            
+            lerTabelaFuncionarioFicha();
+        }
+    }//GEN-LAST:event_jbCadastraFuncionarioFichaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1651,11 +1746,13 @@ public class ViewFichaMedica extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JButton jbAtualiza_Funcao;
     private javax.swing.JButton jbAtualizarAnimal;
     private javax.swing.JButton jbAtualizarFicha;
     private javax.swing.JButton jbAtualizarFuncionario;
     private javax.swing.JButton jbAtualizarResponsavel;
+    private javax.swing.JButton jbCadastraFuncionarioFicha;
     private javax.swing.JButton jbExcluirAnimal;
     private javax.swing.JButton jbExcluirFicha;
     private javax.swing.JButton jbExcluirFuncionario;
@@ -1684,6 +1781,7 @@ public class ViewFichaMedica extends javax.swing.JFrame {
     private javax.swing.JLabel jlFamilia;
     private javax.swing.JLabel jlFilo;
     private javax.swing.JLabel jlFuncao;
+    private javax.swing.JLabel jlFuncionario_FichaMedica;
     private javax.swing.JLabel jlGenero;
     private javax.swing.JLabel jlNascimento;
     private javax.swing.JLabel jlNome;
@@ -1707,6 +1805,7 @@ public class ViewFichaMedica extends javax.swing.JFrame {
     private javax.swing.JTable jtFichaMedica;
     private javax.swing.JTable jtFuncao;
     private javax.swing.JTable jtFuncionario;
+    private javax.swing.JTable jtFuncionarioFicha;
     private javax.swing.JTable jtJOIN_Funcao;
     private javax.swing.JTable jtProcedimento;
     private javax.swing.JScrollPane jtProcedimentos;
@@ -1726,6 +1825,7 @@ public class ViewFichaMedica extends javax.swing.JFrame {
     private javax.swing.JTextField tfFamilia;
     private javax.swing.JTextField tfFilo;
     private javax.swing.JTextField tfFuncaoFuncionario;
+    private javax.swing.JTextField tfFuncionario_FichaMedica;
     private javax.swing.JTextField tfGenero;
     private javax.swing.JTextField tfNascimento;
     private javax.swing.JTextField tfNome;
