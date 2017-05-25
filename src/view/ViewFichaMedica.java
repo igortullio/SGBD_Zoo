@@ -6,7 +6,19 @@ import javax.swing.table.TableRowSorter;
 import model.bean.Animal;
 import model.dao.FichaMedicaDAO;
 import model.bean.FichaMedica;
+import model.bean.Funcao;
+import model.bean.Funcionario;
+import model.bean.FuncionarioFichaJOIN;
+import model.bean.FuncionarioSalarioJOIN;
+import model.bean.Funcionario_FichaMedica;
+import model.bean.Procedimentos;
+import model.bean.Responsavel;
 import model.dao.AnimalDAO;
+import model.dao.FuncaoDAO;
+import model.dao.FuncionarioDAO;
+import model.dao.Funcionario_FichaMedicaDAO;
+import model.dao.ProcedimentosDAO;
+import model.dao.ResponsavelDAO;
 
 /**
  * Tela do sistema de ficha médica do animal
@@ -29,8 +41,33 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         DefaultTableModel modeloAnimal = (DefaultTableModel) jtAnimal.getModel();
         jtAnimal.setRowSorter(new TableRowSorter(modeloAnimal));
         
+        DefaultTableModel modeloResponsavel = (DefaultTableModel) jtResponsavel.getModel();
+        jtResponsavel.setRowSorter(new TableRowSorter(modeloResponsavel));
+        
+        //Parte do Caio
+        DefaultTableModel modeloCadastroFuncionario = (DefaultTableModel) jtFuncionario.getModel();
+        jtFuncionario.setRowSorter(new TableRowSorter(modeloCadastroFuncionario));
+
+        DefaultTableModel modeloCadastroFuncao = (DefaultTableModel) jtFuncao.getModel();
+        jtFuncao.setRowSorter(new TableRowSorter(modeloCadastroFuncao));
+
+        DefaultTableModel modeloJOIN = (DefaultTableModel) jtJOIN_Funcao.getModel();
+        jtJOIN_Funcao.setRowSorter(new TableRowSorter(modeloJOIN));
+        
+        DefaultTableModel modeloFuncionarioFicha = (DefaultTableModel) jtFuncionarioFicha.getModel();
+        jtFuncionarioFicha.setRowSorter(new TableRowSorter(modeloFuncionarioFicha));
+        
+        //Parte do Elton
+        DefaultTableModel modeloProcedimento = (DefaultTableModel) jtProcedimento.getModel();
+        jtProcedimento.setRowSorter(new TableRowSorter(modeloProcedimento));
+        
         lerTabelaFichaMedica();
         lerTabelaAnimal();
+        lerTabelaResponsavel();
+        lerTabelaFuncionario();//Parte do Caio
+        lerTabelaFuncionarioFicha();
+        lerTabelaFuncao();//Parte do Caio
+        lerTabelaProcedimento();//Parte do Elton
         
     }
     
@@ -70,6 +107,87 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         }//fim for
     }//fim metodo
     
+    private void lerTabelaResponsavel(){
+        DefaultTableModel modelResponsavel = (DefaultTableModel)jtResponsavel.getModel();
+        modelResponsavel.setRowCount(0);
+        ResponsavelDAO responsavel = new ResponsavelDAO();
+        for (Responsavel r : ResponsavelDAO.ler()) {
+            modelResponsavel.addRow(new Object[]{
+                r.getNome_Funcionario(),
+                r.getEspecie_Animal(),
+                r.getCodigo_Animal()
+            });
+        }//fim for
+    }
+    
+    private void lerTabelaFuncionario() {
+        DefaultTableModel modelCadastroFuncionario = (DefaultTableModel) jtFuncionario.getModel();
+        modelCadastroFuncionario.setRowCount(0);
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+        for (Funcionario f : funcionarioDAO.ler()) {
+            modelCadastroFuncionario.addRow(new Object[]{
+                f.getCodigo_funcionario(),
+                f.getNome_funcionario(),
+                f.getCpf_funcionario(),
+                f.getRg_funcionario(),
+                f.getCodigo_funcao(),
+                f.getDataEntrada_funcionario(),
+                f.getTelefone_funcionario(),});
+        }//fim for
+    }//fim metodo
+    
+    private void lerTabelaFuncao() {
+        DefaultTableModel modelCadastroFuncao = (DefaultTableModel) jtFuncao.getModel();
+        modelCadastroFuncao.setRowCount(0);
+        FuncaoDAO funcaoDAO = new FuncaoDAO();
+        for (Funcao f : funcaoDAO.lerFuncao()) {
+            modelCadastroFuncao.addRow(new Object[]{
+                f.getCodigo_funcao(),
+                f.getDescricao_funcao(),
+                f.getSalario_funcao(),});
+        }//fim for
+    }
+    
+    private void lerTabelaJOIN() {
+        DefaultTableModel modelJOIN = (DefaultTableModel) jtJOIN_Funcao.getModel();
+        modelJOIN.setRowCount(0);
+        FuncaoDAO funcaoDAO = new FuncaoDAO();
+        for (FuncionarioSalarioJOIN f : funcaoDAO.lerJoin()) {
+            modelJOIN.addRow(new Object[]{
+                f.getNome(),
+                f.getValor()});
+        }//fim for
+    }
+    
+    public void lerTabelaProcedimento(){
+        DefaultTableModel modelProcedimetos = (DefaultTableModel)jtProcedimento.getModel();
+        modelProcedimetos.setRowCount(0);
+        ProcedimentosDAO procedimentosDAO = new ProcedimentosDAO();
+        
+        for (Procedimentos p : procedimentosDAO.ler()) {
+            modelProcedimetos.addRow(new Object[]{
+                p.getCodigo_Procedimentos(),
+                p.getCodigo_TipoProcedimentos(),
+                p.getDescricao(),
+                p.getQuantidade(),
+                p.getData_Vencimento(),
+                p.getValor()
+            });
+        }//fim for
+        
+    }
+    
+    private void lerTabelaFuncionarioFicha(){
+        DefaultTableModel modelJOIN = (DefaultTableModel) jtFuncionarioFicha.getModel();
+        modelJOIN.setRowCount(0);
+        Funcionario_FichaMedicaDAO funcaoDAO = new Funcionario_FichaMedicaDAO();
+        for (FuncionarioFichaJOIN f : funcaoDAO.lerJoin()) {
+            modelJOIN.addRow(new Object[]{
+                f.getNomeFuncionario(),
+                f.getCodigoFicha()});
+        }//fim for
+    }
+    
     private void lerTabelaFichaMedicaPeloCodigo(int codigo_FichaMedica) {
         DefaultTableModel modelFichaMedica = (DefaultTableModel) jtFichaMedica.getModel();
         modelFichaMedica.setNumRows(0);
@@ -106,6 +224,23 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         }
     }
     
+    private void lerTabelaFuncionarioPeloCodigo(int codigo_funcionario) {
+        DefaultTableModel modelFuncionario = (DefaultTableModel) jtFuncionario.getModel();
+        modelFuncionario.setNumRows(0);
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+        for (Funcionario f : funcionarioDAO.lerPorCodigoFuncionario(codigo_funcionario)) {
+            modelFuncionario.addRow(new Object[]{
+                f.getCodigo_funcionario(),
+                f.getNome_funcionario(),
+                f.getCpf_funcionario(),
+                f.getRg_funcionario(),
+                f.getCodigo_funcao(),
+                f.getDataEntrada_funcionario(),
+                f.getTelefone_funcionario()
+            });
+        }
+    }
+    
     private void limparCamposTabelaFichaMedica(){
         tfCodAnimalFicha.setText("");
         tfNascimento.setText("");
@@ -124,6 +259,19 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         tfFamilia.setText("");
         tfGenero.setText("");
         tfEspecie.setText("");
+    }
+    
+    private void limparCamposTabelaFuncionario() {
+        tfFuncaoFuncionario.setText("");
+        tfNome.setText("");
+        tfCpfFuncionario.setText("");
+        tfRGFuncionario.setText("");
+        tfTelefoneFuncionario.setText("");
+    }
+    
+    private void limparCamposTabelaFuncao() {
+        tfDescricaoFuncao.setText("");
+        tfSalarioFuncao.setText("");
     }
 
     /**
@@ -182,9 +330,63 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         jbExcluirAnimal = new javax.swing.JButton();
         jlCodAnimal = new javax.swing.JLabel();
         tfCodAnimal = new javax.swing.JTextField();
+        jsResponsavel = new javax.swing.JScrollPane();
+        jtResponsavel = new javax.swing.JTable();
+        jbAtualizarResponsavel = new javax.swing.JButton();
         jpFuncionarios = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtFuncionario = new javax.swing.JTable();
+        jlNome = new javax.swing.JLabel();
+        tfNome = new javax.swing.JTextField();
+        jlCPF = new javax.swing.JLabel();
+        tfCpfFuncionario = new javax.swing.JTextField();
+        jlRG = new javax.swing.JLabel();
+        tfRGFuncionario = new javax.swing.JTextField();
+        jlFuncao = new javax.swing.JLabel();
+        tfFuncaoFuncionario = new javax.swing.JTextField();
+        jlTelefone = new javax.swing.JLabel();
+        tfTelefoneFuncionario = new javax.swing.JTextField();
+        jbInserirFuncionario = new javax.swing.JButton();
+        jbAtualizarFuncionario = new javax.swing.JButton();
+        jbExcluirFuncionario = new javax.swing.JButton();
+        jlCodigoFuncionario = new javax.swing.JLabel();
+        tfCodigoFuncionario = new javax.swing.JTextField();
+        jbPesquisarFuncionario = new javax.swing.JButton();
+        tfFuncionario_FichaMedica = new javax.swing.JTextField();
+        jlFuncionario_FichaMedica = new javax.swing.JLabel();
+        jbCadastraFuncionarioFicha = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jtFuncionarioFicha = new javax.swing.JTable();
         jpProcedimentos = new javax.swing.JPanel();
+        jtProcedimentos = new javax.swing.JScrollPane();
+        jtProcedimento = new javax.swing.JTable();
+        jlTipoProcedimentos = new javax.swing.JLabel();
+        jlQuantidade = new javax.swing.JLabel();
+        jlDataVencimento = new javax.swing.JLabel();
+        jlValorProcedimento = new javax.swing.JLabel();
+        tfProcedimentos_tipoProcedimentos = new javax.swing.JTextField();
+        tfProcedimentos_Quantidade = new javax.swing.JTextField();
+        tfProcedimentos_DataVencimento = new javax.swing.JTextField();
+        tfProcedimentos_Valor = new javax.swing.JTextField();
+        InserirProcedimentos = new javax.swing.JButton();
+        ExcluirProcedimentos = new javax.swing.JButton();
+        PesquisarProcedimentos = new javax.swing.JButton();
+        AtualizarProcedimentos = new javax.swing.JButton();
+        tfProcedimentos_Descricao = new javax.swing.JTextField();
+        jlDescricaoProcedimento = new javax.swing.JLabel();
         jpFornecedores = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtFuncao = new javax.swing.JTable();
+        jlDescricaoFuncao = new javax.swing.JLabel();
+        jlSalarioFuncao = new javax.swing.JLabel();
+        tfSalarioFuncao = new javax.swing.JTextField();
+        tfDescricaoFuncao = new javax.swing.JTextField();
+        jbInserirFuncao = new javax.swing.JButton();
+        jbAtualiza_Funcao = new javax.swing.JButton();
+        jbExcluir_Funcao = new javax.swing.JButton();
+        jbVerifica = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jtJOIN_Funcao = new javax.swing.JTable();
         btVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -299,7 +501,7 @@ public class ViewFichaMedica extends javax.swing.JFrame {
                             .addComponent(jbPesquisarFicha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jbAtualizarFicha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(spFichaMedica, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1089, Short.MAX_VALUE))
+                    .addComponent(spFichaMedica, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpFichaMedicaLayout.setVerticalGroup(
@@ -415,6 +617,24 @@ public class ViewFichaMedica extends javax.swing.JFrame {
 
         jlCodAnimal.setText("Código do Animal");
 
+        jtResponsavel.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Responsável", "Animal", "Cód Animal"
+            }
+        ));
+        jsResponsavel.setViewportView(jtResponsavel);
+
+        jbAtualizarResponsavel.setText("Atualizar");
+        jbAtualizarResponsavel.setToolTipText("Atualiza a tabela de Responsáveis por animais acima");
+        jbAtualizarResponsavel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAtualizarResponsavelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpAnimaisLayout = new javax.swing.GroupLayout(jpAnimais);
         jpAnimais.setLayout(jpAnimaisLayout);
         jpAnimaisLayout.setHorizontalGroup(
@@ -422,24 +642,31 @@ public class ViewFichaMedica extends javax.swing.JFrame {
             .addGroup(jpAnimaisLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(spAnimal, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE)
                     .addGroup(jpAnimaisLayout.createSequentialGroup()
                         .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jpAnimaisLayout.createSequentialGroup()
-                                    .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jlFamilia, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jlOrdem))
-                                    .addGap(22, 22, 22)
-                                    .addComponent(tfFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jpAnimaisLayout.createSequentialGroup()
-                                    .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jlSubFilo, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jlClasse, javax.swing.GroupLayout.Alignment.LEADING))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(tfOrdem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-                                        .addComponent(tfClasse, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(tfSubFilo, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addGroup(jpAnimaisLayout.createSequentialGroup()
+                                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jpAnimaisLayout.createSequentialGroup()
+                                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jlFamilia, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jlOrdem))
+                                        .addGap(22, 22, 22)
+                                        .addComponent(tfFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jpAnimaisLayout.createSequentialGroup()
+                                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jlSubFilo, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jlClasse, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(tfOrdem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                                            .addComponent(tfClasse, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(tfSubFilo, javax.swing.GroupLayout.Alignment.TRAILING))))
+                                .addGap(18, 18, 18)
+                                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jbExcluirAnimal)
+                                    .addComponent(jbInserirAnimal)
+                                    .addComponent(jbAtualizarAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jpAnimaisLayout.createSequentialGroup()
                                 .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jlReino)
@@ -447,28 +674,31 @@ public class ViewFichaMedica extends javax.swing.JFrame {
                                 .addGap(27, 27, 27)
                                 .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(tfReino)
-                                    .addComponent(tfFilo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                                    .addComponent(tfFilo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlEspecie)
+                                    .addComponent(jlGenero))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jpAnimaisLayout.createSequentialGroup()
+                                        .addComponent(jlCodAnimal)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(tfCodAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jpAnimaisLayout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jbPesquisarAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(61, 61, 61)
                         .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlEspecie)
-                            .addComponent(jlGenero))
-                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(65, 65, 65)
-                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jbExcluirAnimal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbInserirAnimal))
-                        .addGap(36, 36, 36)
-                        .addComponent(jlCodAnimal)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfCodAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jbAtualizarAnimal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbPesquisarAnimal, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
-                        .addGap(0, 383, Short.MAX_VALUE))
-                    .addComponent(spAnimal, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(jsResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jpAnimaisLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jbAtualizarResponsavel)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jpAnimaisLayout.setVerticalGroup(
@@ -477,92 +707,507 @@ public class ViewFichaMedica extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(spAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jpAnimaisLayout.createSequentialGroup()
-                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlGenero)
-                            .addComponent(tfGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpAnimaisLayout.createSequentialGroup()
+                                .addComponent(jlGenero)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                                .addComponent(jbInserirAnimal)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbExcluirAnimal))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpAnimaisLayout.createSequentialGroup()
+                                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(tfGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jlCodAnimal)
+                                    .addComponent(tfCodAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(tfEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jlEspecie)
+                                    .addComponent(jbPesquisarAnimal))
+                                .addGap(73, 73, 73)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlEspecie)
-                            .addComponent(tfEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jpAnimaisLayout.createSequentialGroup()
-                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbInserirAnimal)
-                            .addComponent(jlCodAnimal)
-                            .addComponent(tfCodAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbPesquisarAnimal))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbAtualizarAnimal)
-                            .addComponent(jbExcluirAnimal)))
-                    .addGroup(jpAnimaisLayout.createSequentialGroup()
-                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlReino)
-                            .addComponent(tfReino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlFilo)
-                            .addComponent(tfFilo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(1, 1, 1)
-                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlSubFilo)
-                    .addComponent(tfSubFilo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfClasse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlClasse))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlOrdem)
-                    .addComponent(tfOrdem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
-                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlFamilia)
-                    .addComponent(tfFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addComponent(jbAtualizarAnimal)
+                        .addGap(25, 25, 25))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpAnimaisLayout.createSequentialGroup()
+                        .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpAnimaisLayout.createSequentialGroup()
+                                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jlReino)
+                                    .addComponent(tfReino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jlFilo)
+                                    .addComponent(tfFilo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(7, 7, 7)
+                                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jlSubFilo)
+                                    .addComponent(tfSubFilo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(9, 9, 9)
+                                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(tfClasse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jlClasse))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jlOrdem)
+                                    .addComponent(tfOrdem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(4, 4, 4)
+                                .addGroup(jpAnimaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jlFamilia)
+                                    .addComponent(tfFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpAnimaisLayout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(jsResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbAtualizarResponsavel)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         tpSistemaFichaMedica.addTab("Cadastro de Animais", jpAnimais);
+
+        jtFuncionario.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código", "Nome", "CPF", "RG", "Função", "Data de Entrada", "Telefone"
+            }
+        ));
+        jtFuncionario.setCellSelectionEnabled(true);
+        jtFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtFuncionarioMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtFuncionario);
+
+        jlNome.setText("Nome");
+
+        jlCPF.setText("CPF");
+
+        jlRG.setText("RG");
+
+        jlFuncao.setText("Função");
+
+        jlTelefone.setText("Telefone");
+
+        tfTelefoneFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfTelefoneFuncionarioActionPerformed(evt);
+            }
+        });
+
+        jbInserirFuncionario.setText("Inserir");
+        jbInserirFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbInserirFuncionarioActionPerformed(evt);
+            }
+        });
+
+        jbAtualizarFuncionario.setText("Atualizar");
+        jbAtualizarFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAtualizarFuncionarioActionPerformed(evt);
+            }
+        });
+
+        jbExcluirFuncionario.setText("Excluir");
+        jbExcluirFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExcluirFuncionarioActionPerformed(evt);
+            }
+        });
+
+        jlCodigoFuncionario.setText("Código do Funcionário");
+
+        jbPesquisarFuncionario.setText("Pesquisar");
+        jbPesquisarFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbPesquisarFuncionarioActionPerformed(evt);
+            }
+        });
+
+        jlFuncionario_FichaMedica.setText("Ficha Médica");
+
+        jbCadastraFuncionarioFicha.setText("Cadastrar Ficha para Funcionário");
+        jbCadastraFuncionarioFicha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCadastraFuncionarioFichaActionPerformed(evt);
+            }
+        });
+
+        jtFuncionarioFicha.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Funcionário", "Ficha"
+            }
+        ));
+        jScrollPane4.setViewportView(jtFuncionarioFicha);
 
         javax.swing.GroupLayout jpFuncionariosLayout = new javax.swing.GroupLayout(jpFuncionarios);
         jpFuncionarios.setLayout(jpFuncionariosLayout);
         jpFuncionariosLayout.setHorizontalGroup(
             jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1109, Short.MAX_VALUE)
+            .addGroup(jpFuncionariosLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(161, Short.MAX_VALUE))
+            .addGroup(jpFuncionariosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpFuncionariosLayout.createSequentialGroup()
+                        .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpFuncionariosLayout.createSequentialGroup()
+                                .addComponent(jlCPF)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tfCpfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jpFuncionariosLayout.createSequentialGroup()
+                                    .addComponent(jlNome)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jpFuncionariosLayout.createSequentialGroup()
+                                    .addComponent(jlRG)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(tfRGFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpFuncionariosLayout.createSequentialGroup()
+                                .addComponent(jbInserirFuncionario)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbExcluirFuncionario))
+                            .addComponent(jbAtualizarFuncionario)))
+                    .addGroup(jpFuncionariosLayout.createSequentialGroup()
+                        .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpFuncionariosLayout.createSequentialGroup()
+                                .addComponent(jlFuncao)
+                                .addGap(11, 11, 11))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpFuncionariosLayout.createSequentialGroup()
+                                .addComponent(jlTelefone)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfFuncaoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfTelefoneFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpFuncionariosLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jlCodigoFuncionario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfCodigoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbPesquisarFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpFuncionariosLayout.createSequentialGroup()
+                            .addComponent(jlFuncionario_FichaMedica)
+                            .addGap(18, 18, 18)
+                            .addComponent(tfFuncionario_FichaMedica, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jbCadastraFuncionarioFicha, javax.swing.GroupLayout.Alignment.TRAILING)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpFuncionariosLayout.setVerticalGroup(
             jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 422, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpFuncionariosLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlNome)
+                    .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbInserirFuncionario)
+                    .addComponent(jbExcluirFuncionario)
+                    .addComponent(jlCodigoFuncionario)
+                    .addComponent(tfCodigoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbPesquisarFuncionario))
+                .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpFuncionariosLayout.createSequentialGroup()
+                        .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpFuncionariosLayout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(tfCpfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jlCPF))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jlRG)
+                                    .addComponent(tfRGFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jpFuncionariosLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbAtualizarFuncionario)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfFuncaoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlFuncao))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlTelefone)
+                            .addComponent(tfTelefoneFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jpFuncionariosLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jpFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfFuncionario_FichaMedica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlFuncionario_FichaMedica))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbCadastraFuncionarioFicha)))
+                .addGap(41, 41, 41))
         );
 
         tpSistemaFichaMedica.addTab("Cadastro de Funcionários", jpFuncionarios);
+
+        jtProcedimento.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código", "Tipo", "Descrição", "Quantidade", "Data de Vencimento", "Valor"
+            }
+        ));
+        jtProcedimento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtProcedimentoMouseClicked(evt);
+            }
+        });
+        jtProcedimento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtProcedimentoKeyReleased(evt);
+            }
+        });
+        jtProcedimentos.setViewportView(jtProcedimento);
+
+        jlTipoProcedimentos.setText("Tipo de Procedimento:");
+
+        jlQuantidade.setText("Quantidade:");
+
+        jlDataVencimento.setText("Data de Vencimento:");
+
+        jlValorProcedimento.setText("Valor:");
+
+        tfProcedimentos_Quantidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfProcedimentos_QuantidadeActionPerformed(evt);
+            }
+        });
+
+        InserirProcedimentos.setText("Inserir");
+        InserirProcedimentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InserirProcedimentosActionPerformed(evt);
+            }
+        });
+
+        ExcluirProcedimentos.setText("Excluir");
+        ExcluirProcedimentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExcluirProcedimentosActionPerformed(evt);
+            }
+        });
+
+        PesquisarProcedimentos.setText("Pesquisar");
+        PesquisarProcedimentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PesquisarProcedimentosActionPerformed(evt);
+            }
+        });
+
+        AtualizarProcedimentos.setText("Atualizar");
+
+        tfProcedimentos_Descricao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfProcedimentos_DescricaoActionPerformed(evt);
+            }
+        });
+
+        jlDescricaoProcedimento.setText("Descrição:");
 
         javax.swing.GroupLayout jpProcedimentosLayout = new javax.swing.GroupLayout(jpProcedimentos);
         jpProcedimentos.setLayout(jpProcedimentosLayout);
         jpProcedimentosLayout.setHorizontalGroup(
             jpProcedimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1109, Short.MAX_VALUE)
+            .addComponent(jtProcedimentos)
+            .addGroup(jpProcedimentosLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jpProcedimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlTipoProcedimentos)
+                    .addComponent(jlQuantidade)
+                    .addComponent(jlValorProcedimento)
+                    .addComponent(jlDataVencimento))
+                .addGap(18, 18, 18)
+                .addGroup(jpProcedimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tfProcedimentos_tipoProcedimentos)
+                    .addComponent(tfProcedimentos_Quantidade)
+                    .addComponent(tfProcedimentos_Valor)
+                    .addComponent(tfProcedimentos_DataVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jpProcedimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpProcedimentosLayout.createSequentialGroup()
+                        .addComponent(InserirProcedimentos)
+                        .addGap(18, 18, 18)
+                        .addComponent(ExcluirProcedimentos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(PesquisarProcedimentos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(AtualizarProcedimentos))
+                    .addComponent(jlDescricaoProcedimento)
+                    .addComponent(tfProcedimentos_Descricao, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(382, Short.MAX_VALUE))
         );
         jpProcedimentosLayout.setVerticalGroup(
             jpProcedimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 422, Short.MAX_VALUE)
+            .addGroup(jpProcedimentosLayout.createSequentialGroup()
+                .addComponent(jtProcedimentos, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jlDescricaoProcedimento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpProcedimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jpProcedimentosLayout.createSequentialGroup()
+                        .addGroup(jpProcedimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlTipoProcedimentos)
+                            .addComponent(tfProcedimentos_tipoProcedimentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jpProcedimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlQuantidade)
+                            .addComponent(tfProcedimentos_Quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jpProcedimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlDataVencimento)
+                            .addComponent(tfProcedimentos_DataVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(13, 13, 13)
+                        .addGroup(jpProcedimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfProcedimentos_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlValorProcedimento)))
+                    .addComponent(tfProcedimentos_Descricao))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpProcedimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ExcluirProcedimentos)
+                    .addComponent(InserirProcedimentos)
+                    .addComponent(PesquisarProcedimentos)
+                    .addComponent(AtualizarProcedimentos))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         tpSistemaFichaMedica.addTab("Procedimentos", jpProcedimentos);
+
+        jtFuncao.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código da Função", "Nome da Função", "Salário da Função"
+            }
+        ));
+        jtFuncao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtFuncaoMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jtFuncao);
+
+        jlDescricaoFuncao.setText("Função");
+
+        jlSalarioFuncao.setText("Salário");
+
+        jbInserirFuncao.setText("Inserir");
+        jbInserirFuncao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbInserirFuncaoActionPerformed(evt);
+            }
+        });
+
+        jbAtualiza_Funcao.setText("Atualizar");
+        jbAtualiza_Funcao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAtualiza_FuncaoActionPerformed(evt);
+            }
+        });
+
+        jbExcluir_Funcao.setText("Excluir");
+        jbExcluir_Funcao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExcluir_FuncaoActionPerformed(evt);
+            }
+        });
+
+        jbVerifica.setText("Verifica");
+        jbVerifica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbVerificaActionPerformed(evt);
+            }
+        });
+
+        jtJOIN_Funcao.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Funcionário", "Salário"
+            }
+        ));
+        jScrollPane3.setViewportView(jtJOIN_Funcao);
 
         javax.swing.GroupLayout jpFornecedoresLayout = new javax.swing.GroupLayout(jpFornecedores);
         jpFornecedores.setLayout(jpFornecedoresLayout);
         jpFornecedoresLayout.setHorizontalGroup(
             jpFornecedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1109, Short.MAX_VALUE)
+            .addComponent(jScrollPane2)
+            .addGroup(jpFornecedoresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpFornecedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jpFornecedoresLayout.createSequentialGroup()
+                        .addComponent(jlDescricaoFuncao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tfDescricaoFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpFornecedoresLayout.createSequentialGroup()
+                        .addComponent(jlSalarioFuncao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tfSalarioFuncao)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpFornecedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpFornecedoresLayout.createSequentialGroup()
+                        .addComponent(jbExcluir_Funcao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(145, 145, 145))
+                    .addGroup(jpFornecedoresLayout.createSequentialGroup()
+                        .addComponent(jbInserirFuncao)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbAtualiza_Funcao, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 346, Short.MAX_VALUE)
+                        .addComponent(jbVerifica)
+                        .addGap(261, 261, 261))))
         );
         jpFornecedoresLayout.setVerticalGroup(
             jpFornecedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 422, Short.MAX_VALUE)
+            .addGroup(jpFornecedoresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jpFornecedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpFornecedoresLayout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(jpFornecedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlDescricaoFuncao)
+                            .addComponent(tfDescricaoFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbInserirFuncao)
+                            .addComponent(jbAtualiza_Funcao)))
+                    .addGroup(jpFornecedoresLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jbVerifica)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpFornecedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpFornecedoresLayout.createSequentialGroup()
+                        .addGroup(jpFornecedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlSalarioFuncao)
+                            .addComponent(tfSalarioFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbExcluir_Funcao))
+                        .addGap(0, 91, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
 
-        tpSistemaFichaMedica.addTab("Fornecedores", jpFornecedores);
+        tpSistemaFichaMedica.addTab("Função", jpFornecedores);
 
         btVoltar.setText("Voltar");
         btVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -575,7 +1220,7 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tpSistemaFichaMedica)
+            .addComponent(tpSistemaFichaMedica, javax.swing.GroupLayout.DEFAULT_SIZE, 1013, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btVoltar)
@@ -587,7 +1232,7 @@ public class ViewFichaMedica extends javax.swing.JFrame {
                 .addComponent(tpSistemaFichaMedica, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btVoltar)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -792,6 +1437,267 @@ public class ViewFichaMedica extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbExcluirAnimalActionPerformed
 
+    private void jbAtualizarResponsavelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtualizarResponsavelActionPerformed
+        lerTabelaResponsavel();
+    }//GEN-LAST:event_jbAtualizarResponsavelActionPerformed
+
+    private void jtFuncaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtFuncaoMouseClicked
+        try {
+            tfDescricaoFuncao.setText(jtFuncao.getValueAt(jtFuncao.getSelectedRow(), 1).toString());
+            tfSalarioFuncao.setText(jtFuncao.getValueAt(jtFuncao.getSelectedRow(), 2).toString());
+
+        } catch (Exception e) {
+        }
+
+    }//GEN-LAST:event_jtFuncaoMouseClicked
+
+    private void jbInserirFuncaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInserirFuncaoActionPerformed
+        if (evt.getSource() == jbInserirFuncao) {
+            Funcao funcao = new Funcao();
+            FuncaoDAO funcaoDAO = new FuncaoDAO();
+
+            funcao.setDescricao_funcao(tfDescricaoFuncao.getText());
+            double salario = Double.parseDouble(tfSalarioFuncao.getText());
+            funcao.setSalario_funcao(salario);
+            funcaoDAO.salvar(funcao);
+            
+            lerTabelaFuncao();
+
+        }
+    }//GEN-LAST:event_jbInserirFuncaoActionPerformed
+
+    private void jbAtualiza_FuncaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtualiza_FuncaoActionPerformed
+        try {
+            //selecionar ficha com modificações
+            Funcao funcao = new Funcao(
+                Integer.parseInt(jtFuncao.getValueAt(jtFuncao.getSelectedRow(), 0).toString()),//Codigo_Funcao
+                tfDescricaoFuncao.getText(),
+                Double.parseDouble(tfSalarioFuncao.getText())
+            );
+
+            //alterar no banco
+            FuncaoDAO.atualizar(funcao);
+            //Mensagensinha
+            JOptionPane.showMessageDialog(null, "Atualizado.");
+            //atualiza a tabela no frame
+            lerTabelaFuncao();
+        } catch (IndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(null, "Selecione uma ficha na tabela", null, JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jbAtualiza_FuncaoActionPerformed
+
+    private void jbExcluir_FuncaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluir_FuncaoActionPerformed
+        if (evt.getSource() == jbExcluir_Funcao) {
+            try {
+                Funcao funcao = new Funcao();
+                FuncaoDAO funcaoDAO = new FuncaoDAO();
+
+                funcao.setCodigo_funcao(
+                    (int) jtFuncao.getValueAt(
+                        jtFuncao.getSelectedRow(), 0
+                    )
+                );
+                funcaoDAO.excluirFuncao(funcao);
+
+                limparCamposTabelaFuncao();
+
+                lerTabelaFuncao();
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }//GEN-LAST:event_jbExcluir_FuncaoActionPerformed
+
+    private void jbVerificaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVerificaActionPerformed
+
+        lerTabelaJOIN();
+
+    }//GEN-LAST:event_jbVerificaActionPerformed
+
+    private void jtProcedimentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtProcedimentoMouseClicked
+        if(jtProcedimento.getSelectedRow() != -1){
+            tfProcedimentos_tipoProcedimentos.setText(jtProcedimento.getValueAt(jtProcedimento.getSelectedRow(),1).toString());
+            tfProcedimentos_Descricao.setText(jtProcedimento.getValueAt(jtProcedimento.getSelectedRow(),2).toString());
+            tfProcedimentos_Quantidade.setText(jtProcedimento.getValueAt(jtProcedimento.getSelectedRow(),1).toString());
+            tfProcedimentos_DataVencimento.setText(jtProcedimento.getValueAt(jtProcedimento.getSelectedRow(),1).toString());
+            tfProcedimentos_Valor.setText(jtProcedimento.getValueAt(jtProcedimento.getSelectedRow(),1).toString());
+
+        }
+    }//GEN-LAST:event_jtProcedimentoMouseClicked
+
+    private void jtProcedimentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtProcedimentoKeyReleased
+        if(jtProcedimento.getSelectedRow() != -1){
+            tfProcedimentos_tipoProcedimentos.setText(jtProcedimento.getValueAt(jtProcedimento.getSelectedRow(),1).toString());
+            tfProcedimentos_Descricao.setText(jtProcedimento.getValueAt(jtProcedimento.getSelectedRow(),2).toString());
+            tfProcedimentos_Quantidade.setText(jtProcedimento.getValueAt(jtProcedimento.getSelectedRow(),1).toString());
+            tfProcedimentos_DataVencimento.setText(jtProcedimento.getValueAt(jtProcedimento.getSelectedRow(),1).toString());
+            tfProcedimentos_Valor.setText(jtProcedimento.getValueAt(jtProcedimento.getSelectedRow(),1).toString());
+        }
+    }//GEN-LAST:event_jtProcedimentoKeyReleased
+
+    private void tfProcedimentos_QuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfProcedimentos_QuantidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfProcedimentos_QuantidadeActionPerformed
+
+    private void InserirProcedimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InserirProcedimentosActionPerformed
+
+        Procedimentos pro = new Procedimentos();
+        ProcedimentosDAO proDAO = new ProcedimentosDAO();
+
+        pro.setCodigo_TipoProcedimentos(Integer.parseInt(tfProcedimentos_tipoProcedimentos.getText()));
+        pro.setDescricao(tfProcedimentos_Descricao.getText());
+        pro.setQuantidade(Integer.parseInt(tfProcedimentos_Quantidade.getText()));
+        pro.setData_Vencimento(tfProcedimentos_DataVencimento.getText());
+        pro.setValor(Double.parseDouble(tfProcedimentos_Valor.getText()));
+
+        proDAO.inserir(pro);
+
+        lerTabelaProcedimento();
+    }//GEN-LAST:event_InserirProcedimentosActionPerformed
+
+    private void ExcluirProcedimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirProcedimentosActionPerformed
+        if (jtProcedimento.getSelectedRow() != -1) {
+            Procedimentos pro = new Procedimentos();
+            ProcedimentosDAO proDAO = new ProcedimentosDAO();
+
+            pro.setCodigo_Procedimentos((int)jtProcedimento.getValueAt(jtProcedimento.getSelectedRow(), 0));
+            proDAO.excluir(pro);
+
+            lerTabelaProcedimento();
+
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecine um procedimento!");
+        }
+    }//GEN-LAST:event_ExcluirProcedimentosActionPerformed
+
+    private void PesquisarProcedimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarProcedimentosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PesquisarProcedimentosActionPerformed
+
+    private void tfProcedimentos_DescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfProcedimentos_DescricaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfProcedimentos_DescricaoActionPerformed
+
+    private void jtFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtFuncionarioMouseClicked
+        try {
+
+            tfNome.setText(jtFuncionario.getValueAt(jtFuncionario.getSelectedRow(), 1).toString());
+            tfCpfFuncionario.setText(jtFuncionario.getValueAt(jtFuncionario.getSelectedRow(), 2).toString());
+            tfRGFuncionario.setText(jtFuncionario.getValueAt(jtFuncionario.getSelectedRow(), 3).toString());
+            tfFuncaoFuncionario.setText(jtFuncionario.getValueAt(jtFuncionario.getSelectedRow(), 4).toString());
+            tfTelefoneFuncionario.setText(jtFuncionario.getValueAt(jtFuncionario.getSelectedRow(), 6).toString());
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jtFuncionarioMouseClicked
+
+    private void tfTelefoneFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTelefoneFuncionarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfTelefoneFuncionarioActionPerformed
+
+    private void jbInserirFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInserirFuncionarioActionPerformed
+        if (evt.getSource() == jbInserirFuncionario) {
+            Funcionario funcionario = new Funcionario();
+            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+
+            int cf = Integer.parseInt(tfFuncaoFuncionario.getText());
+            funcionario.setCodigo_funcao(cf);
+            funcionario.setNome_funcionario(tfNome.getText());
+            funcionario.setCpf_funcionario(tfCpfFuncionario.getText());
+            int rg = Integer.parseInt(tfRGFuncionario.getText());
+            funcionario.setRg_funcionario(rg);
+            funcionario.setTelefone_funcionario(tfTelefoneFuncionario.getText());
+            java.util.Date dt = new java.util.Date();
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String currentTime = sdf.format(dt);
+
+            funcionario.setDataEntrada_funcionario(currentTime);
+
+            funcionarioDAO.salvar(funcionario);
+            
+            lerTabelaFuncionario();
+
+        }
+    }//GEN-LAST:event_jbInserirFuncionarioActionPerformed
+
+    private void jbAtualizarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtualizarFuncionarioActionPerformed
+        try {
+
+            Funcionario funcionario = new Funcionario(
+                Integer.parseInt(jtFuncionario.getValueAt(jtFuncionario.getSelectedRow(), 0).toString()),//Codigo_FichaMedica
+                tfNome.getText(),
+                tfCpfFuncionario.getText(),
+                Integer.parseInt(tfRGFuncionario.getText()),
+                Integer.parseInt(tfFuncaoFuncionario.getText()),
+                tfTelefoneFuncionario.getText()
+            );
+            //alterar no banco
+            FuncionarioDAO.atualizar(funcionario);
+            //Mensagensinha
+            JOptionPane.showMessageDialog(null, "Atualizado.");
+            //atualiza a tabela no frame
+            lerTabelaFuncionario();
+        } catch (IndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(null, "Selecione uma ficha na tabela", null, JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jbAtualizarFuncionarioActionPerformed
+
+    private void jbExcluirFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirFuncionarioActionPerformed
+        try {
+            Funcionario funcionario = new Funcionario();
+            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+
+            funcionario.setCodigo_funcionario(
+                (int) jtFuncionario.getValueAt(
+                    jtFuncionario.getSelectedRow(), 0
+                )
+            );
+            funcionarioDAO.excluir(funcionario);
+
+            limparCamposTabelaFuncionario();
+
+            lerTabelaFuncionario();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jbExcluirFuncionarioActionPerformed
+
+    private void jbPesquisarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisarFuncionarioActionPerformed
+        try {
+            //Cria os objetos da ficha a ser buscada
+            Funcionario funcionario = new Funcionario();
+            //Pega o código digitado para busca
+            funcionario.setCodigo_funcionario(Integer.parseInt(tfCodigoFuncionario.getText()));
+            lerTabelaFuncionarioPeloCodigo(funcionario.getCodigo_funcionario());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jbPesquisarFuncionarioActionPerformed
+
+    private void jbCadastraFuncionarioFichaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastraFuncionarioFichaActionPerformed
+        if (evt.getSource() == jbCadastraFuncionarioFicha) {
+            Funcionario_FichaMedica ficha = new Funcionario_FichaMedica();
+            Funcionario_FichaMedicaDAO fichaDAO = new Funcionario_FichaMedicaDAO();
+
+            int cf = Integer.parseInt(tfFuncionario_FichaMedica.getText());
+            ficha.setCodigo_fichaMedica(cf);
+
+            int rg = Integer.parseInt(tfCodigoFuncionario.getText());
+            ficha.setCodigo_funcionario(rg);
+
+            fichaDAO.gravar(ficha);
+            
+            lerTabelaFuncionarioFicha();
+        }
+    }//GEN-LAST:event_jbCadastraFuncionarioFichaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -831,39 +1737,79 @@ public class ViewFichaMedica extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AtualizarProcedimentos;
+    private javax.swing.JButton ExcluirProcedimentos;
+    private javax.swing.JButton InserirProcedimentos;
+    private javax.swing.JButton PesquisarProcedimentos;
     private javax.swing.JButton btVoltar;
     private javax.swing.JComboBox cbEstadoSaude;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JButton jbAtualiza_Funcao;
     private javax.swing.JButton jbAtualizarAnimal;
     private javax.swing.JButton jbAtualizarFicha;
+    private javax.swing.JButton jbAtualizarFuncionario;
+    private javax.swing.JButton jbAtualizarResponsavel;
+    private javax.swing.JButton jbCadastraFuncionarioFicha;
     private javax.swing.JButton jbExcluirAnimal;
     private javax.swing.JButton jbExcluirFicha;
+    private javax.swing.JButton jbExcluirFuncionario;
+    private javax.swing.JButton jbExcluir_Funcao;
     private javax.swing.JButton jbInserirAnimal;
     private javax.swing.JButton jbInserirFicha;
+    private javax.swing.JButton jbInserirFuncao;
+    private javax.swing.JButton jbInserirFuncionario;
     private javax.swing.JButton jbPesquisarAnimal;
     private javax.swing.JButton jbPesquisarFicha;
+    private javax.swing.JButton jbPesquisarFuncionario;
+    private javax.swing.JButton jbVerifica;
     private javax.swing.JLabel jlAltura;
+    private javax.swing.JLabel jlCPF;
     private javax.swing.JLabel jlClasse;
     private javax.swing.JLabel jlCodAnimal;
     private javax.swing.JLabel jlCodAnimalFicha;
     private javax.swing.JLabel jlCodFicha;
+    private javax.swing.JLabel jlCodigoFuncionario;
+    private javax.swing.JLabel jlDataVencimento;
+    private javax.swing.JLabel jlDescricaoFuncao;
+    private javax.swing.JLabel jlDescricaoProcedimento;
     private javax.swing.JLabel jlEntrada;
     private javax.swing.JLabel jlEspecie;
     private javax.swing.JLabel jlEstadoSaude;
     private javax.swing.JLabel jlFamilia;
     private javax.swing.JLabel jlFilo;
+    private javax.swing.JLabel jlFuncao;
+    private javax.swing.JLabel jlFuncionario_FichaMedica;
     private javax.swing.JLabel jlGenero;
     private javax.swing.JLabel jlNascimento;
+    private javax.swing.JLabel jlNome;
     private javax.swing.JLabel jlOrdem;
     private javax.swing.JLabel jlPeso;
+    private javax.swing.JLabel jlQuantidade;
+    private javax.swing.JLabel jlRG;
     private javax.swing.JLabel jlReino;
+    private javax.swing.JLabel jlSalarioFuncao;
     private javax.swing.JLabel jlSubFilo;
+    private javax.swing.JLabel jlTelefone;
+    private javax.swing.JLabel jlTipoProcedimentos;
+    private javax.swing.JLabel jlValorProcedimento;
     private javax.swing.JPanel jpAnimais;
     private javax.swing.JPanel jpFichaMedica;
     private javax.swing.JPanel jpFornecedores;
     private javax.swing.JPanel jpFuncionarios;
     private javax.swing.JPanel jpProcedimentos;
+    private javax.swing.JScrollPane jsResponsavel;
     private javax.swing.JTable jtAnimal;
     private javax.swing.JTable jtFichaMedica;
+    private javax.swing.JTable jtFuncao;
+    private javax.swing.JTable jtFuncionario;
+    private javax.swing.JTable jtFuncionarioFicha;
+    private javax.swing.JTable jtJOIN_Funcao;
+    private javax.swing.JTable jtProcedimento;
+    private javax.swing.JScrollPane jtProcedimentos;
+    private javax.swing.JTable jtResponsavel;
     private javax.swing.JScrollPane spAnimal;
     private javax.swing.JScrollPane spFichaMedica;
     private javax.swing.JTextField tfAltura;
@@ -871,16 +1817,30 @@ public class ViewFichaMedica extends javax.swing.JFrame {
     private javax.swing.JTextField tfCodAnimal;
     private javax.swing.JTextField tfCodAnimalFicha;
     private javax.swing.JTextField tfCodFicha;
+    private javax.swing.JTextField tfCodigoFuncionario;
+    private javax.swing.JTextField tfCpfFuncionario;
+    private javax.swing.JTextField tfDescricaoFuncao;
     private javax.swing.JTextField tfEntrada;
     private javax.swing.JTextField tfEspecie;
     private javax.swing.JTextField tfFamilia;
     private javax.swing.JTextField tfFilo;
+    private javax.swing.JTextField tfFuncaoFuncionario;
+    private javax.swing.JTextField tfFuncionario_FichaMedica;
     private javax.swing.JTextField tfGenero;
     private javax.swing.JTextField tfNascimento;
+    private javax.swing.JTextField tfNome;
     private javax.swing.JTextField tfOrdem;
     private javax.swing.JTextField tfPeso;
+    private javax.swing.JTextField tfProcedimentos_DataVencimento;
+    private javax.swing.JTextField tfProcedimentos_Descricao;
+    private javax.swing.JTextField tfProcedimentos_Quantidade;
+    private javax.swing.JTextField tfProcedimentos_Valor;
+    private javax.swing.JTextField tfProcedimentos_tipoProcedimentos;
+    private javax.swing.JTextField tfRGFuncionario;
     private javax.swing.JTextField tfReino;
+    private javax.swing.JTextField tfSalarioFuncao;
     private javax.swing.JTextField tfSubFilo;
+    private javax.swing.JTextField tfTelefoneFuncionario;
     private javax.swing.JTabbedPane tpSistemaFichaMedica;
     // End of variables declaration//GEN-END:variables
 

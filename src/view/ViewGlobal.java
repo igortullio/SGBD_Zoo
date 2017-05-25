@@ -892,6 +892,7 @@ public class ViewGlobal extends javax.swing.JFrame {
             tfFechaComanda_NumeroComanda.setText("");
             
             leTabelaComandasAbertas();
+            leJoin();
         
         } else {
             JOptionPane.showMessageDialog(null, "Selecione uma comanda.");

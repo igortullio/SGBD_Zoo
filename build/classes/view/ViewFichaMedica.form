@@ -27,7 +27,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="tpSistemaFichaMedica" alignment="0" max="32767" attributes="0"/>
+          <Component id="tpSistemaFichaMedica" alignment="0" pref="1013" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Component id="btVoltar" min="-2" max="-2" attributes="0"/>
@@ -41,7 +41,7 @@
               <Component id="tpSistemaFichaMedica" min="-2" pref="420" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btVoltar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -87,21 +87,21 @@
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jlNascimento" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jlCodAnimal" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jlCodAnimalFicha" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jlEntrada" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="tfEntrada" min="-2" pref="95" max="-2" attributes="0"/>
-                                          <Component id="tfCodAnimal" min="-2" pref="50" max="-2" attributes="0"/>
+                                          <Component id="tfCodAnimalFicha" min="-2" pref="50" max="-2" attributes="0"/>
                                           <Component id="tfNascimento" min="-2" pref="95" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jbExcluir" max="32767" attributes="0"/>
-                                  <Component id="jbInserir" max="32767" attributes="0"/>
+                                  <Component id="jbExcluirFicha" max="32767" attributes="0"/>
+                                  <Component id="jbInserirFicha" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                               <Component id="jlCodFicha" min="-2" max="-2" attributes="0"/>
@@ -109,12 +109,12 @@
                               <Component id="tfCodFicha" min="-2" pref="40" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jbPesquisar" max="32767" attributes="0"/>
-                                  <Component id="jbAtualizar" max="32767" attributes="0"/>
+                                  <Component id="jbPesquisarFicha" max="32767" attributes="0"/>
+                                  <Component id="jbAtualizarFicha" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="spFichaMedica" alignment="1" pref="999" max="32767" attributes="0"/>
+                          <Component id="spFichaMedica" alignment="1" pref="988" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -129,8 +129,8 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jlCodAnimal" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tfCodAnimal" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jlCodAnimalFicha" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfCodAnimalFicha" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -155,15 +155,15 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jbInserir" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jbInserirFicha" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jlCodFicha" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="tfCodFicha" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jbPesquisar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jbPesquisarFicha" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jbAtualizar" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jbExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jbAtualizarFicha" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jbExcluirFicha" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -247,12 +247,12 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="jlCodAnimal">
+            <Component class="javax.swing.JLabel" name="jlCodAnimalFicha">
               <Properties>
                 <Property name="text" type="java.lang.String" value="C&#xf3;digo do Animal"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tfCodAnimal">
+            <Component class="javax.swing.JTextField" name="tfCodAnimalFicha">
             </Component>
             <Component class="javax.swing.JLabel" name="jlNascimento">
               <Properties>
@@ -301,40 +301,40 @@
             </Component>
             <Component class="javax.swing.JTextField" name="tfAltura">
             </Component>
-            <Component class="javax.swing.JButton" name="jbInserir">
+            <Component class="javax.swing.JButton" name="jbInserirFicha">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Inserir"/>
                 <Property name="toolTipText" type="java.lang.String" value="Digite dos dados nescess&#xe1;rios e clique para inserir no banco"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbInserirActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbInserirFichaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jbAtualizar">
+            <Component class="javax.swing.JButton" name="jbAtualizarFicha">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Atualizar"/>
-                <Property name="toolTipText" type="java.lang.String" value="Selecione uma ficha na tabela e clique para atualiza-la"/>
+                <Property name="toolTipText" type="java.lang.String" value="Selecione uma ficha na tabela e clique para atualizar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAtualizarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAtualizarFichaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jbPesquisar">
+            <Component class="javax.swing.JButton" name="jbPesquisarFicha">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pesquisar"/>
                 <Property name="toolTipText" type="java.lang.String" value="Pesquisa a ficha pelo c&#xf3;digo digitado"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbPesquisarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbPesquisarFichaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jbExcluir">
+            <Component class="javax.swing.JButton" name="jbExcluirFicha">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Excluir"/>
                 <Property name="toolTipText" type="java.lang.String" value="Selecione uma ficha na tabela e clique para excluir"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbExcluirActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbExcluirFichaActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jlCodFicha">
@@ -358,15 +358,406 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1019" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="spAnimal" alignment="0" pref="988" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jlFamilia" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jlOrdem" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                                              <Component id="tfFamilia" min="-2" pref="94" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Component id="jlSubFilo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jlClasse" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="tfOrdem" alignment="1" pref="94" max="32767" attributes="0"/>
+                                                  <Component id="tfClasse" alignment="1" max="32767" attributes="0"/>
+                                                  <Component id="tfSubFilo" alignment="1" max="32767" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jbExcluirAnimal" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jbInserirAnimal" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jbAtualizarAnimal" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jlReino" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jlFilo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="tfReino" max="32767" attributes="0"/>
+                                          <Component id="tfFilo" min="-2" pref="95" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jlEspecie" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jlGenero" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="tfGenero" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
+                                          <Component id="tfEspecie" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="jlCodAnimal" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="tfCodAnimal" min="-2" pref="40" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                                              <Component id="jbPesquisarAnimal" min="-2" pref="100" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jsResponsavel" min="-2" pref="318" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                                      <Component id="jbAtualizarResponsavel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="422" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="spAnimal" min="-2" pref="200" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jlGenero" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="62" max="32767" attributes="0"/>
+                                      <Component id="jbInserirAnimal" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jbExcluirAnimal" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="tfGenero" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jlCodAnimal" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfCodAnimal" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="tfEspecie" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jlEspecie" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jbPesquisarAnimal" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jbAtualizarAnimal" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jlReino" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfReino" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jlFilo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfFilo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jlSubFilo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfSubFilo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="tfClasse" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jlClasse" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jlOrdem" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfOrdem" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jlFamilia" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfFamilia" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                                      <Component id="jsResponsavel" min="-2" pref="128" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jbAtualizarResponsavel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JScrollPane" name="spAnimal">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="jtAnimal">
+                  <Properties>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="9" rowCount="0">
+                        <Column editable="true" title="C&#xf3;d Animal" type="java.lang.Object"/>
+                        <Column editable="true" title="Reino" type="java.lang.Object"/>
+                        <Column editable="true" title="Filo" type="java.lang.Object"/>
+                        <Column editable="true" title="Sub Filo" type="java.lang.Object"/>
+                        <Column editable="true" title="Classe" type="java.lang.Object"/>
+                        <Column editable="true" title="Ordem" type="java.lang.Object"/>
+                        <Column editable="true" title="Fam&#xed;lia" type="java.lang.Object"/>
+                        <Column editable="true" title="G&#xea;nero" type="java.lang.Object"/>
+                        <Column editable="true" title="Esp&#xe9;cie" type="java.lang.Object"/>
+                      </Table>
+                    </Property>
+                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                      <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                      </TableColumnModel>
+                    </Property>
+                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jtAnimalMouseClicked"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JLabel" name="jlFilo">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Filo"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfFilo">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlReino">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Reino"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfReino">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlClasse">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Classe"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfClasse">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlGenero">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="G&#xea;nero"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfGenero">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlEspecie">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Esp&#xe9;cie"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfEspecie">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlOrdem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ordem"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfOrdem">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlSubFilo">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Sub Filo"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfSubFilo">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlFamilia">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Familia"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfFamilia">
+            </Component>
+            <Component class="javax.swing.JButton" name="jbInserirAnimal">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Inserir"/>
+                <Property name="toolTipText" type="java.lang.String" value="Digite todos dados nescess&#xe1;rios e clique para inserir no banco"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbInserirAnimalActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbAtualizarAnimal">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Atualizar"/>
+                <Property name="toolTipText" type="java.lang.String" value="Selecione um animal na tabela e clique para atualizar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAtualizarAnimalActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbPesquisarAnimal">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Pesquisar"/>
+                <Property name="toolTipText" type="java.lang.String" value="Pesquisa o animal pelo c&#xf3;digo digitado"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbPesquisarAnimalActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbExcluirAnimal">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Excluir"/>
+                <Property name="toolTipText" type="java.lang.String" value="Selecione um animal na tabela e clique para excluir"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbExcluirAnimalActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlCodAnimal">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="C&#xf3;digo do Animal"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfCodAnimal">
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jsResponsavel">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="jtResponsavel">
+                  <Properties>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="3" rowCount="0">
+                        <Column editable="true" title="Respons&#xe1;vel" type="java.lang.Object"/>
+                        <Column editable="true" title="Animal" type="java.lang.Object"/>
+                        <Column editable="true" title="C&#xf3;d Animal" type="java.lang.Object"/>
+                      </Table>
+                    </Property>
+                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                      <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                      </TableColumnModel>
+                    </Property>
+                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JButton" name="jbAtualizarResponsavel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Atualizar"/>
+                <Property name="toolTipText" type="java.lang.String" value="Atualiza a tabela de Respons&#xe1;veis por animais acima"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAtualizarResponsavelActionPerformed"/>
+              </Events>
+            </Component>
+          </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jpFuncionarios">
           <Constraints>
@@ -380,15 +771,289 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1019" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jScrollPane1" pref="601" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane4" min="-2" pref="240" max="-2" attributes="0"/>
+                      <EmptySpace pref="161" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jlCPF" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="tfCpfFuncionario" min="-2" pref="147" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jlNome" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="tfNome" min="-2" pref="149" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jlRG" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="tfRGFuncionario" min="-2" pref="84" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jbInserirFuncionario" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jbExcluirFuncionario" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jbAtualizarFuncionario" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jlFuncao" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jlTelefone" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="tfFuncaoFuncionario" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
+                                  <Component id="tfTelefoneFuncionario" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                              <Component id="jlCodigoFuncionario" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="tfCodigoFuncionario" min="-2" pref="66" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jbPesquisarFuncionario" min="-2" pref="111" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="jlFuncionario_FichaMedica" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="tfFuncionario_FichaMedica" min="-2" pref="70" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jbCadastraFuncionarioFicha" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="422" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane4" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" alignment="0" pref="217" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jlNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbInserirFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbExcluirFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlCodigoFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfCodigoFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbPesquisarFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="tfCpfFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jlCPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jlRG" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfRGFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jbAtualizarFuncionario" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="tfFuncaoFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jlFuncao" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jlTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfTelefoneFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="tfFuncionario_FichaMedica" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jlFuncionario_FichaMedica" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jbCadastraFuncionarioFicha" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="jtFuncionario">
+                  <Properties>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="7" rowCount="0">
+                        <Column editable="true" title="C&#xf3;digo" type="java.lang.Object"/>
+                        <Column editable="true" title="Nome" type="java.lang.Object"/>
+                        <Column editable="true" title="CPF" type="java.lang.Object"/>
+                        <Column editable="true" title="RG" type="java.lang.Object"/>
+                        <Column editable="true" title="Fun&#xe7;&#xe3;o" type="java.lang.Object"/>
+                        <Column editable="true" title="Data de Entrada" type="java.lang.Object"/>
+                        <Column editable="true" title="Telefone" type="java.lang.Object"/>
+                      </Table>
+                    </Property>
+                    <Property name="cellSelectionEnabled" type="boolean" value="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jtFuncionarioMouseClicked"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JLabel" name="jlNome">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Nome"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfNome">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlCPF">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="CPF"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfCpfFuncionario">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlRG">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="RG"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfRGFuncionario">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlFuncao">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Fun&#xe7;&#xe3;o"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfFuncaoFuncionario">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlTelefone">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Telefone"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfTelefoneFuncionario">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfTelefoneFuncionarioActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbInserirFuncionario">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Inserir"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbInserirFuncionarioActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbAtualizarFuncionario">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Atualizar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAtualizarFuncionarioActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbExcluirFuncionario">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Excluir"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbExcluirFuncionarioActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlCodigoFuncionario">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="C&#xf3;digo do Funcion&#xe1;rio"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfCodigoFuncionario">
+            </Component>
+            <Component class="javax.swing.JButton" name="jbPesquisarFuncionario">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Pesquisar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbPesquisarFuncionarioActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfFuncionario_FichaMedica">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlFuncionario_FichaMedica">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ficha M&#xe9;dica"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbCadastraFuncionarioFicha">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cadastrar Ficha para Funcion&#xe1;rio"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCadastraFuncionarioFichaActionPerformed"/>
+              </Events>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane4">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="jtFuncionarioFicha">
+                  <Properties>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="2" rowCount="0">
+                        <Column editable="true" title="Funcion&#xe1;rio" type="java.lang.Object"/>
+                        <Column editable="true" title="Ficha" type="java.lang.Object"/>
+                      </Table>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jpProcedimentos">
           <Constraints>
@@ -402,21 +1067,188 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1019" max="32767" attributes="0"/>
+                  <Component id="jtProcedimentos" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jlTipoProcedimentos" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlQuantidade" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlValorProcedimento" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlDataVencimento" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="tfProcedimentos_tipoProcedimentos" alignment="0" max="32767" attributes="0"/>
+                          <Component id="tfProcedimentos_Quantidade" alignment="0" max="32767" attributes="0"/>
+                          <Component id="tfProcedimentos_Valor" alignment="0" max="32767" attributes="0"/>
+                          <Component id="tfProcedimentos_DataVencimento" alignment="0" min="-2" pref="136" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="InserirProcedimentos" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="ExcluirProcedimentos" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="PesquisarProcedimentos" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="AtualizarProcedimentos" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jlDescricaoProcedimento" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfProcedimentos_Descricao" alignment="0" min="-2" pref="325" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="382" max="32767" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="422" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jtProcedimentos" min="-2" pref="183" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jlDescricaoProcedimento" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jlTipoProcedimentos" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfProcedimentos_tipoProcedimentos" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jlQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfProcedimentos_Quantidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jlDataVencimento" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfProcedimentos_DataVencimento" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="tfProcedimentos_Valor" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jlValorProcedimento" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="tfProcedimentos_Descricao" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="ExcluirProcedimentos" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="InserirProcedimentos" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="PesquisarProcedimentos" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="AtualizarProcedimentos" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="15" max="32767" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JScrollPane" name="jtProcedimentos">
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="jtProcedimento">
+                  <Properties>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="6" rowCount="0">
+                        <Column editable="true" title="C&#xf3;digo" type="java.lang.Object"/>
+                        <Column editable="true" title="Tipo" type="java.lang.Object"/>
+                        <Column editable="true" title="Descri&#xe7;&#xe3;o" type="java.lang.Object"/>
+                        <Column editable="true" title="Quantidade" type="java.lang.Object"/>
+                        <Column editable="true" title="Data de Vencimento" type="java.lang.Object"/>
+                        <Column editable="true" title="Valor" type="java.lang.Object"/>
+                      </Table>
+                    </Property>
+                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jtProcedimentoMouseClicked"/>
+                    <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtProcedimentoKeyReleased"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JLabel" name="jlTipoProcedimentos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Tipo de Procedimento:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlQuantidade">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Quantidade:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlDataVencimento">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Data de Vencimento:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlValorProcedimento">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Valor:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfProcedimentos_tipoProcedimentos">
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfProcedimentos_Quantidade">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfProcedimentos_QuantidadeActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfProcedimentos_DataVencimento">
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfProcedimentos_Valor">
+            </Component>
+            <Component class="javax.swing.JButton" name="InserirProcedimentos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Inserir"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="InserirProcedimentosActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="ExcluirProcedimentos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Excluir"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ExcluirProcedimentosActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="PesquisarProcedimentos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Pesquisar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PesquisarProcedimentosActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="AtualizarProcedimentos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Atualizar"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfProcedimentos_Descricao">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfProcedimentos_DescricaoActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlDescricaoProcedimento">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o:"/>
+              </Properties>
+            </Component>
+          </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jpFornecedores">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Fornecedores">
-                <Property name="tabTitle" type="java.lang.String" value="Fornecedores"/>
+              <JTabbedPaneConstraints tabName="Fun&#xe7;&#xe3;o">
+                <Property name="tabTitle" type="java.lang.String" value="Fun&#xe7;&#xe3;o"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -424,15 +1256,167 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1019" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jlDescricaoFuncao" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="tfDescricaoFuncao" min="-2" pref="99" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jlSalarioFuncao" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="tfSalarioFuncao" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jbExcluir_Funcao" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jScrollPane3" min="-2" pref="285" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jbInserirFuncao" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jbAtualiza_Funcao" min="-2" pref="89" max="-2" attributes="0"/>
+                              <EmptySpace pref="346" max="32767" attributes="0"/>
+                              <Component id="jbVerifica" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="261" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="422" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="201" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jlDescricaoFuncao" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfDescricaoFuncao" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jbInserirFuncao" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jbAtualiza_Funcao" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jbVerifica" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jlSalarioFuncao" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfSalarioFuncao" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jbExcluir_Funcao" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="91" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="jScrollPane3" alignment="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="jtFuncao">
+                  <Properties>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="3" rowCount="0">
+                        <Column editable="true" title="C&#xf3;digo da Fun&#xe7;&#xe3;o" type="java.lang.Object"/>
+                        <Column editable="true" title="Nome da Fun&#xe7;&#xe3;o" type="java.lang.Object"/>
+                        <Column editable="true" title="Sal&#xe1;rio da Fun&#xe7;&#xe3;o" type="java.lang.Object"/>
+                      </Table>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jtFuncaoMouseClicked"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JLabel" name="jlDescricaoFuncao">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Fun&#xe7;&#xe3;o"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlSalarioFuncao">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Sal&#xe1;rio"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfSalarioFuncao">
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfDescricaoFuncao">
+            </Component>
+            <Component class="javax.swing.JButton" name="jbInserirFuncao">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Inserir"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbInserirFuncaoActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbAtualiza_Funcao">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Atualizar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAtualiza_FuncaoActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbExcluir_Funcao">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Excluir"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbExcluir_FuncaoActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbVerifica">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Verifica"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbVerificaActionPerformed"/>
+              </Events>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="jtJOIN_Funcao">
+                  <Properties>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="2" rowCount="0">
+                        <Column editable="true" title="Funcion&#xe1;rio" type="java.lang.Object"/>
+                        <Column editable="true" title="Sal&#xe1;rio" type="java.lang.Object"/>
+                      </Table>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
         </Container>
       </SubComponents>
     </Container>
